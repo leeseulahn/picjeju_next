@@ -1,4 +1,6 @@
 node_modules/
 .next/
 out/
+cafe24-deploy/
+cafe24-deploy.zip
 *.log

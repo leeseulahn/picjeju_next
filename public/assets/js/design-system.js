@@ -51,6 +51,18 @@
     return event;
   }
 
+  function nextFrame(callback) {
+    let called = false;
+    const run = () => {
+      if (called) return;
+      called = true;
+      callback();
+    };
+
+    if (window.requestAnimationFrame) window.requestAnimationFrame(run);
+    window.setTimeout(run, 16);
+  }
+
   function getFocusable(element) {
     return Array.from(element.querySelectorAll(SELECTOR_FOCUSABLE)).filter((node) => {
       const style = window.getComputedStyle(node);
@@ -63,7 +75,7 @@
     backdrop.className = `pj-${kind}-backdrop`;
     document.body.appendChild(backdrop);
     backdrop.addEventListener("click", onClick);
-    window.requestAnimationFrame(() => backdrop.classList.add("show"));
+    nextFrame(() => backdrop.classList.add("show"));
     return backdrop;
   }
 
@@ -162,7 +174,7 @@
         });
       }
 
-      window.requestAnimationFrame(() => {
+      nextFrame(() => {
         this._element.classList.add("show");
         const focusTarget = getFocusable(this._element)[0] || this._element;
         if (!focusTarget.hasAttribute("tabindex")) focusTarget.setAttribute("tabindex", "-1");
@@ -215,7 +227,7 @@
       if (!shouldScroll) document.body.classList.add("pj-offcanvas-open");
       if (shouldBackdrop) this._backdrop = createBackdrop("offcanvas", () => this.hide());
 
-      window.requestAnimationFrame(() => {
+      nextFrame(() => {
         this._element.classList.add("show");
         const focusTarget = getFocusable(this._element)[0] || this._element;
         if (!focusTarget.hasAttribute("tabindex")) focusTarget.setAttribute("tabindex", "-1");
@@ -522,7 +534,7 @@
     toast.textContent = message;
     region.appendChild(toast);
 
-    window.requestAnimationFrame(() => toast.classList.add("is-visible"));
+    nextFrame(() => toast.classList.add("is-visible"));
     window.setTimeout(() => {
       toast.classList.remove("is-visible");
       window.setTimeout(() => toast.remove(), 200);

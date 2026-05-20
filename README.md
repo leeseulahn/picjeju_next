@@ -9,6 +9,14 @@ npm run build
 npm start
 ```
 
+Cafe24 static deployment package:
+
+```bash
+npm run build:cafe24
+```
+
+Upload the contents of `cafe24-deploy/` to the Cafe24 `/picjeju_next/` directory. The generated package includes static HTML files and `public` assets, with paths rewritten for `https://plandertest2.mycafe24.com/picjeju_next/`.
+
 Routes supported by the converted app:
 
 - `/`

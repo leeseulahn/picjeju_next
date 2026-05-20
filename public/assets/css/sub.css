@@ -1577,6 +1577,159 @@
     padding: 0;
 }
 
+/* Login modal Figma alignment */
+#loginModal {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#loginModal .pj-modal-dialog {
+    width: calc(100% - 32px);
+    max-width: 800px;
+}
+
+#loginModal .pj-modal-content {
+    min-height: 844px;
+    border-radius: 30px;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+#loginModal .pj-button--close-or {
+    top: 24px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-size: 32px 32px;
+}
+
+#loginModal .login-container {
+    max-width: none;
+    width: 100%;
+    padding: 53px 80px 0;
+    box-sizing: border-box;
+}
+
+#loginModal .login-container .logo-text {
+    margin: 0 0 8px;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+#loginModal .login-container h1 {
+    margin: 0 0 64px;
+    line-height: 0;
+}
+
+#loginModal .login-container .logo {
+    width: 300px;
+    height: auto;
+    margin: 0;
+}
+
+#loginModal .login-wrap {
+    gap: 40px;
+}
+
+#loginModal .login-wrap .input-wrapper {
+    min-height: 39px;
+}
+
+#loginModal .pj-field {
+    min-height: 39px;
+    height: 39px;
+    padding: 0 0 8px;
+    font-size: 24px;
+    line-height: 1.3;
+    color: #222;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #d9d9d9;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#loginModal .pj-field::placeholder {
+    color: #8c8c8c;
+}
+
+#loginModal .pj-field:focus {
+    border-bottom-color: var(--pj-color-primary);
+    box-shadow: none;
+}
+
+#loginModal #login-form .pj-button--primary {
+    --pj-btn-bg: #bdbdbd;
+    --pj-btn-border: #bdbdbd;
+    --pj-btn-hover-bg: #bdbdbd;
+    --pj-btn-hover-border: #bdbdbd;
+    --pj-btn-hover-color: #fff;
+    height: 63px;
+    padding: 16px 24px;
+    font-size: 24px;
+    line-height: 1.3;
+    border-radius: 30px;
+}
+
+#loginModal #login-form:has(#loginEmail:not(:placeholder-shown)) .pj-button--primary {
+    --pj-btn-bg: var(--pj-color-primary);
+    --pj-btn-border: var(--pj-color-primary);
+    --pj-btn-hover-bg: var(--pj-color-primary);
+    --pj-btn-hover-border: var(--pj-color-primary);
+}
+
+#loginModal .options {
+    margin-top: 16px;
+}
+
+#loginModal .options .pj-check {
+    gap: 4px;
+}
+
+#loginModal .options .pj-check-input {
+    width: 24px;
+    height: 24px;
+}
+
+#loginModal .options label {
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+#loginModal .social {
+    gap: 24px;
+    margin-top: 64px;
+}
+
+#loginModal .social h4 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+#loginModal .sns-icons ul {
+    gap: 32px;
+    justify-content: center;
+}
+
+#loginModal .sns-icons ul li,
+#loginModal .sns-icons img {
+    width: 90px;
+    height: 90px;
+}
+
+#loginModal .login-bottom {
+    gap: 72px;
+    padding: 56px 0 48px;
+}
+
+#loginModal .login-bottom a {
+    font-size: 20px;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
 /*Find*/
 
 #find {

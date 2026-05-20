@@ -3701,6 +3701,157 @@ main .pj-main-container {
     font-size: var(--body-mo);
 }
 
+#loginModal {
+    background: #fff;
+}
+
+#loginModal .pj-modal-dialog {
+    width: 100%;
+    max-width: none;
+    min-height: 100%;
+    margin: 0;
+}
+
+#loginModal .pj-modal-dialog--centered {
+    align-items: flex-start;
+    min-height: 100%;
+}
+
+#loginModal .pj-modal-content {
+    min-height: 100dvh;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: auto;
+}
+
+#loginModal .pj-modal-body {
+    padding: 0;
+}
+
+#loginModal .pj-button--close-or {
+    top: 18px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+#loginModal .login-container {
+    max-width: none;
+    width: 100%;
+    padding: 80px 16px 20px;
+    box-sizing: border-box;
+}
+
+#loginModal .login-container .logo-text {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+#loginModal .login-container h1 {
+    margin: 0 0 48px;
+    line-height: 0;
+}
+
+#loginModal .login-container .logo {
+    width: 200px;
+    height: auto;
+    margin: 0;
+}
+
+#loginModal .login-wrap {
+    gap: 24px;
+}
+
+#loginModal .login-wrap .input-wrapper {
+    min-height: 32px;
+}
+
+#loginModal .pj-field {
+    min-height: 32px;
+    height: 32px;
+    padding: 0 0 8px;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #222;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #8c8c8c;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#loginModal .pj-field::placeholder {
+    color: #8c8c8c;
+}
+
+#loginModal .pj-field:focus {
+    border-bottom-color: var(--pj-color-primary);
+    box-shadow: none;
+}
+
+#loginModal #login-form .pj-button--primary {
+    height: 53px;
+    padding: 16px 24px;
+    font-size: 16px;
+    line-height: 1.3;
+    border-radius: 30px;
+}
+
+#loginModal .options {
+    margin-top: 8px;
+}
+
+#loginModal .options .pj-check {
+    gap: 4px;
+}
+
+#loginModal .options .pj-check-input {
+    width: 24px;
+    height: 24px;
+}
+
+#loginModal .options label {
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+#loginModal .social {
+    gap: 16px;
+    margin-top: 48px;
+}
+
+#loginModal .social h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+#loginModal .sns-icons ul {
+    gap: 16px;
+    justify-content: center;
+}
+
+#loginModal .sns-icons ul li,
+#loginModal .sns-icons img {
+    width: 56px;
+    height: 56px;
+}
+
+#loginModal .login-bottom {
+    gap: 72px;
+    padding: 24px 0 0;
+}
+
+#loginModal .login-bottom a {
+    font-size: 14px;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
 
 #find {
     padding: 0rem 0;

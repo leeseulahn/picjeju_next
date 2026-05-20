@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
+    "build:cafe24": "npm run build && node scripts/export-cafe24.mjs --base-path=/picjeju_next",
     "start": "next start"
   },
   "dependencies": {

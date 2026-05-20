@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/default.css" />
         <link rel="stylesheet" href="/assets/css/layout.css?v=20260513-layout" />
         <link rel="stylesheet" href="/assets/css/main.css" />
-        <link rel="stylesheet" href="/assets/css/sub.css?v=20260514-figma-commerce-forms" />
+        <link rel="stylesheet" href="/assets/css/sub.css?v=20260520-login-modal" />
         <link rel="stylesheet" href="/assets/css/post.css" />
         <link rel="stylesheet" href="/assets/css/store.css?v=20260514-figma-commerce-forms" />
         <link rel="stylesheet" href="/assets/css/board.css?v=20260520-actions" />
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/ux-polish.css?v=20260520-actions" />
         <link
           rel="stylesheet"
-          href="/assets/css/mobile.css?v=20260514-figma-commerce-forms"
+          href="/assets/css/mobile.css?v=20260520-login-modal"
           media="only screen and (max-width: 767px)"
         />
         <link rel="stylesheet" href="/assets/vendor/pretendard/pretendard.min.css" />
@@ -52,13 +52,13 @@ export default function RootLayout({ children }) {
         <script src="/assets/vendor/gsap/ScrollTrigger.min.js" />
         <script src="/assets/js/swiper-bundle.min.js" />
         <script src="/assets/vendor/aos/aos.js" />
-        <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js" />
         <script src="/assets/js/default.js" />
         <script src="/assets/js/board.js" />
+        <script src="/assets/js/design-system.js?v=20260520-login-modal" />
+        <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js" defer />
         <script src="/assets/js/board-write.js?v=20260520-point-category" defer />
-        <script src="/assets/js/design-system.js?v=20260520-select-svg" />
       </head>
-      <body className="is-logged-in pj-page-loading" suppressHydrationWarning>
+      <body className="is-logged-out pj-page-loading" suppressHydrationWarning>
         {children}
       </body>
     </html>

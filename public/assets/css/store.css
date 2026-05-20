@@ -24,7 +24,6 @@
 .store-main-page .store-hero,
 .store-category-page .store-hero {
     width: 100%;
-    max-width: 1136px;
     margin-right: auto;
     margin-left: auto;
 }
