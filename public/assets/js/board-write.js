@@ -242,11 +242,16 @@
         height: "400px",
         initialEditType: "wysiwyg",
         previewStyle: "vertical",
-        placeholder: body.dataset.placeholder || ""
+        placeholder: body.dataset.placeholder || "",
+        autofocus: false
       });
 
       if (fallback) fallback.hidden = true;
       body.hidden = false;
+      window.requestAnimationFrame(() => {
+        const activeElement = document.activeElement;
+        if (activeElement && body.contains(activeElement)) activeElement.blur();
+      });
 
       const getHtml = () => (typeof toastEditor.getHTML === "function" ? toastEditor.getHTML() : "");
       const getText = () => {
@@ -423,6 +428,13 @@
     formData.set("subCategoryLabel", selected.subLabel);
     formData.set("category", selected.subValue);
     formData.set("content", editor.output.value);
+    formData.set("notice", form.querySelector("#boardNotice")?.checked ? "true" : "false");
+    formData.set("visible", form.querySelector("#boardVisible")?.checked ? "true" : "false");
+    formData.set("status", form.querySelector("#boardVisible")?.checked ? "published" : "private");
+    ["startDate", "endDate", "venue", "contact", "tags", "detailUrl", "applyUrl"].forEach((name) => {
+      const value = formData.get(name);
+      if (typeof value === "string") formData.set(name, value.trim());
+    });
     thumbnail.files.forEach((item) => formData.append("thumbnailFile", item.file));
     attachments.files.forEach((item) => formData.append("files[]", item.file));
     return formData;
@@ -445,6 +457,43 @@
     } else {
       editor.body?.removeAttribute?.("aria-invalid");
     }
+  };
+
+  const isValidUrl = (value) => {
+    const trimmed = String(value || "").trim();
+    if (!trimmed) return true;
+
+    try {
+      const url = new URL(trimmed);
+      return url.protocol === "http:" || url.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+
+  const initAddressSearch = (form) => {
+    const button = form.querySelector("#btnFindAddress");
+    const input = form.querySelector("#boardVenue");
+    if (!button || !input) return;
+
+    button.addEventListener("click", () => {
+      if (window.daum?.Postcode) {
+        new window.daum.Postcode({
+          oncomplete(data) {
+            input.value = data.roadAddress || data.address || "";
+            setInvalid(input, false);
+            input.focus();
+          },
+          width: "100%",
+          height: "100%"
+        }).open({ popupName: "postcodePopup" });
+        return;
+      }
+
+      input.removeAttribute("readonly");
+      input.focus();
+      showToast("주소찾기를 불러오지 못했습니다. 직접 입력해 주세요.");
+    });
   };
 
   const clearInvalidStates = (form, editor) => {
@@ -473,6 +522,11 @@
     const primaryCategory = form.querySelector("[data-board-primary-category]");
     const subCategory = form.querySelector("[data-board-sub-category]");
     const title = form.querySelector("#boardTitle");
+    const startDate = form.querySelector("#boardStart");
+    const endDate = form.querySelector("#boardEnd");
+    const venue = form.querySelector("#boardVenue");
+    const detailUrl = form.querySelector("#boardDetailUrl");
+    const applyUrl = form.querySelector("#boardApplyUrl");
 
     if (!primaryCategory?.value) {
       setInvalid(primaryCategory);
@@ -495,6 +549,48 @@
       return false;
     }
 
+    if (!startDate?.value) {
+      setInvalid(startDate);
+      startDate?.focus();
+      showToast("시작일을 선택해 주세요.");
+      return false;
+    }
+
+    if (!endDate?.value) {
+      setInvalid(endDate);
+      endDate?.focus();
+      showToast("종료일을 선택해 주세요.");
+      return false;
+    }
+
+    if (startDate.value && endDate.value && endDate.value < startDate.value) {
+      setInvalid(endDate);
+      endDate.focus();
+      showToast("종료일은 시작일 이후로 선택해 주세요.");
+      return false;
+    }
+
+    if (!venue?.value.trim()) {
+      setInvalid(venue);
+      venue?.focus();
+      showToast("장소를 입력해 주세요.");
+      return false;
+    }
+
+    if (!isValidUrl(detailUrl?.value)) {
+      setInvalid(detailUrl);
+      detailUrl?.focus();
+      showToast("자세히 보기 링크는 http 또는 https URL로 입력해 주세요.");
+      return false;
+    }
+
+    if (!isValidUrl(applyUrl?.value)) {
+      setInvalid(applyUrl);
+      applyUrl?.focus();
+      showToast("신청하기 링크는 http 또는 https URL로 입력해 주세요.");
+      return false;
+    }
+
     if (!editor.hasContent()) {
       setEditorInvalid(editor);
       editor.focus();
@@ -510,6 +606,7 @@
     if (!form) return;
 
     initCategorySelects(form);
+    initAddressSearch(form);
 
     const editor = initRichEditor(form.querySelector("[data-board-editor]"));
     if (!editor) return;
@@ -541,6 +638,11 @@
       const payload = Object.fromEntries(collectFormData({ form, editor, thumbnail, attachments }).entries());
       localStorage.setItem("picjejuBoardDraft", JSON.stringify({ ...payload, savedAt: new Date().toISOString() }));
       showToast("임시저장되었습니다.");
+    });
+
+    form.querySelector("[data-board-preview]")?.addEventListener("click", () => {
+      editor.sync();
+      showToast("미리보기는 준비 중입니다.");
     });
 
     form.addEventListener("submit", async (event) => {

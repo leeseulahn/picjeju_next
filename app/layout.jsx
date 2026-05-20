@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/store.css?v=20260514-figma-commerce-forms" />
         <link rel="stylesheet" href="/assets/css/board.css?v=20260520-actions" />
         <link rel="stylesheet" href="/assets/css/hover.css" />
-        <link rel="stylesheet" href="/assets/css/ux-polish.css?v=20260520-actions" />
+        <link rel="stylesheet" href="/assets/css/ux-polish.css?v=20260520-admin-write" />
         <link
           rel="stylesheet"
           href="/assets/css/mobile.css?v=20260520-login-modal"
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
         <script src="/assets/js/board.js" />
         <script src="/assets/js/design-system.js?v=20260520-login-modal" />
         <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js" defer />
-        <script src="/assets/js/board-write.js?v=20260520-point-category" defer />
+        <script src="/assets/js/board-write.js?v=20260520-admin-write" defer />
       </head>
       <body className="is-logged-out pj-page-loading" suppressHydrationWarning>
         {children}

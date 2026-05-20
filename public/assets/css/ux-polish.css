@@ -307,6 +307,197 @@ button:focus-visible,
     pointer-events: none;
 }
 
+.board-write-page .front-board-write__container {
+    max-width: min(100% - 3rem, 1200px) !important;
+}
+
+.board-write-page .front-board-write__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 5rem;
+}
+
+.board-write-page .front-board-write {
+    margin: 0;
+}
+
+.board-write-page .front-board-write__panel {
+    gap: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.board-write-page .front-board-write__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.board-write-page .front-board-write__field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.board-write-page .front-board-write__col--2 {
+    grid-column: span 2;
+}
+
+.board-write-page .front-board-write__col--4 {
+    grid-column: span 4;
+}
+
+.board-write-page .front-board-write__col--6 {
+    grid-column: span 6;
+}
+
+.board-write-page .front-board-write__col--12 {
+    grid-column: span 12;
+}
+
+.board-write-page .front-board-write__field--switch {
+    justify-content: flex-start;
+}
+
+.board-write-page .front-board-write__switch {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 52px;
+}
+
+.board-write-page .front-board-write__switch-input {
+    position: relative;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 24px;
+    margin: 0;
+    border: 1px solid var(--pj-ux-border-strong);
+    border-radius: 999px;
+    appearance: none;
+    background: var(--pj-ux-surface-soft);
+    cursor: pointer;
+    transition: border-color .16s ease, background-color .16s ease;
+}
+
+.board-write-page .front-board-write__switch-input::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(18, 19, 26, .2);
+    transition: transform .16s ease;
+}
+
+.board-write-page .front-board-write__switch-input:checked {
+    border-color: var(--pj-color-primary);
+    background: var(--pj-color-primary);
+}
+
+.board-write-page .front-board-write__switch-input:checked::after {
+    transform: translateX(18px);
+}
+
+.board-write-page .front-board-write__switch-input:focus-visible {
+    outline: 0;
+    box-shadow: var(--pj-focus-ring);
+}
+
+.board-write-page .front-board-write__switch-label {
+    color: var(--pj-color-dark-1);
+    font-size: var(--body-md);
+    font-weight: 600;
+}
+
+.board-write-page .front-board-write__address {
+    display: flex;
+    gap: .5rem;
+    min-width: 0;
+}
+
+.board-write-page .front-board-write__address .pj-field {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.board-write-page .front-board-write__address .pj-button {
+    flex: 0 0 auto;
+    gap: .25rem;
+    min-width: 112px;
+    justify-content: center;
+}
+
+.board-write-page .front-board-write__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem clamp(1.25rem, 3vw, 2rem);
+    border-top: 1px solid var(--pj-ux-border);
+    background: var(--pj-ux-surface-soft);
+}
+
+.board-write-page .front-board-write__note {
+    margin: 0;
+    color: var(--pj-color-dark-3);
+    font-size: var(--body-sm);
+}
+
+.board-write-page .front-board-write__actions {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: .5rem;
+    align-items: center;
+    padding: 0;
+}
+
+.board-write-page .front-board-write__actions-left,
+.board-write-page .front-board-write__actions-right {
+    display: flex;
+    gap: .5rem;
+}
+
+.board-write-page .front-board-write__actions-left .pj-button,
+.board-write-page .front-board-write__actions-right .pj-button {
+    width: auto;
+    flex: 0 0 auto;
+}
+
+.board-write-page .front-board-write__actions .pj-button {
+    display: inline-flex;
+    gap: .25rem;
+}
+
+.board-write-page .front-board-write__help {
+    border: 1px solid var(--pj-ux-border);
+    border-radius: var(--pj-radius-sm);
+    background: var(--pj-ux-surface);
+    box-shadow: var(--pj-ux-shadow-soft);
+}
+
+.board-write-page .front-board-write__help strong {
+    display: block;
+    padding: .875rem 1rem;
+    border-bottom: 1px solid var(--pj-ux-border);
+    color: var(--pj-color-dark-1);
+    font-size: var(--body-md);
+}
+
+.board-write-page .front-board-write__help p {
+    margin: 0;
+    padding: 1rem;
+    color: var(--pj-color-dark-3);
+    font-size: var(--body-sm);
+    line-height: 1.8;
+}
+
 @media (max-width: 767px) {
     .board-write-page {
         padding-bottom: 6.5rem;
@@ -323,23 +514,60 @@ button:focus-visible,
         border-radius: var(--pj-radius-sm);
     }
 
+    .board-write-page .front-board-write__layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .board-write-page .front-board-write__panel {
+        padding: 0;
+    }
+
+    .board-write-page .front-board-write__grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .board-write-page .front-board-write__col--2,
+    .board-write-page .front-board-write__col--4,
+    .board-write-page .front-board-write__col--6,
+    .board-write-page .front-board-write__col--12 {
+        grid-column: 1 / -1;
+    }
+
     .board-write-page .front-board-write__row--meta {
         grid-template-columns: 1fr !important;
     }
 
     .board-write-page .front-board-write__actions {
-        left: 0;
-        right: 0;
-        margin-inline: -1rem;
-        padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
-        border-top: 1px solid var(--pj-ux-border);
-        box-shadow: 0 -12px 24px rgba(18, 19, 26, .08);
+        position: static !important;
+        flex-wrap: wrap;
+        width: 100%;
+        background: transparent !important;
+        border-top: 0;
+        box-shadow: none;
     }
 
     .board-write-page .front-board-write__actions .pj-button {
         min-width: 0;
         padding-inline: .625rem;
     }
+
+    .board-write-page .front-board-write__address,
+    .board-write-page .front-board-write__footer,
+    .board-write-page .front-board-write__actions-right {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .board-write-page .front-board-write__actions-left,
+    .board-write-page .front-board-write__actions-right,
+    .board-write-page .front-board-write__actions .pj-button,
+    .board-write-page .front-board-write__address .pj-button {
+        width: 100%;
+    }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

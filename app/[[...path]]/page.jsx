@@ -23,6 +23,86 @@ function getWriteCategoryQuery(pageKey) {
   return defaults[pageKey] || "";
 }
 
+const writeButtonPageKeys = new Set([
+  "community-tip",
+  "community-friends",
+  "community-event",
+  "board-market",
+  "point-exchange"
+]);
+
+function hasFrontendWriteButton(html) {
+  return (
+    /\bclass=(["'])[^"']*\bboard-write\b[^"']*\1/.test(html) ||
+    /\bdata-pj-href=(["'])[^"']*\/pages\/board-write\.html[^"']*\1/.test(html)
+  );
+}
+
+function findMatchingClosingDiv(html, startIndex) {
+  const tagPattern = /<\/?div\b[^>]*>/gi;
+  tagPattern.lastIndex = startIndex;
+  let depth = 0;
+  let match;
+
+  while ((match = tagPattern.exec(html))) {
+    const tag = match[0];
+    if (/^<div\b/i.test(tag)) {
+      depth += 1;
+      continue;
+    }
+
+    depth -= 1;
+    if (depth === 0) {
+      return { start: match.index, end: tagPattern.lastIndex };
+    }
+  }
+
+  return null;
+}
+
+function injectFrontendWriteButton(html, pageKey) {
+  if (!writeButtonPageKeys.has(pageKey) || hasFrontendWriteButton(html)) return html;
+
+  const pageWrapMatch = /<div\b[^>]*\bid=(["'])page-wrap\1[^>]*>/i.exec(html);
+  if (!pageWrapMatch) return html;
+
+  const closeTag = findMatchingClosingDiv(html, pageWrapMatch.index);
+  if (!closeTag) return html;
+
+  const writeHref = `/pages/board-write.html${getWriteCategoryQuery(pageKey)}`;
+  const writeButton = `\r\n                <div class="board-write">\r\n                    <button type="button" class="pj-button pj-button--primary pj-button--md" data-pj-href="${writeHref}">&#44544;&#50416;&#44592;</button>\r\n                </div>`;
+
+  return `${html.slice(0, closeTag.start)}${writeButton}${html.slice(closeTag.start)}`;
+}
+
+function fillFindPasswordTab(html, pageKey) {
+  if (pageKey !== "find" || html.includes("비밀번호를 찾을 방법을 선택해 주세요.")) return html;
+
+  const passwordContent = `
+                            <div class="find-id">
+                                <div class="title">비밀번호를 찾을 방법을 선택해 주세요.</div>
+                                <div class="pj-button--wrap">
+                                    <button class="pj-button pj-button--lg pj-button--primary" type="button">가입한 이메일로 찾기</button>
+                                    <button type="button" class="pj-button pj-button--lg pj-button--primary">가입한 휴대폰번호로 찾기</button>
+                                    <button type="button" class="pj-button pj-button--lg pj-button--primary">휴대폰 본인인증</button>
+                                    <button type="button" class="pj-button pj-button--lg pj-button--primary">간편 본인인증</button>
+                                </div>
+                            </div>
+                            <div class="find-info">
+                                <div class="title">안내사항</div>
+                                <ul>
+                                    <li>가입 시 등록한 아이디와 이메일 또는 휴대폰번호로 비밀번호를 재설정할 수 있습니다.</li>
+                                    <li>본인 확인 후 임시 비밀번호 또는 비밀번호 재설정 안내가 발송됩니다.</li>
+                                    <li>비밀번호를 찾지 못하셨을 경우 고객센터(010-4443-1492)로 문의해 주세요.</li>
+                                </ul>
+                            </div>`;
+
+  return html.replace(
+    /(<div class="pj-tab-pane pj-fade" id="pw-tab-pane"[^>]*>\s*)<\/div>/,
+    `$1${passwordContent}\n                        </div>`
+  );
+}
+
 function fixPointExchangeLinks(html) {
   return html.replace(
     /(<a\b[^>]*href=(["']))((?:pages\/)?board-news\.html)(\2[^>]*>\s*픽포인트 거래소\s*<\/a>)/g,
@@ -34,7 +114,7 @@ function fixPointExchangeLinks(html) {
 }
 
 function wireFrontendWriteButtons(html, pageKey) {
-  const linkedHtml = fixPointExchangeLinks(html);
+  const linkedHtml = fillFindPasswordTab(injectFrontendWriteButton(fixPointExchangeLinks(html), pageKey), pageKey);
   const writeHref = `/pages/board-write.html${getWriteCategoryQuery(pageKey)}`;
 
   return linkedHtml.replace(/<button\b([^>]*)>(\s*글쓰기\s*)<\/button>/g, (match, attributes, label) => {
@@ -68,14 +148,16 @@ function getBoardWriteHtml() {
       <h3>게시글 작성</h3>
     </div>
 
-    <div class="pj-container">
+    <div class="pj-container front-board-write__container">
+      <div class="front-board-write__layout">
+        <div class="front-board-write__main">
       <form id="frontBoardWriteForm" class="front-board-write" data-board-write-form data-endpoint="/api/posts" novalidate>
         <div class="front-board-write__panel">
-          <div class="front-board-write__row front-board-write__row--split">
-            <div>
-              <label class="pj-label pj-u-fw-bold" for="boardPrimaryCategory">대분류 <span class="pj-u-text-primary">*</span></label>
+          <div class="front-board-write__grid">
+            <div class="front-board-write__field front-board-write__col--4">
+              <label class="pj-label pj-u-fw-bold" for="boardPrimaryCategory">게시판 <span class="pj-u-text-primary">*</span></label>
               <select id="boardPrimaryCategory" name="primaryCategory" class="pj-field" required data-board-primary-category>
-                <option value="">대분류를 선택해 주세요.</option>
+                <option value="">선택하세요</option>
                 <option value="jeju-life-news">제주살이 뉴스</option>
                 <option value="community-tip">제주살이 꿀팁</option>
                 <option value="picjeju-friends">픽제주 친구들</option>
@@ -84,91 +166,119 @@ function getBoardWriteHtml() {
                 <option value="point-exchange">픽포인트 거래소</option>
               </select>
             </div>
-            <div>
-              <label class="pj-label pj-u-fw-bold" for="boardSubCategory">하위분류 <span class="pj-u-text-primary">*</span></label>
+            <div class="front-board-write__field front-board-write__col--4">
+              <label class="pj-label pj-u-fw-bold" for="boardSubCategory">카테고리 <span class="pj-u-text-primary">*</span></label>
               <select id="boardSubCategory" name="subCategory" class="pj-field" required data-board-sub-category>
-                <option value="">대분류를 먼저 선택해 주세요.</option>
+                <option value="">선택하세요</option>
               </select>
             </div>
             <input id="boardCategory" name="category" type="hidden" value="">
-          </div>
-
-          <div class="front-board-write__row">
-            <label class="pj-label pj-u-fw-bold" for="boardTitle">제목 <span class="pj-u-text-primary">*</span></label>
-            <input id="boardTitle" name="title" class="pj-field" type="text" placeholder="제목을 입력해 주세요." required>
-          </div>
-
-          <div class="front-board-write__row">
-            <label class="pj-label pj-u-fw-bold" for="boardSummary">요약</label>
-            <input id="boardSummary" name="summary" class="pj-field" type="text" placeholder="목록에 노출할 한 줄 요약을 입력해 주세요.">
-          </div>
-
-          <div class="front-board-write__row front-board-write__row--split front-board-write__row--meta">
-            <div>
-              <label class="pj-label pj-u-fw-bold" for="boardAuthor">작성자</label>
-              <input id="boardAuthor" name="author" class="pj-field" type="text" value="물비늘" readonly aria-readonly="true">
-            </div>
-            <div>
-              <label class="pj-label pj-u-fw-bold" for="boardStatus">상태</label>
-              <select id="boardStatus" name="status" class="pj-field">
-                <option value="published">공개</option>
-                <option value="private">비공개</option>
-                <option value="draft">임시저장</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="front-board-write__row front-board-write__options">
-            <div class="pj-check">
-              <input class="pj-check-input" type="checkbox" id="boardNotice" name="notice">
-              <label class="pj-check-label" for="boardNotice">공지로 등록</label>
-            </div>
-            <div class="pj-check">
-              <input class="pj-check-input" type="checkbox" id="boardComment" name="allowComment" checked>
-              <label class="pj-check-label" for="boardComment">댓글 허용</label>
-            </div>
-          </div>
-
-          <div class="front-board-write__row">
-            <label class="pj-label pj-u-fw-bold" for="boardEditor">내용 <span class="pj-u-text-primary">*</span></label>
-            <div class="front-editor front-editor--toast" data-board-editor>
-              <div id="boardEditorFallback" class="front-editor__fallback" data-editor-fallback hidden>
-                <textarea class="pj-field" rows="10" placeholder="에디터 로딩 실패시 내용을 입력해 주세요."></textarea>
+            <div class="front-board-write__field front-board-write__field--switch front-board-write__col--2">
+              <span class="pj-label pj-u-fw-bold">공지사항</span>
+              <div class="front-board-write__switch">
+                <input class="front-board-write__switch-input" type="checkbox" id="boardNotice" name="notice">
+                <label class="front-board-write__switch-label" for="boardNotice">공지</label>
               </div>
-              <div id="boardEditor" class="front-editor__toast" data-editor-body data-placeholder="내용을 작성해 주세요."></div>
-              <textarea name="content" class="pj-visually-hidden" data-editor-output required></textarea>
+            </div>
+            <div class="front-board-write__field front-board-write__field--switch front-board-write__col--2">
+              <span class="pj-label pj-u-fw-bold">노출</span>
+              <div class="front-board-write__switch">
+                <input class="front-board-write__switch-input" type="checkbox" id="boardVisible" name="visible" checked>
+                <label class="front-board-write__switch-label" for="boardVisible">공개</label>
+              </div>
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--12">
+              <label class="pj-label pj-u-fw-bold" for="boardTitle">제목 <span class="pj-u-text-primary">*</span></label>
+              <input id="boardTitle" name="title" class="pj-field" type="text" placeholder="제목을 입력해 주세요." required>
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardStart">시작일 <span class="pj-u-text-primary">*</span></label>
+              <input id="boardStart" name="startDate" class="pj-field" type="date" required>
+            </div>
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardEnd">종료일 <span class="pj-u-text-primary">*</span></label>
+              <input id="boardEnd" name="endDate" class="pj-field" type="date" required>
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardVenue">장소 <span class="pj-u-text-primary">*</span></label>
+              <div class="front-board-write__address">
+                <input id="boardVenue" name="venue" class="pj-field" type="text" placeholder="주소를 입력하세요" readonly required>
+                <button type="button" class="pj-button pj-button--line pj-button--md" id="btnFindAddress">
+                  <i class="ri-map-pin-line" aria-hidden="true"></i> 주소찾기
+                </button>
+              </div>
+            </div>
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardContact">문의</label>
+              <input id="boardContact" name="contact" class="pj-field" type="text" placeholder="(064)782-9898">
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--12">
+              <label class="pj-label pj-u-fw-bold" for="boardThumbnail">썸네일 이미지</label>
+              <div class="front-board-write__uploader">
+                <label class="pj-button pj-button--gray pj-button--md" for="boardThumbnail">이미지 선택</label>
+                <input id="boardThumbnail" name="thumbnail" class="pj-visually-hidden" type="file" accept="image/*">
+                <div class="front-board-write__thumb" data-board-thumb-preview aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--12">
+              <label class="pj-label pj-u-fw-bold" for="boardEditor">상세 설명 <span class="pj-u-text-primary">*</span></label>
+              <div class="front-editor front-editor--toast" data-board-editor>
+                <div id="boardEditorFallback" class="front-editor__fallback" data-editor-fallback hidden>
+                  <textarea class="pj-field" rows="10" placeholder="에디터 로딩 실패시 내용을 입력해 주세요."></textarea>
+                </div>
+                <div id="boardEditor" class="front-editor__toast" data-editor-body data-placeholder="상세 설명을 작성해 주세요."></div>
+                <textarea name="content" class="pj-visually-hidden" data-editor-output required></textarea>
+              </div>
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardDetailUrl">자세히보기 링크</label>
+              <input id="boardDetailUrl" name="detailUrl" class="pj-field" type="url" inputmode="url" placeholder="https://example.com/detail">
+            </div>
+            <div class="front-board-write__field front-board-write__col--6">
+              <label class="pj-label pj-u-fw-bold" for="boardApplyUrl">신청하기 링크</label>
+              <input id="boardApplyUrl" name="applyUrl" class="pj-field" type="url" inputmode="url" placeholder="https://example.com/apply">
+            </div>
+
+            <div class="front-board-write__field front-board-write__col--12">
+              <label class="pj-label pj-u-fw-bold" for="boardTags">태그</label>
+              <input id="boardTags" name="tags" class="pj-field" type="text" placeholder="쉼표로 구분: 제주, 가족, 무료">
             </div>
           </div>
 
-          <div class="front-board-write__row">
-            <label class="pj-label pj-u-fw-bold" for="boardThumbnail">대표 이미지</label>
-            <div class="front-board-write__uploader">
-              <label class="pj-button pj-button--gray pj-button--md" for="boardThumbnail">이미지 선택</label>
-              <input id="boardThumbnail" name="thumbnail" class="pj-visually-hidden" type="file" accept="image/*">
-              <div class="front-board-write__thumb" data-board-thumb-preview aria-live="polite"></div>
-            </div>
-          </div>
-
-          <div class="front-board-write__row">
-            <label class="pj-label pj-u-fw-bold" for="boardFiles">첨부 파일</label>
-            <div class="front-board-write__uploader">
-              <label class="pj-button pj-button--gray pj-button--md" for="boardFiles">파일 첨부</label>
-              <input id="boardFiles" name="files" class="pj-visually-hidden" type="file" multiple>
-              <div class="front-board-write__files" data-board-file-list aria-live="polite"></div>
-            </div>
-          </div>
-
+          <div class="front-board-write__footer">
+            <p class="front-board-write__note">새 게시물을 작성합니다.</p>
           <div class="front-board-write__actions">
             <div class="front-board-write__actions-left">
-              <button type="button" class="pj-button pj-button--gray pj-button--md" data-board-cancel>취소</button>
-              <button type="button" class="pj-button pj-button--line pj-button--md" data-board-draft>임시저장</button>
+                <button type="button" class="pj-button pj-button--line pj-button--md" data-board-preview>
+                  <i class="ri-external-link-line" aria-hidden="true"></i> 미리보기
+                </button>
             </div>
             <div class="front-board-write__actions-right">
-              <button type="submit" class="pj-button pj-button--primary pj-button--md">등록하기</button>
+                <button type="button" class="pj-button pj-button--gray pj-button--md" data-board-cancel>취소</button>
+                <button type="button" class="pj-button pj-button--line pj-button--md" data-board-draft>임시저장</button>
+                <button type="submit" class="pj-button pj-button--primary pj-button--md">
+                  <i class="ri-save-3-line" aria-hidden="true"></i> 저장하기
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </form>
+        </div>
+
+        <aside class="front-board-write__aside" aria-label="글쓰기 도움말">
+          <div class="front-board-write__help">
+            <strong>도움말</strong>
+            <p>· 제목/기간은 필수입니다.<br>· 썸네일은 목록 카드에 표시됩니다.<br>· 저장 후 목록으로 이동합니다.</p>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 </main>
