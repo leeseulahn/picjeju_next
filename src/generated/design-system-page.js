@@ -218,7 +218,7 @@ const STYLES = `
   .ds-page * { box-sizing: border-box; }
   .ds-page .ds-container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-  .ds-hero { padding: 40px 0 32px; }
+  .ds-hero { padding: 40px 0 32px; height: auto; position: relative; }
   .ds-hero__kicker { display: inline-block; padding: 6px 12px; border-radius: 999px; background: var(--pj-color-primary-tint); color: var(--pj-color-primary-dark); font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
   .ds-hero__title { margin: 14px 0 12px; font-size: clamp(34px, 4vw, 48px); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; }
   .ds-hero__desc { max-width: 720px; color: var(--pj-color-dark-2); font-size: 17px; line-height: 1.6; }
