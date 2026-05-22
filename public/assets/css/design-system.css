@@ -13,11 +13,13 @@
     --pj-color-primary-dark: #dd572b;
     --pj-color-primary-light: #ffb299;
     --pj-color-primary-tint: rgba(255, 102, 51, 0.18);
+    --pj-color-primary-rgb: 255, 102, 51;
 
     --pj-color-secondary: #00cc66;
     --pj-color-secondary-dark: #01bf60;
     --pj-color-secondary-light: #99ebc2;
     --pj-color-secondary-vivid: #00ff80;
+    --pj-color-secondary-rgb: 0, 204, 102;
 
     --pj-color-dark-1: #222222;
     --pj-color-dark-2: #8c8c8c;
@@ -139,12 +141,12 @@
     --pj-legacy-primary-dark: var(--pj-color-primary-dark);
     --pj-legacy-primary-light: var(--pj-color-primary-light);
     --pj-legacy-primary-lighter: var(--pj-color-primary-tint);
-    --pj-legacy-primary-rgb: 255, 102, 51;
+    --pj-legacy-primary-rgb: var(--pj-color-primary-rgb);
     --pj-legacy-secondary: var(--pj-color-secondary);
     --pj-legacy-secondary-dakger: var(--pj-color-secondary-dark);
     --pj-legacy-secondary-dark: var(--pj-color-secondary-dark);
     --pj-legacy-secondary-light: var(--pj-color-secondary-vivid);
-    --pj-legacy-secondary-rgb: 0, 204, 102;
+    --pj-legacy-secondary-rgb: var(--pj-color-secondary-rgb);
     --pj-legacy-white: var(--pj-color-light-1);
     --pj-legacy-white-rgb: 255, 255, 255;
     --pj-legacy-dark: var(--pj-color-dark-1);

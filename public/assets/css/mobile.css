@@ -2607,8 +2607,8 @@ main .pj-main-container {
         BUTTONS
         =============================== */
 .pj-u-order-page .pj-u-order-btn-sm {
-    background: #FF6633;
-    color: #fff;
+    background: var(--pj-color-primary);
+    color: var(--pj-color-light-1);
     border: 0;
     border-radius: 20px;
     padding: 6px 16px;
@@ -2909,8 +2909,8 @@ main .pj-main-container {
 }
 
 .pj-u-order-page .pj-u-order-submit {
-    background: #FF6633;
-    color: #fff;
+    background: var(--pj-color-primary);
+    color: var(--pj-color-light-1);
 
     font-weight: 700;
     border: 0;

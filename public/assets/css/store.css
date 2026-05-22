@@ -699,7 +699,7 @@
 .pj-button--like {
     width: 32px;
     height: 32px;
-    background: #222;
+    background: var(--pj-color-dark-1);
     border: 0;
     border-radius: 4px;
 }
@@ -939,7 +939,7 @@
 }
 
 .thumb-grid img.active {
-    outline: 2px solid var(--pj-legacy-primary, #ff6633);
+    outline: 2px solid var(--pj-color-primary);
     outline-offset: 2px;
     border-radius: var(--pj-legacy-border-radius-sm);
 }
@@ -1226,14 +1226,14 @@
 }
 
 #StoreTab .pj-nav-link.active {
-    color: #ff6633;
+    color: var(--pj-color-primary);
     font-weight: 700;
-    border-bottom-color: #ff6633;
+    border-bottom-color: var(--pj-color-primary);
 }
 
 #StoreTab .pj-nav-link:hover {
-    color: #ff6633;
-    border-bottom-color: #ff6633;
+    color: var(--pj-color-primary);
+    border-bottom-color: var(--pj-color-primary);
 }
 
 #StoreTab .pj-nav-link:focus {
@@ -1242,7 +1242,7 @@
 
 #StoreTab .pj-nav-link:focus-visible {
     outline: none;
-    box-shadow: inset 0 -3px 0 #ff6633;
+    box-shadow: inset 0 -3px 0 var(--pj-color-primary);
 }
 
 
@@ -2077,8 +2077,8 @@
      BUTTONS
      =============================== */
 .pj-u-order-page .pj-u-order-btn-sm {
-    background: #FF6633;
-    color: #fff;
+    background: var(--pj-color-primary);
+    color: var(--pj-color-light-1);
     border: 0;
     border-radius: 20px;
     padding: 6px 16px;
@@ -2364,8 +2364,8 @@
 }
 
 .pj-u-order-page .pj-u-order-submit {
-    background: #FF6633;
-    color: #fff;
+    background: var(--pj-color-primary);
+    color: var(--pj-color-light-1);
     font-size: var(--body-md);
     font-weight: 700;
     border: 0;

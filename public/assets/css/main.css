@@ -113,13 +113,13 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 204, 102, 0.00) 50%, #0C6 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.80) 100%);
+    background: linear-gradient(180deg, rgba(var(--pj-color-secondary-rgb), 0) 50%, var(--pj-color-secondary) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%);
     pointer-events: none;
 }
 
 
 #main-content .main-card--hero .main-card__media::after {
-    background: linear-gradient(180deg, rgba(255, 102, 51, 0.00) 50%, #F63 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.80) 100%);
+    background: linear-gradient(180deg, rgba(var(--pj-color-primary-rgb), 0) 50%, var(--pj-color-primary) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 /* ====== 카드 내 텍스트/배지(절대배치로 오버레이) ====== */
