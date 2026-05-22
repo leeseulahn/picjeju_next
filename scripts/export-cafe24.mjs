@@ -11,7 +11,7 @@ const rootDir = path.resolve(scriptDir, "..");
 const outputDir = path.join(rootDir, "cafe24-deploy");
 const nextBin = path.join(rootDir, "node_modules", "next", "dist", "bin", "next");
 
-const extraPageKeys = ["board-write", "point-exchange"];
+const extraPageKeys = ["board-write", "point-exchange", "design-system"];
 const textExtensions = new Set([".css", ".html", ".js", ".json", ".txt"]);
 const defaultBasePath = "/picjeju_next";
 const deployBasePath = normalizeBasePath(getArgValue("--base-path") || process.env.CAFE24_BASE_PATH || defaultBasePath);
