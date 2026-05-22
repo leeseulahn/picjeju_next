@@ -1,6 +1,93 @@
 // Picjeju Design System showcase page content.
 // Renders inside the shared header/footer chrome via app/[[...path]]/page.jsx.
 
+const SCALE_PRIMARY = [
+  { step: 50, hex: "#FFF5F1" },
+  { step: 100, hex: "#FFE6DA" },
+  { step: 200, hex: "#FFC9B0" },
+  { step: 300, hex: "#FFA785" },
+  { step: 400, hex: "#FF8B5C" },
+  { step: 500, hex: "#FF6633" },
+  { step: 600, hex: "#DD572B" },
+  { step: 700, hex: "#B14422" },
+  { step: 800, hex: "#82321A" },
+  { step: 900, hex: "#531F10" }
+];
+
+const SCALE_SECONDARY = [
+  { step: 50, hex: "#ECFDF3" },
+  { step: 100, hex: "#D1FAE0" },
+  { step: 200, hex: "#99EBC2" },
+  { step: 300, hex: "#5AD899" },
+  { step: 400, hex: "#2BC57C" },
+  { step: 500, hex: "#00CC66" },
+  { step: 600, hex: "#01BF60" },
+  { step: 700, hex: "#028A48" },
+  { step: 800, hex: "#045D32" },
+  { step: 900, hex: "#02351D" }
+];
+
+const SCALE_GRAY = [
+  { step: 50, hex: "#F9F9F9" },
+  { step: 100, hex: "#F2F2F5" },
+  { step: 200, hex: "#E3E3E3" },
+  { step: 300, hex: "#BDBDBD" },
+  { step: 400, hex: "#8C8C8C" },
+  { step: 500, hex: "#6B6E80" },
+  { step: 600, hex: "#4F525F" },
+  { step: 700, hex: "#3A3D49" },
+  { step: 800, hex: "#2A2C36" },
+  { step: 900, hex: "#222222" }
+];
+
+const SEMANTIC_TEXT = [
+  { token: "--pj-text-primary", name: "Text / Primary", value: "#222222", use: "본문, 제목, 강조 텍스트" },
+  { token: "--pj-text-secondary", name: "Text / Secondary", value: "#4F525F", use: "보조 본문, 메타 정보" },
+  { token: "--pj-text-tertiary", name: "Text / Tertiary", value: "#8C8C8C", use: "캡션, 비활성 라벨" },
+  { token: "--pj-text-disabled", name: "Text / Disabled", value: "#BDBDBD", use: "비활성 입력값" },
+  { token: "--pj-text-inverse", name: "Text / Inverse", value: "#FFFFFF", use: "어두운 배경 위 텍스트" },
+  { token: "--pj-text-link", name: "Text / Link", value: "#DD572B", use: "본문 내 링크" }
+];
+
+const SEMANTIC_SURFACE = [
+  { token: "--pj-surface-base", name: "Surface / Base", value: "#FFFFFF", use: "기본 콘텐츠 배경" },
+  { token: "--pj-surface-1", name: "Surface / 1", value: "#F9F9F9", use: "섹션·필드 배경" },
+  { token: "--pj-surface-2", name: "Surface / 2", value: "#F2F2F5", use: "경계가 있는 박스 배경" },
+  { token: "--pj-surface-raised", name: "Surface / Raised", value: "#FFFFFF", use: "카드, 모달 (그림자 동반)" },
+  { token: "--pj-surface-inverse", name: "Surface / Inverse", value: "#222222", use: "다크 영역, Toast" },
+  { token: "--pj-overlay", name: "Overlay", value: "rgba(17,24,39,.55)", use: "모달 백드롭, Drawer 스크림" }
+];
+
+const SEMANTIC_BORDER = [
+  { token: "--pj-border-subtle", name: "Border / Subtle", value: "#F2F2F5", use: "구분선, 약한 경계" },
+  { token: "--pj-border-default", name: "Border / Default", value: "#E3E3E3", use: "입력 필드, 카드 외곽" },
+  { token: "--pj-border-strong", name: "Border / Strong", value: "#BDBDBD", use: "비활성 강조 외곽" },
+  { token: "--pj-border-focus", name: "Border / Focus", value: "#FF6633", use: "포커스 링, 활성 외곽" }
+];
+
+const STATUS_EXTENDED = [
+  { name: "Error", text: "#B3201B", bg: "#FFEAEA", border: "#FFCBCB", base: "#FF3B3B" },
+  { name: "Warning", text: "#7A5B00", bg: "#FFF6DC", border: "#F5E0A0", base: "#FFCC00" },
+  { name: "Info", text: "#1742A6", bg: "#EEF4FF", border: "#C7D8FF", base: "#0063F7" },
+  { name: "Success", text: "#036A3E", bg: "#E6FAEF", border: "#BFE9CF", base: "#06C270" }
+];
+
+const GRADIENTS = [
+  { name: "Brand · Soft", token: "--pj-gradient-brand-soft", css: "linear-gradient(135deg, #FFB299 0%, #FF6633 100%)", use: "히어로, 카드 썸네일" },
+  { name: "Brand · Vivid", token: "--pj-gradient-brand-vivid", css: "linear-gradient(135deg, #FF8B5C 0%, #DD572B 100%)", use: "CTA 강조, 배너" },
+  { name: "Mint · Soft", token: "--pj-gradient-mint-soft", css: "linear-gradient(135deg, #99EBC2 0%, #00CC66 100%)", use: "마켓 카테고리" },
+  { name: "Sunset", token: "--pj-gradient-sunset", css: "linear-gradient(135deg, #FFE082 0%, #F99100 100%)", use: "체험·축제 카테고리" },
+  { name: "Sky", token: "--pj-gradient-sky", css: "linear-gradient(135deg, #E0EBFF 0%, #0644B8 100%)", use: "청년·뉴스 카테고리" },
+  { name: "Dawn", token: "--pj-gradient-dawn", css: "linear-gradient(180deg, #FFF7F2 0%, #FFFFFF 100%)", use: "알림 패널, 부드러운 헤더" }
+];
+
+const USAGE_RULES = [
+  { color: "#FF6633", title: "Primary", do: "CTA 버튼, 강조 링크, 핵심 메트릭, 포커스 링", dont: "본문 텍스트, 큰 영역의 배경 색칠" },
+  { color: "#00CC66", title: "Secondary", do: "성공 배지, 픽포인트 강조, 보조 액션", dont: "주요 CTA(Primary와 경쟁하지 않도록)" },
+  { color: "#222222", title: "Dark", do: "본문, 헤더 텍스트, 다크 영역 배경", dont: "에러/경고 등 상태를 표현해야 할 때" },
+  { color: "#FF3B3B", title: "Error", do: "유효성 실패, 삭제 위험 표시", dont: "단순 강조 색으로 남용 금지" }
+];
+
 const COLOR_BRAND = [
   { name: "Primary", token: "--pj-color-primary", hex: "#FF6633", text: "#ffffff" },
   { name: "Primary Dark", token: "--pj-color-primary-dark", hex: "#DD572B", text: "#ffffff" },
@@ -437,6 +524,72 @@ const STYLES = `
   .ds-tone-dont { background: #ffeaea; color: #b3201b; }
   .ds-tone-tag { font-weight: 800; font-size: 11px; letter-spacing: 0.04em; }
 
+  /* Tonal scale */
+  .ds-scale { display: grid; grid-template-columns: 90px 1fr; gap: 14px; align-items: stretch; }
+  .ds-scale__label { display: flex; flex-direction: column; gap: 4px; padding: 6px 0; font-size: 13px; font-weight: 800; color: var(--pj-color-dark-1); }
+  .ds-scale__label span { font-size: 11px; font-weight: 600; color: var(--pj-color-dark-2); letter-spacing: 0.04em; }
+  .ds-scale__row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 0 rgba(17,24,39,.04); }
+  .ds-scale__step { padding: 10px 4px 14px; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 88px; justify-content: flex-end; cursor: pointer; transition: transform .15s ease; }
+  .ds-scale__step:hover { transform: translateY(-2px); }
+  .ds-scale__step .ds-scale__step-num { font-size: 12px; font-weight: 800; }
+  .ds-scale__step .ds-scale__step-hex { font-size: 10px; font-weight: 600; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; opacity: 0.9; }
+  @media (max-width: 720px) {
+    .ds-scale { grid-template-columns: 1fr; }
+    .ds-scale__row { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  /* Semantic token table */
+  .ds-tokens { display: grid; gap: 8px; }
+  .ds-token-row { display: grid; grid-template-columns: 48px 220px 140px 1fr; align-items: center; gap: 14px; padding: 10px 14px; border: 1px solid var(--pj-color-guide-line); border-radius: 12px; background: #ffffff; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+  .ds-token-row:hover { border-color: var(--pj-color-primary-light); background: var(--pj-color-light-2); }
+  .ds-token-row__swatch { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--pj-color-guide-line); }
+  .ds-token-row__name { font-size: 13px; font-weight: 700; color: var(--pj-color-dark-1); }
+  .ds-token-row__token { font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pj-color-primary-dark); word-break: break-all; }
+  .ds-token-row__use { font-size: 12px; color: var(--pj-color-dark-2); }
+  @media (max-width: 720px) {
+    .ds-token-row { grid-template-columns: 36px 1fr; }
+    .ds-token-row__token, .ds-token-row__use { grid-column: 1 / -1; }
+  }
+
+  /* Status extended */
+  .ds-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .ds-status-card { padding: 18px; border-radius: 14px; border: 1px solid; background: #ffffff; display: grid; gap: 12px; }
+  .ds-status-card__head { display: flex; align-items: center; gap: 10px; }
+  .ds-status-card__head strong { font-size: 14px; font-weight: 800; }
+  .ds-status-card__chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid; font-size: 12px; font-weight: 700; }
+  .ds-status-card__sample { padding: 12px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; font-weight: 600; }
+  .ds-status-card__tokens { display: grid; gap: 4px; }
+  .ds-status-card__tokens code { font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pj-color-dark-2); }
+
+  /* Gradients */
+  .ds-grad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .ds-grad { border-radius: 14px; overflow: hidden; border: 1px solid var(--pj-color-guide-line); background: #ffffff; cursor: pointer; transition: transform .15s ease; }
+  .ds-grad:hover { transform: translateY(-2px); }
+  .ds-grad__swatch { height: 104px; display: flex; align-items: flex-end; padding: 12px; color: #ffffff; font-size: 12px; font-weight: 800; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0,0,0,.18); }
+  .ds-grad__meta { padding: 12px 14px 14px; }
+  .ds-grad__name { font-size: 13px; font-weight: 800; color: var(--pj-color-dark-1); }
+  .ds-grad__use { font-size: 12px; color: var(--pj-color-dark-2); margin-top: 4px; }
+  .ds-grad__token { display: block; font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pj-color-dark-2); margin-top: 6px; word-break: break-all; }
+
+  /* Color usage */
+  .ds-usage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .ds-usage-card { display: grid; grid-template-rows: 64px auto auto; border-radius: 14px; border: 1px solid var(--pj-color-guide-line); overflow: hidden; background: #ffffff; }
+  .ds-usage-card__band { display: flex; align-items: center; padding: 0 18px; color: #ffffff; font-weight: 800; font-size: 15px; text-shadow: 0 1px 2px rgba(0,0,0,.14); }
+  .ds-usage-card__row { display: grid; grid-template-columns: 38px 1fr; gap: 10px; padding: 12px 16px; font-size: 12px; line-height: 1.5; }
+  .ds-usage-card__row + .ds-usage-card__row { border-top: 1px solid var(--pj-color-guide-line); }
+  .ds-usage-card__pill { display: inline-flex; align-items: center; justify-content: center; height: 22px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; }
+  .ds-usage-card__pill--do { background: #e6faef; color: #036a3e; }
+  .ds-usage-card__pill--no { background: #ffeaea; color: #b3201b; }
+
+  /* Toast (for click-to-copy feedback) */
+  .ds-copy-toast { position: fixed; left: 50%; bottom: 32px; transform: translateX(-50%) translateY(20px); padding: 10px 16px; background: #1d1f2a; color: #ffffff; border-radius: 999px; font-size: 13px; font-weight: 700; box-shadow: 0 12px 32px rgba(17,24,39,.24); opacity: 0; pointer-events: none; transition: transform .2s ease, opacity .2s ease; z-index: 12000; }
+  .ds-copy-toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Make color cards & tiles look clickable */
+  .ds-color, .ds-cat-tile, .ds-pair, .ds-shadow { cursor: pointer; }
+  .ds-color { transition: transform .15s ease; }
+  .ds-color:hover { transform: translateY(-2px); }
+
   /* Accessibility pairing */
   .ds-pair-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
   .ds-pair { padding: 22px; border-radius: 14px; display: flex; flex-direction: column; gap: 6px; min-height: 132px; justify-content: space-between; }
@@ -461,12 +614,92 @@ const STYLES = `
 function renderColorCard({ name, token, hex, text = "#ffffff" }) {
   const swatchStyle = `background:${hex};color:${text};`;
   return `
-    <div class="ds-color">
+    <div class="ds-color" data-copy="${hex}" title="클릭하여 복사">
       <div class="ds-color__swatch" style="${swatchStyle}">${hex.toUpperCase()}</div>
       <div class="ds-color__meta">
         <div class="ds-color__name">${name}</div>
         <div class="ds-color__hex">${hex}</div>
         <div class="ds-color__token">${token}</div>
+      </div>
+    </div>`;
+}
+
+function scaleTextColor(step) {
+  return step >= 400 ? "#ffffff" : "#222222";
+}
+
+function renderScaleRow(label, scale) {
+  const steps = scale
+    .map(
+      ({ step, hex }) => `
+      <button type="button" class="ds-scale__step" data-copy="${hex}" title="${hex}" style="background:${hex};color:${scaleTextColor(step)};">
+        <span class="ds-scale__step-num">${step}</span>
+        <span class="ds-scale__step-hex">${hex.replace("#", "")}</span>
+      </button>`
+    )
+    .join("");
+  return `
+    <div class="ds-scale">
+      <div class="ds-scale__label">${label}<span>50 → 900</span></div>
+      <div class="ds-scale__row">${steps}</div>
+    </div>`;
+}
+
+function renderTokenRow({ token, name, value, use }) {
+  return `
+    <div class="ds-token-row" data-copy="${token}" title="토큰명 복사: ${token}">
+      <span class="ds-token-row__swatch" style="background:${value};"></span>
+      <div>
+        <div class="ds-token-row__name">${name}</div>
+        <div class="ds-token-row__token">${token}</div>
+      </div>
+      <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--pj-color-dark-2);">${value}</code>
+      <span class="ds-token-row__use">${use}</span>
+    </div>`;
+}
+
+function renderStatusExtended({ name, text, bg, border, base }) {
+  return `
+    <div class="ds-status-card" style="border-color:${border};">
+      <div class="ds-status-card__head">
+        <span class="ds-status-card__chip" style="background:${bg};color:${text};border-color:${border};">${name}</span>
+        <strong style="color:${text};">${name} state</strong>
+      </div>
+      <div class="ds-status-card__sample" style="background:${bg};color:${text};border:1px solid ${border};">
+        예시: ${name === "Error" ? "비밀번호가 일치하지 않습니다." : name === "Success" ? "정상적으로 저장되었습니다." : name === "Warning" ? "오늘 자정에 마감됩니다." : "안내가 도착했습니다."}
+      </div>
+      <div class="ds-status-card__tokens">
+        <code data-copy="${text}" title="복사: ${text}">text · ${text}</code>
+        <code data-copy="${bg}" title="복사: ${bg}">bg · ${bg}</code>
+        <code data-copy="${border}" title="복사: ${border}">border · ${border}</code>
+        <code data-copy="${base}" title="복사: ${base}">base · ${base}</code>
+      </div>
+    </div>`;
+}
+
+function renderGradient({ name, token, css, use }) {
+  return `
+    <div class="ds-grad" data-copy="${css}" title="CSS 복사">
+      <div class="ds-grad__swatch" style="background:${css};">${name.split("·")[1] ? name.split("·")[1].trim() : name}</div>
+      <div class="ds-grad__meta">
+        <div class="ds-grad__name">${name}</div>
+        <div class="ds-grad__use">${use}</div>
+        <code class="ds-grad__token">${token}</code>
+      </div>
+    </div>`;
+}
+
+function renderUsageCard({ color, title, do: doText, dont }) {
+  return `
+    <div class="ds-usage-card">
+      <div class="ds-usage-card__band" style="background:${color};">${title} · ${color}</div>
+      <div class="ds-usage-card__row">
+        <span class="ds-usage-card__pill ds-usage-card__pill--do">DO</span>
+        <span>${doText}</span>
+      </div>
+      <div class="ds-usage-card__row">
+        <span class="ds-usage-card__pill ds-usage-card__pill--no">DON'T</span>
+        <span>${dont}</span>
       </div>
     </div>`;
 }
@@ -544,6 +777,15 @@ export function buildDesignSystemMain() {
   const shadows = SHADOWS.map(renderShadow).join("");
   const icons = SAMPLE_ICONS.map(renderIcon).join("");
   const categoryGroups = CATEGORY_GROUPS.map(renderCategoryGroup).join("");
+  const scalePrimary = renderScaleRow("Primary", SCALE_PRIMARY);
+  const scaleSecondary = renderScaleRow("Secondary", SCALE_SECONDARY);
+  const scaleGray = renderScaleRow("Gray", SCALE_GRAY);
+  const semanticText = SEMANTIC_TEXT.map(renderTokenRow).join("");
+  const semanticSurface = SEMANTIC_SURFACE.map(renderTokenRow).join("");
+  const semanticBorder = SEMANTIC_BORDER.map(renderTokenRow).join("");
+  const statusExtended = STATUS_EXTENDED.map(renderStatusExtended).join("");
+  const gradients = GRADIENTS.map(renderGradient).join("");
+  const usageCards = USAGE_RULES.map(renderUsageCard).join("");
 
   return `
 ${STYLES}
@@ -572,6 +814,10 @@ ${STYLES}
           <div class="ds-toc__group-label">Foundation</div>
           <ul class="ds-toc__list">
             <li><a href="#colors">Colors</a></li>
+            <li><a href="#semantic-tokens">Semantic Tokens</a></li>
+            <li><a href="#status-extended">Status Extended</a></li>
+            <li><a href="#gradients">Gradients</a></li>
+            <li><a href="#color-usage">Color Usage</a></li>
             <li><a href="#category-filter">Category Filter</a></li>
             <li><a href="#typography">Typography</a></li>
             <li><a href="#spacing">Spacing</a></li>
@@ -647,12 +893,72 @@ ${STYLES}
           <div class="ds-sub">Brand</div>
           <div class="ds-color-grid">${colorBrand}</div>
 
-          <div class="ds-sub">Neutral</div>
+          <div class="ds-sub">Tonal scale</div>
+          <p style="margin:-6px 0 14px;font-size:13px;color:var(--pj-color-dark-2);line-height:1.5;">10단계 색조 팔레트입니다. 호버·배경·보더에 쓸 단계를 즉시 고를 수 있도록 정리했습니다. 클릭하면 HEX가 복사됩니다.</p>
+          <div style="display:grid;gap:14px;">
+            ${scalePrimary}
+            ${scaleSecondary}
+            ${scaleGray}
+          </div>
+
+          <div class="ds-sub">Neutral (legacy alias)</div>
           <div class="ds-color-grid">${colorNeutral}</div>
 
-          <div class="ds-sub">Status</div>
+          <div class="ds-sub">Status (base)</div>
           <div class="ds-color-grid">${colorStatus}</div>
 
+        </section>
+
+        <section class="ds-section" id="semantic-tokens">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Semantic Tokens</h2>
+              <p class="ds-section__desc">값(<code>--pj-color-dark-2</code>)이 아니라 역할로 컬러를 사용하세요. 향후 다크 모드/리브랜딩 대응이 쉬워집니다. 행을 클릭하면 토큰명이 복사됩니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+
+          <div class="ds-sub">Text</div>
+          <div class="ds-tokens">${semanticText}</div>
+
+          <div class="ds-sub">Surface</div>
+          <div class="ds-tokens">${semanticSurface}</div>
+
+          <div class="ds-sub">Border</div>
+          <div class="ds-tokens">${semanticBorder}</div>
+        </section>
+
+        <section class="ds-section" id="status-extended">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Status — extended</h2>
+              <p class="ds-section__desc">상태별로 text · soft background · border 3종 세트를 정의해 알림 / 뱃지 / 입력 검증을 일관되게 표현합니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          <div class="ds-status-grid">${statusExtended}</div>
+        </section>
+
+        <section class="ds-section" id="gradients">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Gradients</h2>
+              <p class="ds-section__desc">히어로·썸네일·카테고리에 자주 쓰는 그라데이션을 토큰화했습니다. 클릭하면 CSS 값이 복사됩니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          <div class="ds-grad-grid">${gradients}</div>
+        </section>
+
+        <section class="ds-section" id="color-usage">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Color Usage</h2>
+              <p class="ds-section__desc">각 컬러를 어디에 써야 하고, 어디에 쓰지 않아야 하는지 한눈에 보는 가이드입니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          <div class="ds-usage-grid">${usageCards}</div>
         </section>
 
         <section class="ds-section" id="category-filter">
@@ -1652,6 +1958,56 @@ ${STYLES}
       </div>
     </div>
   </div>
+  <div id="ds-copy-toast" class="ds-copy-toast" role="status" aria-live="polite">복사되었어요</div>
 </main>
+<script>
+(function () {
+  if (typeof document === 'undefined') return;
+  function init() {
+    var toast = document.getElementById('ds-copy-toast');
+    var hideTimer;
+    function showToast(text) {
+      if (!toast) return;
+      toast.textContent = text;
+      toast.classList.add('is-show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () { toast.classList.remove('is-show'); }, 1500);
+    }
+    function fallbackCopy(text) {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand('copy'); } catch (_e) {}
+      document.body.removeChild(area);
+    }
+    function copy(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(function () { fallbackCopy(text); });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+    document.addEventListener('click', function (event) {
+      var target = event.target.closest('[data-copy]');
+      if (!target) return;
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' && target.type === 'submit') return;
+      var value = target.getAttribute('data-copy');
+      if (!value) return;
+      event.preventDefault();
+      copy(value);
+      showToast('복사 · ' + value);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
 `;
 }
