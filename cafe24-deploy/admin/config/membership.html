@@ -1,0 +1,857 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<script>window.PICJEJU_BASE_PATH="/picjeju_next";window.ADMIN_BASE_PATH="/picjeju_next/admin";window.ADMIN_BASE_URL="/picjeju_next/admin/";</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>관리자</title>
+
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-design-system.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-ux-polish.css?v=20260520-ux">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css">
+
+  <!-- Flatpickr (range 지원) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css"> 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ko.js"></script>
+
+  <script>window.ADMIN_BASE_URL = "/picjeju_next/admin/";</script>
+</head>
+<body class="admin-enhanced admin-next-shell">
+<header class="topbar">
+  <div class="container-fluid">
+    <div class="top-header">
+      <button class="btn btn-outline-secondary d-lg-none me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"><i class="ri-menu-line"></i></button>
+      <h1 class="h5 mb-0">환경설정 <span class="text-muted">/</span> 회원가입 · 그룹/등급</h1>
+      <div class="ms-auto d-none d-md-flex gap-2">
+        <button class="btn btn-light btn-sm" id="btnHelp"><i class="ri-question-line"></i> 도움말</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  
+<!-- Desktop sidebar -->
+<aside class="sidebar d-none d-lg-block">
+  <div class="brand d-flex align-items-center gap-2 p-2 mb-1">
+    <a href="/picjeju_next/admin/" class="d-flex align-items-center text-decoration-none">
+      <i class="ri-grid-fill text-primary me-2"></i>
+      <strong class="text-dark">Admin</strong>
+    </a>
+  </div>
+  <ul class="menu" id="main-menu-desktop"><li><a href="/picjeju_next/admin/" class=""><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-8eb8d54b4f54c0551899103ea4e60a9a" role="button" aria-expanded="false" aria-controls="m-8eb8d54b4f54c0551899103ea4e60a9a"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-8eb8d54b4f54c0551899103ea4e60a9a" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ba6072a256299aaa9077a10d892ba93d" role="button" aria-expanded="false" aria-controls="m-ba6072a256299aaa9077a10d892ba93d"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-ba6072a256299aaa9077a10d892ba93d" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-21b6bec525da8439c8823580479198de" role="button" aria-expanded="false" aria-controls="m-21b6bec525da8439c8823580479198de"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-21b6bec525da8439c8823580479198de" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-855db6319a1cb0d218f0acfe115eb865" role="button" aria-expanded="false" aria-controls="m-855db6319a1cb0d218f0acfe115eb865"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-855db6319a1cb0d218f0acfe115eb865" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-67ca6f5c3f0c5419ec0e5d5ea0df068e" role="button" aria-expanded="false" aria-controls="m-67ca6f5c3f0c5419ec0e5d5ea0df068e"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-67ca6f5c3f0c5419ec0e5d5ea0df068e" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-391752e910208cd4faf2f35ee1f0ce52" role="button" aria-expanded="false" aria-controls="m-391752e910208cd4faf2f35ee1f0ce52"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-391752e910208cd4faf2f35ee1f0ce52" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fb5de4adaaf705616a8d5a8291fac850" role="button" aria-expanded="false" aria-controls="m-fb5de4adaaf705616a8d5a8291fac850"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-fb5de4adaaf705616a8d5a8291fac850" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ab0e0b2c33f481965876a6bab3d80abc" role="button" aria-expanded="true" aria-controls="m-ab0e0b2c33f481965876a6bab3d80abc"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse show" id="m-ab0e0b2c33f481965876a6bab3d80abc" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a class="active" href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul></aside>
+
+<!-- Mobile offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="ri-grid-fill me-2 text-primary"></i>Admin</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <ul class="menu" id="main-menu-mobile"><li><a href="/picjeju_next/admin/" class=""><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-5120c092695aa7c0897d8a573bfd94f5" role="button" aria-expanded="false" aria-controls="m-5120c092695aa7c0897d8a573bfd94f5"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-5120c092695aa7c0897d8a573bfd94f5" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-69e37c0845a3ad57c8bd69c9e2fb29ca" role="button" aria-expanded="false" aria-controls="m-69e37c0845a3ad57c8bd69c9e2fb29ca"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-69e37c0845a3ad57c8bd69c9e2fb29ca" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-44532bae1a810e071b529cdde29ece34" role="button" aria-expanded="false" aria-controls="m-44532bae1a810e071b529cdde29ece34"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-44532bae1a810e071b529cdde29ece34" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4021aba985b9800f861cf47e924d4987" role="button" aria-expanded="false" aria-controls="m-4021aba985b9800f861cf47e924d4987"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4021aba985b9800f861cf47e924d4987" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4ba879a3f2fadbe5391b44a1acaa4938" role="button" aria-expanded="false" aria-controls="m-4ba879a3f2fadbe5391b44a1acaa4938"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4ba879a3f2fadbe5391b44a1acaa4938" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-2088aaae039216f0a947f83763a29ed1" role="button" aria-expanded="false" aria-controls="m-2088aaae039216f0a947f83763a29ed1"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-2088aaae039216f0a947f83763a29ed1" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-15ebc1da6ba6fa6440bc849d746b5f81" role="button" aria-expanded="false" aria-controls="m-15ebc1da6ba6fa6440bc849d746b5f81"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-15ebc1da6ba6fa6440bc849d746b5f81" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fc6747a8d38353bc0069a993f76780dd" role="button" aria-expanded="true" aria-controls="m-fc6747a8d38353bc0069a993f76780dd"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse show" id="m-fc6747a8d38353bc0069a993f76780dd" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a class="active" href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul>  </div>
+</div>
+
+
+  <main class="container-fluid">
+    <div id="alertBox" class="my-3"></div>
+
+    <!-- 상단 탭 -->
+    <ul class="nav nav-tabs my-2">
+      <li class="nav-item"><a class="nav-link active" href="/picjeju_next/admin/config/membership/?mode=join">가입 설정</a></li>      <li class="nav-item"><a class="nav-link" href="/picjeju_next/admin/config/membership/?mode=group">그룹 및 등급 설정</a></li>    </ul>
+
+        <!-- ------------------------------ 가입 설정 ------------------------------ -->
+    <form id="membershipForm" class="needs-validation" novalidate>
+      <section class="row g-3 my-2">
+
+        <!-- 가입 설정 -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-white"><strong>가입 설정</strong></div>
+            <div class="card-body">
+
+              <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label text-sm-end">가입설정</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="use_login" id="use_login" checked>
+                    <label class="form-check-label" for="use_login">
+                      로그인/가입 사용
+                      <div class="form-text">
+                        해제해도 기존 회원은 일부 경로에서 로그인할 수 있습니다.
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label text-sm-end">약관동의</label>
+                <div class="col-sm-10">
+                  <div class="form-check mb-1">
+                    <input class="form-check-input" type="radio" name="use_policy" id="policy_step" value="Y" checked>
+                    <label class="form-check-label" for="policy_step">가입 시 약관 동의 단계 거치기 (권장)</label>
+                  </div>
+                  <div class="form-check mb-1">
+                    <input class="form-check-input" type="radio" name="use_policy" id="policy_inline" value="V" disabled>
+                    <label class="form-check-label" for="policy_inline">약관동의 문구를 하단에 표시</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="use_policy" id="policy_none" value="N" disabled>
+                    <label class="form-check-label" for="policy_none">약관 동의 사용 안함</label>
+                  </div>
+                  <div class="form-text text-danger">법적 사유로 대체 옵션은 비활성화되어 있습니다.</div>
+                </div>
+              </div>
+
+              <div class="mb-3 row _social_login_use_policy_wrap">
+                <label class="col-sm-2 col-form-label text-sm-end">기타 약관동의</label>
+                <div class="col-sm-10">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="social_login_use_policy" name="social_login_use_policy" checked>
+                    <label class="form-check-label" for="social_login_use_policy">
+                      소셜 로그인 신규 가입도 약관 동의 받기
+                      <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                         data-bs-content="소셜 로그인으로 첫 가입 시에도 약관 동의 단계를 거칩니다.">
+                        <i class="ri-question-line"></i>
+                      </a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="optional_policy_use_all_check" name="optional_policy_use_all_check" checked>
+                    <label class="form-check-label" for="optional_policy_use_all_check">전체 동의 클릭 시 선택 항목까지 체크</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-1">
+                <label class="col-sm-2 col-form-label text-sm-end" for="join_info">가입안내</label>
+                <div class="col-sm-10">
+                  <textarea id="join_info" class="form-control" rows="2" name="info" placeholder="예: 아래 항목을 빠짐없이 입력해 주세요."></textarea>
+                  <div class="form-text">
+                    약관/개인정보 방침은 <a href="/picjeju_next/admin/config/etc" class="text-primary">약관 설정</a>에서 관리합니다.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 공통항목 -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-white"><strong>공통항목</strong></div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                  <colgroup>
+                    <col style="width:40%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
+                  </colgroup>
+                  <thead class="table-light">
+                  <tr>
+                    <th>항목</th>
+                    <th class="text-center">
+                      <abbr title="로그인 방식 선택(이메일/아이디)">로그인 계정</abbr>
+                    </th>
+                    <th>사용</th>
+                    <th>필수</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>이메일 주소</td>
+                    <td class="text-center">
+                      <div class="form-check m-0 d-inline-block">
+                        <input class="form-check-input" type="radio" name="login_type" value="email" id="login_type_email" checked aria-label="login type email">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check m-0">
+                        <input class="form-check-input" type="checkbox" id="use_email" checked disabled aria-label="use email">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check m-0">
+                        <input class="form-check-input" type="checkbox" id="essential_email" checked disabled aria-label="essential email">
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>아이디</td>
+                    <td class="text-center">
+                      <div class="form-check m-0 d-inline-block">
+                        <input class="form-check-input" type="radio" name="login_type" value="id" id="login_type_id" aria-label="login type id">
+                      </div>
+                    </td>
+                    <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="use_id" disabled aria-label="use id"></div></td>
+                    <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_id" disabled aria-label="essential id"></div></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div id="password_main_form">
+                        비밀번호
+                        <button type="button" class="btn btn-sm btn-light ms-2" onclick="CONFIG_MEMBERSHIP.showHiddenForm('password')">정책 수정</button>
+                      </div>
+                      <div id="password_hidden_form" class="border rounded p-2 mt-2 d-none">
+                        <div class="row g-2 align-items-center">
+                          <div class="col-auto">최소 길이</div>
+                          <div class="col-auto"><input type="number" class="form-control" id="password_min_length" name="password_min_length" value="8" min="6" max="64" style="width:90px" aria-label="password min length"></div>
+                        </div>
+                        <div class="form-check mt-2"><input class="form-check-input" type="checkbox" checked disabled id="password_require_upper_case"><label class="form-check-label" for="password_require_upper_case">1개 이상의 대문자 필수</label></div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox" checked disabled id="password_require_number"><label class="form-check-label" for="password_require_number">1개 이상의 숫자 필수</label></div>
+                        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" checked disabled id="password_require_special_text"><label class="form-check-label" for="password_require_special_text">1개 이상의 특수문자 필수</label></div>
+                        <div class="d-flex gap-2">
+                          <button type="button" class="btn btn-primary btn-sm" onclick="CONFIG_MEMBERSHIP.saveHiddenForm('password')">확인</button>
+                          <button type="button" class="btn btn-light btn-sm" onclick="CONFIG_MEMBERSHIP.hideHiddenForm('password')">취소</button>
+                        </div>
+                      </div>
+                    </td>
+                    <td></td>
+                    <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                    <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 가입 폼 관리 - 일반회원 -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-white d-flex align-items-center">
+              <strong>가입 폼 관리</strong>
+              <a tabindex="0" class="ms-2 text-muted" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true"
+                 data-bs-title="가입 폼 관리"
+                 data-bs-content="<p>방문자 가입 시 수집할 항목을 유형별로 설정합니다.</p><p>최소한의 정보 수집을 권장합니다.</p>">
+                <i class="ri-question-line"></i>
+              </a>
+              <div class="ms-auto">
+                <button type="button" class="btn btn-sm btn-light" onclick="CONFIG_MEMBERSHIP.openJoinTypeEditForm('default')">설정</button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <input type="hidden" name="default_join_type_code" value="t202103122811c77db5515">
+              <input type="hidden" id="default_allow_type" name="default_allow_type" value="auto">
+              <input type="hidden" id="default_limit_join_type" name="default_limit_join_type" value="not_auth">
+              <input type="hidden" id="default_default_group" name="default_default_group" value="">
+              <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-2">
+                <div class="form-check m-0">
+                  <input class="form-check-input _use_checkbox" type="checkbox" name="use_default_type" id="use_default_type" checked data-target="#default_type_form_wrap">
+                  <label class="form-check-label" for="use_default_type"><span id="default_main_text" class="fw-semibold">일반회원</span></label>
+                </div>
+                <div class="small text-muted"><img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="20" height="20" alt=""></div>
+              </div>
+
+              <div id="default_type_form_wrap">
+                <div class="table-responsive">
+                  <table class="table align-middle">
+                    <colgroup>
+                      <col style="width:40%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:50px"><col style="width:50px">
+                    </colgroup>
+                    <thead class="table-light">
+                    <tr>
+                      <th>항목</th>
+                      <th></th>
+                      <th>사용</th>
+                      <th>필수</th>
+                      <th></th><th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        <div id="default_name_main_form">
+                          <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" class="me-1" alt="">이름
+                          <button type="button" class="btn btn-sm btn-light ms-2" data-bs-toggle="tooltip" title="표기명 변경" onclick="CONFIG_MEMBERSHIP.showHiddenForm('default_name')">수정</button>
+                        </div>
+                        <div id="default_name_hidden_form" class="border rounded p-2 mt-2 d-none">
+                          <div class="d-flex align-items-center gap-2 mb-2">
+                            <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" alt="">
+                            <input type="text" class="form-control" style="max-width:220px" value="이름" maxlength="20" aria-label="text">
+                            <button type="button" class="btn btn-link p-0" onclick="CONFIG_MEMBERSHIP.resetDefaultText(this,'이름')"><i class="ri-arrow-go-back-line me-1"></i>기본값으로</button>
+                          </div>
+                          <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="default_name_unique">
+                            <label class="form-check-label" for="default_name_unique">같은 이름(닉네임) 중복 가입 방지</label>
+                          </div>
+                          <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="CONFIG_MEMBERSHIP.saveHiddenForm('default_name')">확인</button>
+                            <button type="button" class="btn btn-light btn-sm" onclick="CONFIG_MEMBERSHIP.hideHiddenForm('default_name')">취소</button>
+                          </div>
+                        </div>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>성별</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_gender" data-essential="#default_essential_gender" aria-label="default use gender"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_gender" disabled aria-label="default essential gender"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>홈페이지</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_homepage" data-essential="#default_essential_homepage" aria-label="default use homepage"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_homepage" disabled aria-label="default essential homepage"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div id="default_callnum_main_form">
+                          <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" class="me-1" alt="">연락처
+                          <button type="button" class="btn btn-sm btn-light ms-2" data-bs-toggle="tooltip" title="표기명 변경" onclick="CONFIG_MEMBERSHIP.showHiddenForm('default_callnum')">수정</button>
+                        </div>
+                        <div id="default_callnum_hidden_form" class="border rounded p-2 mt-2 d-none">
+                          <div class="d-flex align-items-center gap-2 mb-2">
+                            <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" alt="">
+                            <input type="text" class="form-control" style="max-width:220px" value="연락처" maxlength="20" aria-label="text">
+                            <button type="button" class="btn btn-link p-0" onclick="CONFIG_MEMBERSHIP.resetDefaultText(this,'연락처')"><i class="ri-arrow-go-back-line me-1"></i>기본값으로</button>
+                          </div>
+                          <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="CONFIG_MEMBERSHIP.saveHiddenForm('default_callnum')">확인</button>
+                            <button type="button" class="btn btn-light btn-sm"  onclick="CONFIG_MEMBERSHIP.hideHiddenForm('default_callnum')">취소</button>
+                          </div>
+                        </div>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_callnum" data-essential="#default_essential_callnum" aria-label="default use callnum"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_callnum" disabled aria-label="default essential callnum"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        주소
+                        <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-html="true"
+                           data-bs-content="<p>국가/언어/배송 설정에 따라 주소 입력 형식이 달라집니다.</p>">
+                          <i class="ri-question-line"></i>
+                        </a>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_addr" data-essential="#default_essential_addr" aria-label="default use addr"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_addr" disabled aria-label="default essential addr"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>생년월일</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_birth" data-essential="#default_essential_birth" aria-label="default use birth"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_birth" disabled aria-label="default essential birth"></div></td>
+                      <td></td><td></td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                      <td>
+                        추천인
+                        <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-html="true"
+                           data-bs-content="<p>추천인 코드를 가입 시 입력받습니다. 가입 완료 후에는 변경 불가.</p>">
+                          <i class="ri-question-line"></i>
+                        </a>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="default_use_recommend" data-essential="#default_essential_recommend" aria-label="default use recommend"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="default_essential_recommend" disabled aria-label="default essential recommend"></div></td>
+                      <td></td><td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mt-3">
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="CONFIG_MEMBERSHIP.openJoinFormAddForm('default')">
+                    <i class="ri-add-line me-1"></i>사용자 정의 항목 추가
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 가입 폼 관리 - 사업자 회원 -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+
+              <input type="hidden" name="business_join_type_code" value="">
+              <input type="hidden" id="business_allow_type" name="business_allow_type" value="auto">
+              <input type="hidden" id="business_limit_join_type" name="business_limit_join_type" value="not_auth">
+              <input type="hidden" id="business_default_group" name="business_default_group" value="">
+
+              <div class="d-flex align-items-center justify-content-between border-top pt-3 mt-1">
+                <div class="form-check m-0">
+                  <input class="form-check-input _use_checkbox" type="checkbox" id="use_business_type" name="use_business_type" data-target="#business_type_form_wrap">
+                  <label class="form-check-label" for="use_business_type">
+                    <span id="business_main_text" class="fw-semibold">사업자 회원</span>
+                    <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true"
+                       data-bs-content="<p>사업자 회원가입 시 수집 항목을 설정합니다. 별도 인증 기능은 제공하지 않습니다.</p>">
+                      <i class="ri-question-line"></i>
+                    </a>
+                  </label>
+                </div>
+                <button type="button" class="btn btn-sm btn-light" onclick="CONFIG_MEMBERSHIP.openJoinTypeEditForm('business')">설정</button>
+              </div>
+
+              <div id="business_type_form_wrap" class="d-none mt-3">
+                <div class="table-responsive">
+                  <table class="table align-middle">
+                    <colgroup>
+                      <col style="width:40%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:50px"><col style="width:50px">
+                    </colgroup>
+                    <thead class="table-light">
+                    <tr>
+                      <th>항목</th><th></th><th>사용</th><th>필수</th><th></th><th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        <div id="business_name_main_form">
+                          <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" class="me-1" alt="">상호
+                          <button type="button" class="btn btn-sm btn-light ms-2" onclick="CONFIG_MEMBERSHIP.showHiddenForm('business_name')">수정</button>
+                        </div>
+                        <div id="business_name_hidden_form" class="border rounded p-2 mt-2 d-none">
+                          <div class="d-flex align-items-center gap-2 mb-2">
+                            <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" alt="">
+                            <input type="text" class="form-control" style="max-width:220px" value="상호" maxlength="20" aria-label="text">
+                            <button type="button" class="btn btn-link p-0" onclick="CONFIG_MEMBERSHIP.resetDefaultText(this,'상호')"><i class="ri-arrow-go-back-line me-1"></i>기본값으로</button>
+                          </div>
+                          <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="unique_business_number" checked>
+                            <label class="form-check-label" for="unique_business_number">사업자번호 중복 가입 방지</label>
+                          </div>
+                          <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="CONFIG_MEMBERSHIP.saveHiddenForm('business_name')">확인</button>
+                            <button type="button" class="btn btn-light btn-sm" onclick="CONFIG_MEMBERSHIP.hideHiddenForm('business_name')">취소</button>
+                          </div>
+                        </div>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" checked disabled aria-label="checkbox"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>대표자명</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_representative_name" data-essential="#essential_representative_name" aria-label="use representative name"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_representative_name" disabled aria-label="essential representative name"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div id="business_callnum_main_form">
+                          <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" class="me-1" alt="">연락처
+                          <button type="button" class="btn btn-sm btn-light ms-2" onclick="CONFIG_MEMBERSHIP.showHiddenForm('business_callnum')">수정</button>
+                        </div>
+                        <div id="business_callnum_hidden_form" class="border rounded p-2 mt-2 d-none">
+                          <div class="d-flex align-items-center gap-2 mb-2">
+                            <img src="/picjeju_next/admin/assets/img/flag-kr-circle.svg" width="16" alt="">
+                            <input type="text" class="form-control" style="max-width:220px" value="연락처" maxlength="20" aria-label="text">
+                            <button type="button" class="btn btn-link p-0" onclick="CONFIG_MEMBERSHIP.resetDefaultText(this,'연락처')"><i class="ri-arrow-go-back-line me-1"></i>기본값으로</button>
+                          </div>
+                          <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="CONFIG_MEMBERSHIP.saveHiddenForm('business_callnum')">확인</button>
+                            <button type="button" class="btn btn-light btn-sm"  onclick="CONFIG_MEMBERSHIP.hideHiddenForm('business_callnum')">취소</button>
+                          </div>
+                        </div>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_business_callnum" data-essential="#essential_business_callnum" aria-label="use business callnum"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_business_callnum" disabled aria-label="essential business callnum"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>종목</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_business_kind" data-essential="#essential_business_kind" aria-label="use business kind"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_business_kind" disabled aria-label="essential business kind"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        사업장주소
+                        <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-html="true"
+                           data-bs-content="<p>국가/언어/배송 설정에 따라 주소 입력 형식이 달라집니다.</p>">
+                          <i class="ri-question-line"></i>
+                        </a>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_business_addr" data-essential="#essential_business_addr" aria-label="use business addr"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_business_addr" disabled aria-label="essential business addr"></div></td>
+                      <td></td><td></td>
+                    </tr>
+
+                    <tr>
+                      <td>담당자명</td><td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_contact_name" data-essential="#essential_contact_name" aria-label="use contact name"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_contact_name" disabled aria-label="essential contact name"></div></td>
+                      <td></td><td></td>
+                    </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                      <td>
+                        추천인
+                        <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-html="true"
+                           data-bs-content="<p>추천인 코드를 가입 시 입력받습니다. 가입 완료 후에는 변경 불가.</p>">
+                          <i class="ri-question-line"></i>
+                        </a>
+                      </td>
+                      <td></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" name="use_business_recommend" data-essential="#essential_business_recommend" aria-label="use business recommend"></div></td>
+                      <td><div class="form-check m-0"><input class="form-check-input" type="checkbox" id="essential_business_recommend" disabled aria-label="essential business recommend"></div></td>
+                      <td></td><td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mt-3">
+                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="CONFIG_MEMBERSHIP.openJoinFormAddForm('business')">
+                    <i class="ri-add-line me-1"></i>사용자 정의 항목 추가
+                  </button>
+                </div>
+              </div>
+
+              <!-- 커스텀 유형 컨테이너 -->
+              <div id="custom_type_wrap" class="mt-4"></div>
+
+              <div class="text-center my-2">
+                <button type="button" class="btn btn-light btn-sm" onclick="CONFIG_MEMBERSHIP.openJoinTypeAddForm()">
+                  <i class="ri-add-line me-1"></i>새 유형 추가
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 저장 바 -->
+      <div class="position-sticky bottom-0 bg-body border-top py-2">
+        <div class="container-fluid d-flex justify-content-end">
+          <button id="btnSave" type="submit" class="btn btn-primary" disabled><i class="ri-save-3-line me-1"></i> 저장하기</button>
+        </div>
+      </div>
+    </form>
+
+    
+  </main>
+</div>
+
+<!-- 도움말 모달 -->
+<div class="modal fade" id="mdHelp" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">환경설정 · 회원가입/그룹</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body small">
+        저장 흐름은 화면에서 먼저 확인할 수 있고, 실제 저장 로직은 <code>config.membership.js</code>에서 연결합니다.
+      </div>
+      <div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">닫기</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- 전용 스크립트 --> 
+<script>
+  document.getElementById('btnHelp')?.addEventListener('click', ()=> new bootstrap.Modal('#mdHelp').show());
+</script>
+
+<div class="offcanvas offcanvas-end notify-panel" tabindex="-1" id="offcanvasNotify" aria-labelledby="offcanvasNotifyLabel" style="width:420px;max-width:100vw;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasNotifyLabel">알림</h5>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-light" data-notify-markread>모두 읽음</button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="offcanvas-body p-0">
+    <!-- 배너: 알림 있을 때만 >
+    <div class="p-3 bg-warning-subtle border-bottom" >
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge text-bg-warning">광고</span>
+        <div class="fw-semibold">쇼핑몰 CS 챗봇, <u>챗봇나우</u> 베타</div>
+        <a class="ms-auto small text-decoration-underline" href="#" target="_blank">자세히</a>
+      </div>
+    </div-->
+
+    <!-- 알림 리스트: 없으면 display:none -->
+    <ul class="list-group list-group-flush" id="notifyList" >
+              <li class="list-group-item d-flex gap-2 align-items-start bg-body-tertiary">
+  <i class="ri-message-2-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">새 문의가 도착했어요</div>
+              <span class="badge rounded-pill text-bg-primary ms-2">New</span>
+            <small class="ms-auto text-body-secondary">방금</small>
+    </div>
+          <div class="small text-body-secondary mt-1">홍길동님이 1:1 문의를 남겼습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/membership/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-shopping-bag-3-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">주문 결제 완료</div>
+            <small class="ms-auto text-body-secondary">2시간 전</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0916-001 결제가 완료되었습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/membership/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-truck-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">배송 출발</div>
+            <small class="ms-auto text-body-secondary">어제</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0915-004이 택배사에 인계됐습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/membership/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/membership/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+          </ul>
+
+    <!-- null 상태 안내는 요청대로 숨김 유지 -->
+    <div id="notifyEmpty" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ===== Core JS (순서 중요) ===== -->
+<script src="/picjeju_next/admin/assets/js/admin.js"></script>
+
+
+
+<!-- ===== 사용자 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 쇼핑: 상품/주문 ===== -->
+
+
+
+
+<!-- ===== 주문/취소/반품 기존 페이지 ===== -->
+
+<!-- ===== 통일 레이아웃(RETURN 스타일) 페이지: 공통 CSS + 전용 JS/CSS ===== -->
+
+
+ 
+
+ 
+
+<!-- ===== 컨텐츠 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 공연/이벤트 (추가된 부분) ===== -->
+
+
+
+
+
+<!-- ===== 환경설정(config) 전용 스크립트 ===== -->
+<script src="/picjeju_next/admin/assets/js/config.membership.js"></script>
+
+
+
+<!-- ===== 통계(stat) 공통 & 세부 페이지 스크립트 ===== -->
+
+
+<!-- ===== 부트스트랩 툴팁/토스트 등 전역 초기화(선택) ===== -->
+<script>
+    (function() {
+        function initTooltips() {
+            if (!window.bootstrap) return;
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+                try {
+                    new bootstrap.Tooltip(el);
+                } catch (e) {}
+            });
+        }
+        if (window.bootstrap) initTooltips();
+        window.addEventListener('bootstrap:ready', initTooltips, {
+            once: true
+        });
+    })();
+</script>
+
+<!-- 카카오 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('btnFindAddress');
+        const input = document.getElementById('evVenue');
+
+        if (!btn || !input) return;
+
+        btn.addEventListener('click', function() {
+            // 기존 팝업이 떠 있었다면 닫기
+            if (window.daum && daum.Postcode) {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        input.value = data.address;
+                        input.focus();
+                    },
+                    width: '100%',
+                    height: '100%'
+                }).open({
+                    popupName: 'postcodePopup'
+                });
+            } else {
+                alert('주소찾기 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        });
+    });
+</script> 
+
+
+<!-- ===== Flatpickr 공통 초기화 ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.flatpickr) return;
+
+  // 한글 locale
+  flatpickr.localize(flatpickr.l10ns.ko);
+
+  // 기본 옵션
+  const optBase = {
+    allowInput: true,
+    altInput: false,
+    locale: 'ko',
+  };
+
+  const optDatetime = {
+    ...optBase,
+    enableTime: true,
+    dateFormat: 'Y-m-d H:i',
+    time_24hr: true,
+    minuteIncrement: 5
+  };
+
+  const optDate = {
+    ...optBase,
+    dateFormat: 'Y-m-d'
+  };
+
+  const optTime = {
+    ...optBase,
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: 'H:i',
+    time_24hr: true
+  };
+
+  const optRange = {
+    ...optDatetime,
+    mode: 'range'
+  };
+
+  // 클래스별 자동 적용
+  flatpickr('.flatpickr', optDatetime);      // 날짜+시간
+  flatpickr('.flatpickr-date', optDate);     // 날짜만
+  flatpickr('.flatpickr-time', optTime);     // 시간만
+  flatpickr('.flatpickr-range', optRange);   // 기간 선택(시작~종료)
+
+  // 전역 재호출 함수 (모달·Ajax용)
+  window.AdminInitFlatpickr = () => {
+    flatpickr('.flatpickr:not(.fp-ready)', optDatetime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-date:not(.fp-ready)', optDate).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-time:not(.fp-ready)', optTime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-range:not(.fp-ready)', optRange).forEach(el => el.classList.add('fp-ready'));
+  };
+});
+</script>
+
+
+
+</body>
+
+</html>
+

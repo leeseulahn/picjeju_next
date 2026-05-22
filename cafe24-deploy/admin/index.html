@@ -1,0 +1,749 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<script>window.PICJEJU_BASE_PATH="/picjeju_next";window.ADMIN_BASE_PATH="/picjeju_next/admin";window.ADMIN_BASE_URL="/picjeju_next/admin/";</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>관리자</title>
+
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-design-system.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-ux-polish.css?v=20260520-ux">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css">
+
+  <!-- Flatpickr (range 지원) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css"> 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ko.js"></script>
+
+  <script>window.ADMIN_BASE_URL = "/picjeju_next/admin/";</script>
+</head>
+<body class="admin-enhanced admin-next-shell">
+
+<!-- ===== Topbar ===== -->
+<header class="topbar">
+  <div class="container-fluid">
+    <div class="top-header">
+      <!-- Mobile: sidebar toggle -->
+      <button class="btn btn-outline-secondary d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+        <i class="ri-menu-line"></i>
+      </button>
+
+      <h1 class="h5 mb-0 page-title d-none d-md-block">대시보드</h1>
+
+      <div class="flex-grow-1"></div>
+
+      <form class="admin-search d-none d-md-block" role="search">
+        <div class="input-group">
+          <span class="input-group-text bg-transparent border-end-0"><i class="ri-search-line"></i></span>
+          <input class="form-control border-start-0" type="search" placeholder="검색어를 입력하세요" />
+        </div>
+      </form>
+
+      <!-- Quick actions -->
+      <div>
+        <button class="btn btn-outline-secondary" data-notify-trigger><i class="ri-notification-3-line"></i></button>
+      </div>
+
+      <div>
+        <a class="btn btn-primary ms-1" href="/picjeju_next/admin/config/pg">PG 가입 안내</a>
+      </div>
+
+      <!-- User -->
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="ri-user-3-line me-1"></i> 관리자
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mdAdminProfile">내 정보</a></li>
+          <li><a class="dropdown-item" href="/picjeju_next/admin/config/default">설정</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" data-admin-toast="로그아웃 처리되었습니다.">로그아웃</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ===== Sidebar ===== -->
+  
+<!-- Desktop sidebar -->
+<aside class="sidebar d-none d-lg-block">
+  <div class="brand d-flex align-items-center gap-2 p-2 mb-1">
+    <a href="/picjeju_next/admin/" class="d-flex align-items-center text-decoration-none">
+      <i class="ri-grid-fill text-primary me-2"></i>
+      <strong class="text-dark">Admin</strong>
+    </a>
+  </div>
+  <ul class="menu" id="main-menu-desktop"><li><a href="/picjeju_next/admin/" class=" active"><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-8eb8d54b4f54c0551899103ea4e60a9a" role="button" aria-expanded="false" aria-controls="m-8eb8d54b4f54c0551899103ea4e60a9a"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-8eb8d54b4f54c0551899103ea4e60a9a" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ba6072a256299aaa9077a10d892ba93d" role="button" aria-expanded="false" aria-controls="m-ba6072a256299aaa9077a10d892ba93d"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-ba6072a256299aaa9077a10d892ba93d" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-21b6bec525da8439c8823580479198de" role="button" aria-expanded="false" aria-controls="m-21b6bec525da8439c8823580479198de"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-21b6bec525da8439c8823580479198de" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-855db6319a1cb0d218f0acfe115eb865" role="button" aria-expanded="false" aria-controls="m-855db6319a1cb0d218f0acfe115eb865"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-855db6319a1cb0d218f0acfe115eb865" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-67ca6f5c3f0c5419ec0e5d5ea0df068e" role="button" aria-expanded="false" aria-controls="m-67ca6f5c3f0c5419ec0e5d5ea0df068e"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-67ca6f5c3f0c5419ec0e5d5ea0df068e" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-391752e910208cd4faf2f35ee1f0ce52" role="button" aria-expanded="false" aria-controls="m-391752e910208cd4faf2f35ee1f0ce52"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-391752e910208cd4faf2f35ee1f0ce52" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fb5de4adaaf705616a8d5a8291fac850" role="button" aria-expanded="false" aria-controls="m-fb5de4adaaf705616a8d5a8291fac850"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-fb5de4adaaf705616a8d5a8291fac850" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ab0e0b2c33f481965876a6bab3d80abc" role="button" aria-expanded="false" aria-controls="m-ab0e0b2c33f481965876a6bab3d80abc"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-ab0e0b2c33f481965876a6bab3d80abc" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul></aside>
+
+<!-- Mobile offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="ri-grid-fill me-2 text-primary"></i>Admin</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <ul class="menu" id="main-menu-mobile"><li><a href="/picjeju_next/admin/" class=" active"><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-5120c092695aa7c0897d8a573bfd94f5" role="button" aria-expanded="false" aria-controls="m-5120c092695aa7c0897d8a573bfd94f5"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-5120c092695aa7c0897d8a573bfd94f5" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-69e37c0845a3ad57c8bd69c9e2fb29ca" role="button" aria-expanded="false" aria-controls="m-69e37c0845a3ad57c8bd69c9e2fb29ca"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-69e37c0845a3ad57c8bd69c9e2fb29ca" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-44532bae1a810e071b529cdde29ece34" role="button" aria-expanded="false" aria-controls="m-44532bae1a810e071b529cdde29ece34"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-44532bae1a810e071b529cdde29ece34" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4021aba985b9800f861cf47e924d4987" role="button" aria-expanded="false" aria-controls="m-4021aba985b9800f861cf47e924d4987"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4021aba985b9800f861cf47e924d4987" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4ba879a3f2fadbe5391b44a1acaa4938" role="button" aria-expanded="false" aria-controls="m-4ba879a3f2fadbe5391b44a1acaa4938"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4ba879a3f2fadbe5391b44a1acaa4938" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-2088aaae039216f0a947f83763a29ed1" role="button" aria-expanded="false" aria-controls="m-2088aaae039216f0a947f83763a29ed1"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-2088aaae039216f0a947f83763a29ed1" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-15ebc1da6ba6fa6440bc849d746b5f81" role="button" aria-expanded="false" aria-controls="m-15ebc1da6ba6fa6440bc849d746b5f81"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-15ebc1da6ba6fa6440bc849d746b5f81" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fc6747a8d38353bc0069a993f76780dd" role="button" aria-expanded="false" aria-controls="m-fc6747a8d38353bc0069a993f76780dd"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-fc6747a8d38353bc0069a993f76780dd" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul>  </div>
+</div>
+
+
+  <!-- ===== Main ===== -->
+  <main class="admin-dashboard">
+    <!-- Page alert / breadcrumb -->
+    <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+      <i class="ri-information-fill me-1"></i>
+      판매를 위해 필요한 절차를 빠르게 완료하고 운영을 시작해보세요.
+      <a href="/picjeju_next/admin/config/default" class="btn btn-sm btn-outline-primary ms-auto">빠른 설정</a>
+    </div>
+
+    <!-- Quick setup row -->
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-xxl-9">
+        <div class="row g-3">
+          <div class="col-12 col-lg-5">
+            <div class="card h-100 quick-card">
+              <div class="card-header d-flex justify-content-between">
+                <span class="fw-semibold">결제 방법 추가</span>
+                <span class="badge text-bg-light">PC/모바일</span>
+              </div>
+              <div class="card-body">
+                <div class="list-check">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="pay1" checked>
+                    <label class="form-check-label" for="pay1">신용/체크 카드</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="pay2" checked>
+                    <label class="form-check-label" for="pay2">간편 결제(네이버/카카오/토스)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="pay3">
+                    <label class="form-check-label" for="pay3">무통장 입금(가상계좌)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="pay4">
+                    <label class="form-check-label" for="pay4">휴대폰 결제</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent d-flex justify-content-end gap-2">
+                <button class="btn btn-outline-secondary btn-sm" data-admin-toast="임시 저장되었습니다.">임시 저장</button>
+                <button class="btn btn-primary btn-sm" data-admin-toast="결제 방법이 적용되었습니다.">적용</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="card h-100 quick-card">
+              <div class="card-header"><span class="fw-semibold">기본 설정</span></div>
+              <div class="card-body">
+                <ul class="list-unstyled small mb-0">
+                  <li class="mb-2"><span class="metric-dot dot-green"></span>상점명 / 대표자명</li>
+                  <li class="mb-2"><span class="metric-dot dot-amber"></span>사업자등록번호</li>
+                  <li class="mb-2"><span class="metric-dot dot-green"></span>대표 이메일</li>
+                  <li class="mb-2"><span class="metric-dot dot-red"></span>통신판매업 신고</li>
+                </ul>
+              </div>
+              <div class="card-footer bg-transparent text-end">
+                <a class="btn btn-outline-primary btn-sm" href="/picjeju_next/admin/config/default">수정</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-3">
+            <div class="card h-100 quick-card">
+              <div class="card-header"><span class="fw-semibold">판매하기</span></div>
+              <div class="card-body">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="sell" id="sell1" checked>
+                  <label class="form-check-label" for="sell1">상품 등록하기</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="sell" id="sell2">
+                  <label class="form-check-label" for="sell2">배송 설정</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="sell" id="sell3">
+                  <label class="form-check-label" for="sell3">네이버페이 연동하기</label>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent text-end">
+                <a class="btn btn-primary btn-sm" href="/picjeju_next/admin/shopping/product">시작하기</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card guide-card">
+              <div class="card-body py-3 d-flex align-items-center gap-2">
+                <i class="ri-flashlight-line text-warning"></i>
+                <strong>상점 가이드</strong>
+                <span class="text-body-secondary small">초보자를 위한 셋업 튜토리얼 · 5분</span>
+                <a href="#" class="btn btn-outline-secondary btn-sm ms-auto" data-admin-toast="운영 가이드를 준비했습니다.">바로가기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right rail -->
+      <div class="col-12 col-xxl-3">
+        <div class="card rail-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <span class="admin-avatar me-2" aria-hidden="true">관</span>
+              <div>
+                <div class="fw-semibold">관리자</div>
+                <div class="text-body-secondary small">owner@example.com</div>
+              </div>
+            </div> 
+            <a class="btn btn-primary w-100 mb-3" href="/picjeju_next/admin/config/pg">PG 가입 안내</a>
+            <div class="ad-box mb-3">
+              <div>
+                <strong>오늘의 운영 상태</strong>
+                <span>미답변 문의 4건 · 발송 대기 12건</span>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center gap-2">
+              <span class="admin-avatar admin-avatar--sm" aria-hidden="true">문</span>
+              <div class="small">
+                <strong>콘티</strong>님이 신규 문의를 남겼습니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-xl-6">
+            <div class="card h-100 chart-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">방문자</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-outline-secondary active" data-range="7d">7일</button>
+              <button class="btn btn-outline-secondary" data-range="30d">30일</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="visitorsChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+            <div class="card h-100 chart-card">
+          <div class="card-header"><span class="fw-semibold">기간별 통계</span></div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table mb-0 align-middle">
+                <thead class="small">
+                  <tr>
+                    <th>일자</th><th>주문</th><th>매출</th><th>방문수</th><th>가입</th><th>문의</th>
+                  </tr>
+                </thead>
+                <tbody id="statTableBody">
+                  <!-- JS가 샘플 데이터로 채움 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content shortcuts -->
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-xl-4">
+        <div class="card h-100 shortcut-card">
+          <div class="card-header"><span class="fw-semibold">상품 구성</span></div>
+          <div class="card-body">
+            <div class="dashboard-mini-list">
+              <div><span>카테고리</span><strong>24개</strong></div>
+              <div><span>판매중 상품</span><strong>128개</strong></div>
+              <div><span>숨김 상품</span><strong>9개</strong></div>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent text-end">
+            <a class="btn btn-outline-primary btn-sm" href="/picjeju_next/admin/shopping/product">상품 등록</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4">
+        <div class="card h-100 shortcut-card">
+          <div class="card-header"><span class="fw-semibold">상점 문서</span></div>
+          <div class="card-body">
+            <div class="dashboard-mini-list">
+              <div><span>이용약관</span><strong>게시중</strong></div>
+              <div><span>개인정보처리방침</span><strong>검토 필요</strong></div>
+              <div><span>마케팅 수신동의</span><strong>게시중</strong></div>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent text-end">
+            <a class="btn btn-outline-secondary btn-sm" href="/picjeju_next/admin/config/etc">문서 편집</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4">
+        <div class="card h-100 shortcut-card">
+          <div class="card-header"><span class="fw-semibold">디자인 시스템</span></div>
+        <div class="card-body">
+            <div class="dashboard-mini-list">
+              <div><span>메인 배너</span><strong>3개 노출</strong></div>
+              <div><span>모바일 메뉴</span><strong>정상</strong></div>
+              <div><span>팝업</span><strong>1개 예약</strong></div>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent text-end">
+            <a class="btn btn-secondary btn-sm" href="/picjeju_next/admin/design">디자인 시스템</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notices & Feeds -->
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-xl-6">
+        <div class="card h-100 notice-card">
+          <div class="card-header"><span class="fw-semibold">이용안내 &amp; 공지</span></div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>[안내] 신규 테마 업데이트</span><span class="text-body-secondary small">2025-09-12</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>[점검] 결제 시스템 점검 (09/20 02:00)</span><span class="text-body-secondary small">2025-09-10</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>[가이드] 초보자를 위한 운영 체크리스트</span><span class="text-body-secondary small">2025-09-08</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-xl-6">
+        <div class="card h-100 notice-card">
+          <div class="card-header"><span class="fw-semibold">어드민 소식</span></div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between">
+                <span><i class="ri-apps-line text-primary me-1"></i>신규 앱 마켓 오픈</span><span class="text-body-secondary small">2025-09-01</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span><i class="ri-bill-line text-primary me-1"></i>세금계산서 자동발행 베타</span><span class="text-body-secondary small">2025-08-28</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span><i class="ri-shield-check-line text-primary me-1"></i>보안 안내: 2단계 인증 활성화</span><span class="text-body-secondary small">2025-08-22</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card dashboard-ops-card">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <span class="fw-semibold">오늘 처리할 일</span>
+        <span class="badge text-bg-light">운영 체크</span>
+      </div>
+      <div class="card-body">
+        <div class="dashboard-task-grid">
+          <a href="/picjeju_next/admin/shopping/order" class="dashboard-task">
+            <i class="ri-truck-line"></i>
+            <span>발송 대기 주문</span>
+            <strong>12건</strong>
+          </a>
+          <a href="/picjeju_next/admin/shopping/qna" class="dashboard-task">
+            <i class="ri-question-answer-line"></i>
+            <span>미답변 문의</span>
+            <strong>4건</strong>
+          </a>
+          <a href="/picjeju_next/admin/shopping/review" class="dashboard-task">
+            <i class="ri-star-smile-line"></i>
+            <span>신규 리뷰</span>
+            <strong>8건</strong>
+          </a>
+          <a href="/picjeju_next/admin/config/popup" class="dashboard-task">
+            <i class="ri-window-line"></i>
+            <span>예약 팝업</span>
+            <strong>1건</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+ 
+
+<!-- [모달] 내정보 수정 -->
+<div class="modal fade" id="mdAdminProfile" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="ri-user-settings-line me-1"></i> 내 정보 수정</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+      </div>
+
+      <form id="formAdminProfile" novalidate>
+        <div class="modal-body">
+          <div class="row g-3">
+            
+            <div class="col-12 col-md-6">
+              <label class="form-label">이름 <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="adminName" value="관리자" required aria-label="admin name">
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">아이디(이메일)</label>
+              <input type="email" class="form-control" id="adminEmail" value="admin@picjeju.com" readonly aria-label="admin email">
+              <div class="form-text text-muted">아이디는 변경할 수 없습니다.</div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">연락처</label>
+              <input type="tel" class="form-control" id="adminPhone" value="010-1234-5678" placeholder="010-xxxx-xxxx">
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">직책</label>
+              <select class="form-select" aria-label="field">
+              <option style="user-select: auto !important;">관리자</option>
+              <option style="user-select: auto !important;">스태프</option>
+              <option style="user-select: auto !important;">소유자</option>
+            </select>
+            </div>
+
+            <div class="col-12">
+              <hr class="my-2">
+              <h6 class="fw-semibold"><i class="ri-lock-line me-1"></i> 비밀번호 변경</h6>
+              <p class="small text-body-secondary mb-2">비밀번호를 변경하려면 아래 항목을 입력하세요.</p>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">현재 비밀번호</label>
+              <input type="password" class="form-control" id="currentPassword" placeholder="현재 비밀번호">
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">새 비밀번호</label>
+              <input type="password" class="form-control" id="newPassword" placeholder="새 비밀번호">
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label">새 비밀번호 확인</label>
+              <input type="password" class="form-control" id="newPasswordConfirm" placeholder="새 비밀번호 확인">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">메모</label>
+              <textarea class="form-control" id="adminMemo" rows="2" placeholder="관리자 노트나 메모를 남길 수 있습니다."></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+            <i class="ri-close-line me-1"></i> 닫기
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="ri-save-3-line me-1"></i> 저장하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="offcanvas offcanvas-end notify-panel" tabindex="-1" id="offcanvasNotify" aria-labelledby="offcanvasNotifyLabel" style="width:420px;max-width:100vw;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasNotifyLabel">알림</h5>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-light" data-notify-markread>모두 읽음</button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="offcanvas-body p-0">
+    <!-- 배너: 알림 있을 때만 >
+    <div class="p-3 bg-warning-subtle border-bottom" >
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge text-bg-warning">광고</span>
+        <div class="fw-semibold">쇼핑몰 CS 챗봇, <u>챗봇나우</u> 베타</div>
+        <a class="ms-auto small text-decoration-underline" href="#" target="_blank">자세히</a>
+      </div>
+    </div-->
+
+    <!-- 알림 리스트: 없으면 display:none -->
+    <ul class="list-group list-group-flush" id="notifyList" >
+              <li class="list-group-item d-flex gap-2 align-items-start bg-body-tertiary">
+  <i class="ri-message-2-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">새 문의가 도착했어요</div>
+              <span class="badge rounded-pill text-bg-primary ms-2">New</span>
+            <small class="ms-auto text-body-secondary">방금</small>
+    </div>
+          <div class="small text-body-secondary mt-1">홍길동님이 1:1 문의를 남겼습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-shopping-bag-3-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">주문 결제 완료</div>
+            <small class="ms-auto text-body-secondary">2시간 전</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0916-001 결제가 완료되었습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-truck-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">배송 출발</div>
+            <small class="ms-auto text-body-secondary">어제</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0915-004이 택배사에 인계됐습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+          </ul>
+
+    <!-- null 상태 안내는 요청대로 숨김 유지 -->
+    <div id="notifyEmpty" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ===== Core JS (순서 중요) ===== -->
+<script src="/picjeju_next/admin/assets/js/admin.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+    <!-- 대시보드 전용 -->
+    <script src="/picjeju_next/admin/assets/js/dashboard.js"></script>
+
+<!-- ===== 사용자 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 쇼핑: 상품/주문 ===== -->
+
+
+
+
+<!-- ===== 주문/취소/반품 기존 페이지 ===== -->
+
+<!-- ===== 통일 레이아웃(RETURN 스타일) 페이지: 공통 CSS + 전용 JS/CSS ===== -->
+
+
+ 
+
+ 
+
+<!-- ===== 컨텐츠 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 공연/이벤트 (추가된 부분) ===== -->
+
+
+
+
+
+<!-- ===== 환경설정(config) 전용 스크립트 ===== -->
+
+
+
+
+<!-- ===== 통계(stat) 공통 & 세부 페이지 스크립트 ===== -->
+
+
+<!-- ===== 부트스트랩 툴팁/토스트 등 전역 초기화(선택) ===== -->
+<script>
+    (function() {
+        function initTooltips() {
+            if (!window.bootstrap) return;
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+                try {
+                    new bootstrap.Tooltip(el);
+                } catch (e) {}
+            });
+        }
+        if (window.bootstrap) initTooltips();
+        window.addEventListener('bootstrap:ready', initTooltips, {
+            once: true
+        });
+    })();
+</script>
+
+<!-- 카카오 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('btnFindAddress');
+        const input = document.getElementById('evVenue');
+
+        if (!btn || !input) return;
+
+        btn.addEventListener('click', function() {
+            // 기존 팝업이 떠 있었다면 닫기
+            if (window.daum && daum.Postcode) {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        input.value = data.address;
+                        input.focus();
+                    },
+                    width: '100%',
+                    height: '100%'
+                }).open({
+                    popupName: 'postcodePopup'
+                });
+            } else {
+                alert('주소찾기 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        });
+    });
+</script> 
+
+
+<!-- ===== Flatpickr 공통 초기화 ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.flatpickr) return;
+
+  // 한글 locale
+  flatpickr.localize(flatpickr.l10ns.ko);
+
+  // 기본 옵션
+  const optBase = {
+    allowInput: true,
+    altInput: false,
+    locale: 'ko',
+  };
+
+  const optDatetime = {
+    ...optBase,
+    enableTime: true,
+    dateFormat: 'Y-m-d H:i',
+    time_24hr: true,
+    minuteIncrement: 5
+  };
+
+  const optDate = {
+    ...optBase,
+    dateFormat: 'Y-m-d'
+  };
+
+  const optTime = {
+    ...optBase,
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: 'H:i',
+    time_24hr: true
+  };
+
+  const optRange = {
+    ...optDatetime,
+    mode: 'range'
+  };
+
+  // 클래스별 자동 적용
+  flatpickr('.flatpickr', optDatetime);      // 날짜+시간
+  flatpickr('.flatpickr-date', optDate);     // 날짜만
+  flatpickr('.flatpickr-time', optTime);     // 시간만
+  flatpickr('.flatpickr-range', optRange);   // 기간 선택(시작~종료)
+
+  // 전역 재호출 함수 (모달·Ajax용)
+  window.AdminInitFlatpickr = () => {
+    flatpickr('.flatpickr:not(.fp-ready)', optDatetime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-date:not(.fp-ready)', optDate).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-time:not(.fp-ready)', optTime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-range:not(.fp-ready)', optRange).forEach(el => el.classList.add('fp-ready'));
+  };
+});
+</script>
+
+
+
+</body>
+
+</html>
+

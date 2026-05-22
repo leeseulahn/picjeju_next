@@ -1,0 +1,767 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<script>window.PICJEJU_BASE_PATH="/picjeju_next";window.ADMIN_BASE_PATH="/picjeju_next/admin";window.ADMIN_BASE_URL="/picjeju_next/admin/";</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>관리자</title>
+
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-design-system.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin.css">
+  <link rel="stylesheet" href="/picjeju_next/admin/assets/css/admin-ux-polish.css?v=20260520-ux">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css">
+
+  <!-- Flatpickr (range 지원) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css"> 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ko.js"></script>
+
+  <script>window.ADMIN_BASE_URL = "/picjeju_next/admin/";</script>
+</head>
+<body class="admin-enhanced admin-next-shell">
+<header class="topbar">
+  <div class="container-fluid">
+    <div class="top-header">
+      <button class="btn btn-outline-secondary d-lg-none me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"><i class="ri-menu-line"></i></button>
+      <h1 class="h5 mb-0">환경설정 <span class="text-muted">/</span> 전자결제</h1>
+      <div class="ms-auto d-none d-md-flex gap-2">
+        <button class="btn btn-light btn-sm" id="btnHelp"><i class="ri-question-line"></i> 도움말</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  
+<!-- Desktop sidebar -->
+<aside class="sidebar d-none d-lg-block">
+  <div class="brand d-flex align-items-center gap-2 p-2 mb-1">
+    <a href="/picjeju_next/admin/" class="d-flex align-items-center text-decoration-none">
+      <i class="ri-grid-fill text-primary me-2"></i>
+      <strong class="text-dark">Admin</strong>
+    </a>
+  </div>
+  <ul class="menu" id="main-menu-desktop"><li><a href="/picjeju_next/admin/" class=""><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-8eb8d54b4f54c0551899103ea4e60a9a" role="button" aria-expanded="false" aria-controls="m-8eb8d54b4f54c0551899103ea4e60a9a"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-8eb8d54b4f54c0551899103ea4e60a9a" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ba6072a256299aaa9077a10d892ba93d" role="button" aria-expanded="false" aria-controls="m-ba6072a256299aaa9077a10d892ba93d"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-ba6072a256299aaa9077a10d892ba93d" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-21b6bec525da8439c8823580479198de" role="button" aria-expanded="false" aria-controls="m-21b6bec525da8439c8823580479198de"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-21b6bec525da8439c8823580479198de" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-855db6319a1cb0d218f0acfe115eb865" role="button" aria-expanded="false" aria-controls="m-855db6319a1cb0d218f0acfe115eb865"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-855db6319a1cb0d218f0acfe115eb865" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-67ca6f5c3f0c5419ec0e5d5ea0df068e" role="button" aria-expanded="false" aria-controls="m-67ca6f5c3f0c5419ec0e5d5ea0df068e"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-67ca6f5c3f0c5419ec0e5d5ea0df068e" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-391752e910208cd4faf2f35ee1f0ce52" role="button" aria-expanded="false" aria-controls="m-391752e910208cd4faf2f35ee1f0ce52"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-391752e910208cd4faf2f35ee1f0ce52" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fb5de4adaaf705616a8d5a8291fac850" role="button" aria-expanded="false" aria-controls="m-fb5de4adaaf705616a8d5a8291fac850"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-fb5de4adaaf705616a8d5a8291fac850" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-ab0e0b2c33f481965876a6bab3d80abc" role="button" aria-expanded="true" aria-controls="m-ab0e0b2c33f481965876a6bab3d80abc"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse show" id="m-ab0e0b2c33f481965876a6bab3d80abc" data-bs-parent="#main-menu-desktop"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a class="active" href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul></aside>
+
+<!-- Mobile offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="ri-grid-fill me-2 text-primary"></i>Admin</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <ul class="menu" id="main-menu-mobile"><li><a href="/picjeju_next/admin/" class=""><i class="ri-dashboard-line"></i>대시보드 </a></li><li><a href="#" class="" data-notify-trigger="1"><i class="ri-notification-3-line"></i>알림 </a></li><li><a href="//plandertest2.mycafe24.com/picjeju" class=""><i class="ri-external-link-line"></i>사이트 바로가기 </a></li><li class="spacer"></li><li class="heading">사이트 관리</li><li><a data-bs-toggle="collapse" href="#m-5120c092695aa7c0897d8a573bfd94f5" role="button" aria-expanded="false" aria-controls="m-5120c092695aa7c0897d8a573bfd94f5"><i class="ri-user-3-line"></i>사용자 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-5120c092695aa7c0897d8a573bfd94f5" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/member/list">사용자 목록 </a></li><li><a href="/picjeju_next/admin/member/permission">운영진 </a></li><li><a href="/picjeju_next/admin/member/kakao_friend">친구톡 </a></li><li><a href="/picjeju_next/admin/member/alimtalk">알림톡 </a></li><li><a href="/picjeju_next/admin/member/sms">SMS·알림톡 </a></li><li><a href="/picjeju_next/admin/member/send">발송 로그 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-69e37c0845a3ad57c8bd69c9e2fb29ca" role="button" aria-expanded="false" aria-controls="m-69e37c0845a3ad57c8bd69c9e2fb29ca"><i class="ri-coins-line"></i>픽포인트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-69e37c0845a3ad57c8bd69c9e2fb29ca" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/point/list">현황/내역 </a></li><li><a href="/picjeju_next/admin/point/setting">지급/차감하기 </a></li><li><a href="/picjeju_next/admin/point/chart">통계 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-44532bae1a810e071b529cdde29ece34" role="button" aria-expanded="false" aria-controls="m-44532bae1a810e071b529cdde29ece34"><i class="ri-shopping-bag-3-line"></i>쇼핑 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-44532bae1a810e071b529cdde29ece34" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/shopping/product">상품 </a></li><li><a href="/picjeju_next/admin/shopping/order">주문 </a></li><li><a href="/picjeju_next/admin/shopping/cancel">취소 </a></li><li><a href="/picjeju_next/admin/shopping/return">반품 </a></li><li><a href="/picjeju_next/admin/shopping/exchange">교환 </a></li><li><a href="/picjeju_next/admin/shopping/review">리뷰 </a></li><li><a href="/picjeju_next/admin/shopping/qna">문의 </a></li><li><a href="/picjeju_next/admin/shopping/points">적립금 </a></li><li><a href="/picjeju_next/admin/shopping/coupon">쿠폰 </a></li><li><a href="/picjeju_next/admin/shopping/best">베스트/신상품 </a></li><li><a href="/picjeju_next/admin/shopping/shipping">배송설정 </a></li><li><a href="/picjeju_next/admin/shopping/settings">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4021aba985b9800f861cf47e924d4987" role="button" aria-expanded="false" aria-controls="m-4021aba985b9800f861cf47e924d4987"><i class="ri-calendar-event-line"></i>공연/이벤트 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4021aba985b9800f861cf47e924d4987" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/event">목록 </a></li><li><a href="/picjeju_next/admin/event/add">추가 </a></li><li><a href="/picjeju_next/admin/event/review">후기 </a></li><li><a href="/picjeju_next/admin/event/calendar">일정 </a></li><li><a href="/picjeju_next/admin/event/config">환경설정 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-4ba879a3f2fadbe5391b44a1acaa4938" role="button" aria-expanded="false" aria-controls="m-4ba879a3f2fadbe5391b44a1acaa4938"><i class="ri-pencil-line"></i>컨텐츠 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-4ba879a3f2fadbe5391b44a1acaa4938" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/content/post">포스트 </a></li><li><a href="/picjeju_next/admin/content/category">카테고리 </a></li><li><a href="/picjeju_next/admin/content/board">게시판 관리 </a></li><li><a href="/picjeju_next/admin/content/write">게시물 </a></li><li><a href="/picjeju_next/admin/content/comment">댓글 </a></li><li><a href="/picjeju_next/admin/content/report">신고·차단 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-2088aaae039216f0a947f83763a29ed1" role="button" aria-expanded="false" aria-controls="m-2088aaae039216f0a947f83763a29ed1"><i class="ri-carousel-view"></i>슬라이드 관리 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-2088aaae039216f0a947f83763a29ed1" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/banner">목록 </a></li><li><a href="/picjeju_next/admin/banner/add">추가 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-15ebc1da6ba6fa6440bc849d746b5f81" role="button" aria-expanded="false" aria-controls="m-15ebc1da6ba6fa6440bc849d746b5f81"><i class="ri-bar-chart-2-line"></i>통계 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse" id="m-15ebc1da6ba6fa6440bc849d746b5f81" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/stat/summary">홈 </a></li><li><a href="/picjeju_next/admin/stat/visitor">방문자 </a></li><li><a href="/picjeju_next/admin/stat/shopping">매출 </a></li><li><a href="/picjeju_next/admin/stat/analytics">기간별 분석 </a></li><li><a href="/picjeju_next/admin/stat/mileage">적립금 </a></li><li><a href="/picjeju_next/admin/stat/feedback">반응 </a></li><li><a href="/picjeju_next/admin/stat/keyword">검색어 </a></li><li><a href="/picjeju_next/admin/stat/page">페이지 </a></li><li><a href="/picjeju_next/admin/stat/traffic">유입 </a></li><li><a href="/picjeju_next/admin/stat/site">사이트 </a></li></ul></div></li><li><a data-bs-toggle="collapse" href="#m-fc6747a8d38353bc0069a993f76780dd" role="button" aria-expanded="true" aria-controls="m-fc6747a8d38353bc0069a993f76780dd"><i class="ri-settings-3-line"></i>환경설정 <i class="ri-arrow-right-s-line caret"></i></a><div class="collapse show" id="m-fc6747a8d38353bc0069a993f76780dd" data-bs-parent="#main-menu-mobile"><ul class="submenu list-unstyled mb-2"><li><a href="/picjeju_next/admin/config/default">일반 </a></li><li><a class="active" href="/picjeju_next/admin/config/pg">전자결제 </a></li><li><a href="/picjeju_next/admin/config/membership">회원·등급 </a></li><li><a href="/picjeju_next/admin/config/etc">약관 </a></li><li><a href="/picjeju_next/admin/config/popup">팝업·배너 </a></li><li><a href="/picjeju_next/admin/config/adult">인증 </a></li><li><a href="/picjeju_next/admin/config/oauth">소셜 로그인 </a></li><li><a href="/picjeju_next/admin/config/security">보안·권한 </a></li></ul></div></li></ul>  </div>
+</div>
+
+
+  <main class="container-fluid">
+    <div id="alertBox" class="my-3"></div>
+
+    <section class="row g-3 my-2">
+      <!-- 좌측 네비 -->
+      <div class="col-md-3 col-xl-2">
+        <div class="third-nav-wrap">
+          <div class="card mb-3 border-primary">
+            <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=common">
+              <div class="card-body py-3">
+                <div class="d-flex align-items-center gap-2">
+                  <div style="width:68px" class="text-center">
+                    <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_setting.svg" alt="" class="img-fluid">
+                  </div>
+                  <div class="fw-semibold small">공통 결제 설정</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <p class="text-gray small mb-2">국내 결제</p>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=domestic" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">국내 전자 결제</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=tosspay" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_tosspay.png" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">토스페이</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=kakaopay" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_kakaopay_v2.svg?v2" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">카카오페이</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=naver" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_npay.svg?v2" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">네이버페이</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=talkpay" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_kakaopay.svg?v3" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">톡체크아웃 (카카오 페이구매)</div>
+                                              <div class="text-muted xsmall">설정하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/shopping/regularly" target="_blank">
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_regularly.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">정기구독</div>
+                                              <div class="text-muted xsmall">설정하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=danal" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_danal.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">다날 휴대폰 결제</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=samsungpay" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_samsung.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">삼성페이</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=deposit_confirmation" >
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_bankda.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">자동 입금확인</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          
+          <p class="text-gray small mb-2">해외 결제</p>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=paypal">
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_paypal.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">Paypal</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                      <div class="card mb-3 ">
+              <a class="text-decoration-none" href="/picjeju_next/admin/config/pg?mode=eximbay">
+                <div class="card-body py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <div style="width:68px" class="text-center">
+                      <img src="https://vendor-cdn.imweb.me/images/icons_pg/ico_pg_eximbay.svg" alt="" class="img-fluid">
+                    </div>
+                    <div>
+                      <div class="fw-semibold small">엑심베이</div>
+                                              <div class="text-muted xsmall">신청하기</div>
+                                          </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+                  </div>
+      </div>
+
+      <!-- 우측 설정 카드 -->
+      <div class="col-md-9 col-xl-10">
+        <div class="card">
+                    <form id="pgForm" class="needs-validation" novalidate>
+            <div class="card-header bg-white">
+              <strong>공통 설정</strong>
+            </div>
+            <div class="card-body" id="pg_detail_wrap">
+              <input type="hidden" class="deposit_limit" value="N">
+
+              <!-- 국내 결제설정 -->
+              <div class="mb-4">
+                <label class="form-label">
+                  국내 결제설정
+                  <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true"
+                     data-bs-title="국내 결제설정"
+                     data-bs-content="<p>무통장입금을 제외한 나머지 결제수단은 PG신청 이후 사용 가능합니다. <a href='/picjeju_next/admin/config/pg?mode=domestic' class='text-primary'>설정 및 신청하기</a></p><p>휴대폰 결제는 다날 휴대폰 결제 서비스를 신청하거나 가입된 PG사에서 별도 신청 후 이용할 수 있습니다.</p>대한민국 원화(KRW)로 설정된 사이트에만 사용 가능합니다.">
+                    <i class="ri-question-line"></i>
+                  </a>
+                </label>
+                <div class="d-flex flex-wrap gap-3">
+                                                        <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="card"
+                        onclick="SHOP_PG_CONFIG.changePayType('card', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">신용카드</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="iche"
+                        onclick="SHOP_PG_CONFIG.changePayType('iche', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">실시간계좌이체</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="virtual"
+                        onclick="SHOP_PG_CONFIG.changePayType('virtual', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">가상계좌</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="cash"
+                        onclick="SHOP_PG_CONFIG.changePayType('cash', this.checked)" aria-label="pay types" >
+                      <label class="form-check-label">무통장입금</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="tosspay"
+                        onclick="SHOP_PG_CONFIG.changePayType('tosspay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">토스페이</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="kakaopay_direct"
+                        onclick="SHOP_PG_CONFIG.changePayType('kakaopay_direct', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">카카오페이(직연동)</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="kakaopay"
+                        onclick="SHOP_PG_CONFIG.changePayType('kakaopay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">카카오페이(이니시스)</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="kcp_payco"
+                        onclick="SHOP_PG_CONFIG.changePayType('kcp_payco', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">PAYCO</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="npay_checkout"
+                        onclick="SHOP_PG_CONFIG.changePayType('npay_checkout', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">네이버페이(결제형)</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="samsungpay"
+                        onclick="SHOP_PG_CONFIG.changePayType('samsungpay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">삼성페이</label>
+                    </div>
+                                  </div>
+              </div>
+
+              <!-- 해외 결제설정 -->
+              <div class="mb-4">
+                <label class="form-label">
+                  해외 결제설정
+                  <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-trigger="focus"
+                     data-bs-title="해외 결제설정"
+                     data-bs-content="해외 결제설정은 국내 통화로 설정된 사이트에선 사용이 불가합니다. Paypal 또는 엑심베이 신청 및 설정 이후 사용 가능합니다.">
+                    <i class="ri-question-line"></i>
+                  </a>
+                </label>
+                <div class="d-flex flex-wrap gap-3">
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="paypal"
+                        onclick="SHOP_PG_CONFIG.changePayType('paypal', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">PayPal</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="eximbay"
+                        onclick="SHOP_PG_CONFIG.changePayType('eximbay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">엑심베이</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="eb_alipay"
+                        onclick="SHOP_PG_CONFIG.changePayType('eb_alipay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">알리페이</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="eb_molpay"
+                        onclick="SHOP_PG_CONFIG.changePayType('eb_molpay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">몰페이</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="eb_wechatpay"
+                        onclick="SHOP_PG_CONFIG.changePayType('eb_wechatpay', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">위쳇페이</label>
+                    </div>
+                                      <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="pay_types" value="eb_econtext"
+                        onclick="SHOP_PG_CONFIG.changePayType('eb_econtext', this.checked)" disabled aria-label="pay types">
+                      <label class="form-check-label">이컨텍스트</label>
+                    </div>
+                                  </div>
+              </div>
+
+              <!-- 휴대폰 결제 -->
+              <div class="mb-4">
+                <div class="small text-muted mb-1">휴대폰 결제</div>
+                <div class="d-flex align-items-center gap-4">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="pay_types_phone" value=""
+                      onchange="SHOP_PG_CONFIG.changePayType('none', this.checked)" checked aria-label="pay types phone">
+                    <label class="form-check-label">사용안함</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="pay_types_phone" value="phone"
+                      onchange="SHOP_PG_CONFIG.changePayType('phone', this.checked)" disabled aria-label="pay types phone">
+                    <label class="form-check-label">휴대폰결제</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 기본 결제수단 -->
+              <div id="select_default_type_wrap" class="mb-4" data-cnt="1" style="display:none;">
+                <label for="select_default_type" class="form-label">기본 결제수단</label>
+                <select class="form-select" name="default_pay_type" id="select_default_type"
+                        onchange="SHOP_PG_CONFIG.changeDefaultPayType()">
+                  <option value="card" disabled style="display:none;">신용카드</option>
+                  <option value="iche" disabled style="display:none;">실시간계좌이체</option>
+                  <option value="virtual" disabled style="display:none;">가상계좌</option>
+                  <option value="cash">무통장입금</option>
+                  <option value="phone" disabled style="display:none;">휴대폰 소액결제</option>
+                  <option value="tosspay" disabled style="display:none;">토스페이</option>
+                  <option value="kakaopay_direct" disabled style="display:none;">카카오페이</option>
+                  <option value="kakaopay" disabled style="display:none;">카카오페이</option>
+                  <option value="kcp_payco" disabled style="display:none;">PAYCO</option>
+                  <option value="inicis_payco" disabled style="display:none;">PAYCO</option>
+                  <option value="npay" disabled style="display:none;">네이버페이 주문형</option>
+                  <option value="npay_checkout" disabled style="display:none;">네이버페이 결제형</option>
+                  <option value="danal" disabled style="display:none;">휴대폰(다날)</option>
+                  <option value="samsungpay" disabled style="display:none;">삼성페이</option>
+                  <option value="eximbay" disabled style="display:none;">엑심베이</option>
+                </select>
+                <div class="form-text">결제페이지에서 기본으로 선택될 결제 수단을 지정합니다.</div>
+              </div>
+
+              <!-- 현금영수증 -->
+              <div class="mb-4 _cash_receipt_wrap" style="display:none;">
+                <label class="form-label">현금영수증 신청 기능</label>
+                <div class="row g-2">
+                  <div class="col-sm-5">
+                    <select class="form-select" name="use_cash_receipt" id="use_cash_receipt"
+                      onchange="SHOP_PG_CONFIG.changeCashReceiptStatus('', 'N')" aria-label="use cash receipt">
+                      <option value="N" selected>사용안함</option>
+                      <option value="Y">현금영수증 신청 사용</option>
+                      <option value="AUTO">현금영수증 자동발행</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-text">
+                  무통장입금/가상계좌 등 현금거래 시 고객 요청 시 의무 발행 대상입니다.
+                </div>
+              </div>
+
+              <div class="mb-4 _cash_receipt_wrap" style="display:none;">
+                <label class="form-label">현금영수증 의무발행 대상</label>
+                <div class="row g-2">
+                  <div class="col-sm-5">
+                    <select class="form-select" name="cash_receipt_require" id="cash_receipt_require" aria-label="cash receipt require">
+                      <option value="N" selected>없음</option>
+                      <option value="C">10만원 이상 결제 주문</option>
+                      <option value="Y">모든 주문</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 무통장입금 계좌 정보 -->
+              <div class="mb-1" id="bank_info_from" style="display:none;">
+                <label class="form-label">
+                  무통장입금 계좌 정보
+                  <a tabindex="0" class="ms-1 text-muted" data-bs-toggle="popover" data-bs-title="무통장입금 계좌 정보"
+                     data-bs-content="<p>입금확인은 자동처리되지 않으므로 주문관리에서 직접 처리하세요.</p>">
+                    <i class="ri-question-line"></i>
+                  </a>
+                </label>
+
+                <div class="input-group _cash_from mb-2">
+                  <input type="text" class="form-control" name="bank[]" placeholder="은행명" oninput="SHOP_PG_CONFIG.enableSave()">
+                  <input type="text" class="form-control" name="bank_num[]" placeholder="계좌번호" oninput="SHOP_PG_CONFIG.enableSave()">
+                  <input type="text" class="form-control" name="name[]" placeholder="예금주" oninput="SHOP_PG_CONFIG.enableSave()">
+                  <button class="btn btn-outline-secondary" type="button" onclick="SHOP_PG_CONFIG.addCashForm('btn')"><i class="ri-add-circle-line"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="position-sticky bottom-0 bg-body border-top py-2 px-3 d-flex justify-content-end">
+              <button id="btnSave" type="submit" class="btn btn-primary" disabled><i class="ri-save-3-line me-1"></i> 저장하기</button>
+            </div>
+          </form>
+                  </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 도움말 모달 -->
+<div class="modal fade" id="mdHelp" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">환경설정 · 전자결제</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body small">
+        결제수단 활성화/저장은 서버 로직에 연결하세요. UI 동작은 <code>config.pg.js</code>에서 처리합니다.
+      </div>
+      <div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">닫기</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- 페이지 전용 스크립트 (헤드/푸터 어디서든 asset() 제공 가정) --> 
+<script>
+  document.getElementById('btnHelp')?.addEventListener('click', ()=> {
+    const md = new bootstrap.Modal(document.getElementById('mdHelp'));
+    md.show();
+  });
+</script>
+
+<div class="offcanvas offcanvas-end notify-panel" tabindex="-1" id="offcanvasNotify" aria-labelledby="offcanvasNotifyLabel" style="width:420px;max-width:100vw;">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="offcanvasNotifyLabel">알림</h5>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-light" data-notify-markread>모두 읽음</button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="offcanvas-body p-0">
+    <!-- 배너: 알림 있을 때만 >
+    <div class="p-3 bg-warning-subtle border-bottom" >
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge text-bg-warning">광고</span>
+        <div class="fw-semibold">쇼핑몰 CS 챗봇, <u>챗봇나우</u> 베타</div>
+        <a class="ms-auto small text-decoration-underline" href="#" target="_blank">자세히</a>
+      </div>
+    </div-->
+
+    <!-- 알림 리스트: 없으면 display:none -->
+    <ul class="list-group list-group-flush" id="notifyList" >
+              <li class="list-group-item d-flex gap-2 align-items-start bg-body-tertiary">
+  <i class="ri-message-2-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">새 문의가 도착했어요</div>
+              <span class="badge rounded-pill text-bg-primary ms-2">New</span>
+            <small class="ms-auto text-body-secondary">방금</small>
+    </div>
+          <div class="small text-body-secondary mt-1">홍길동님이 1:1 문의를 남겼습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/pg/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-shopping-bag-3-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">주문 결제 완료</div>
+            <small class="ms-auto text-body-secondary">2시간 전</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0916-001 결제가 완료되었습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/pg/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+              <li class="list-group-item d-flex gap-2 align-items-start ">
+  <i class="ri-truck-line fs-5 mt-1"></i>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="fw-semibold">배송 출발</div>
+            <small class="ms-auto text-body-secondary">어제</small>
+    </div>
+          <div class="small text-body-secondary mt-1">주문 #2025-0915-004이 택배사에 인계됐습니다.</div>
+      </div>
+
+  <!-- ▼▼ 더보기 메뉴 (드롭다운) ▼▼ -->
+  <div class="dropdown ms-1">
+    <button class="btn btn-sm btn-link text-body-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="ri-more-2-fill"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/mark-read">읽음 처리</button></li>
+      <li><button class="dropdown-item" data-action="/picjeju_next/admin/config/pg/open">상세 보기</button></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><button class="dropdown-item text-danger" data-action="/picjeju_next/admin/config/pg/delete">삭제</button></li>
+    </ul>
+  </div>
+  <!-- ▲▲ 더보기 메뉴 끝 ▲▲ -->
+</li>
+
+          </ul>
+
+    <!-- null 상태 안내는 요청대로 숨김 유지 -->
+    <div id="notifyEmpty" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ===== Core JS (순서 중요) ===== -->
+<script src="/picjeju_next/admin/assets/js/admin.js"></script>
+
+
+
+<!-- ===== 사용자 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 쇼핑: 상품/주문 ===== -->
+
+
+
+
+<!-- ===== 주문/취소/반품 기존 페이지 ===== -->
+
+<!-- ===== 통일 레이아웃(RETURN 스타일) 페이지: 공통 CSS + 전용 JS/CSS ===== -->
+
+
+ 
+
+ 
+
+<!-- ===== 컨텐츠 관리 ===== -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== 공연/이벤트 (추가된 부분) ===== -->
+
+
+
+
+
+<!-- ===== 환경설정(config) 전용 스크립트 ===== -->
+<script src="/picjeju_next/admin/assets/js/config.pg.js"></script>
+
+
+
+<!-- ===== 통계(stat) 공통 & 세부 페이지 스크립트 ===== -->
+
+
+<!-- ===== 부트스트랩 툴팁/토스트 등 전역 초기화(선택) ===== -->
+<script>
+    (function() {
+        function initTooltips() {
+            if (!window.bootstrap) return;
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+                try {
+                    new bootstrap.Tooltip(el);
+                } catch (e) {}
+            });
+        }
+        if (window.bootstrap) initTooltips();
+        window.addEventListener('bootstrap:ready', initTooltips, {
+            once: true
+        });
+    })();
+</script>
+
+<!-- 카카오 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('btnFindAddress');
+        const input = document.getElementById('evVenue');
+
+        if (!btn || !input) return;
+
+        btn.addEventListener('click', function() {
+            // 기존 팝업이 떠 있었다면 닫기
+            if (window.daum && daum.Postcode) {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        input.value = data.address;
+                        input.focus();
+                    },
+                    width: '100%',
+                    height: '100%'
+                }).open({
+                    popupName: 'postcodePopup'
+                });
+            } else {
+                alert('주소찾기 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        });
+    });
+</script> 
+
+
+<!-- ===== Flatpickr 공통 초기화 ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.flatpickr) return;
+
+  // 한글 locale
+  flatpickr.localize(flatpickr.l10ns.ko);
+
+  // 기본 옵션
+  const optBase = {
+    allowInput: true,
+    altInput: false,
+    locale: 'ko',
+  };
+
+  const optDatetime = {
+    ...optBase,
+    enableTime: true,
+    dateFormat: 'Y-m-d H:i',
+    time_24hr: true,
+    minuteIncrement: 5
+  };
+
+  const optDate = {
+    ...optBase,
+    dateFormat: 'Y-m-d'
+  };
+
+  const optTime = {
+    ...optBase,
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: 'H:i',
+    time_24hr: true
+  };
+
+  const optRange = {
+    ...optDatetime,
+    mode: 'range'
+  };
+
+  // 클래스별 자동 적용
+  flatpickr('.flatpickr', optDatetime);      // 날짜+시간
+  flatpickr('.flatpickr-date', optDate);     // 날짜만
+  flatpickr('.flatpickr-time', optTime);     // 시간만
+  flatpickr('.flatpickr-range', optRange);   // 기간 선택(시작~종료)
+
+  // 전역 재호출 함수 (모달·Ajax용)
+  window.AdminInitFlatpickr = () => {
+    flatpickr('.flatpickr:not(.fp-ready)', optDatetime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-date:not(.fp-ready)', optDate).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-time:not(.fp-ready)', optTime).forEach(el => el.classList.add('fp-ready'));
+    flatpickr('.flatpickr-range:not(.fp-ready)', optRange).forEach(el => el.classList.add('fp-ready'));
+  };
+});
+</script>
+
+
+
+</body>
+
+</html>
+

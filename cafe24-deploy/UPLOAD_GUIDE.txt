@@ -1,0 +1,15 @@
+Picjeju Cafe24 deployment package
+
+Upload every file and folder inside this directory to:
+https://plandertest2.mycafe24.com/picjeju_next
+
+Do not upload the parent cafe24-deploy folder itself.
+
+Generated routes: 257
+Base path: /picjeju_next
+
+Notes:
+- This is a static export for Cafe24 web hosting.
+- Files under assets and admin/assets must stay in place.
+- Next.js runtime scripts are stripped because this package is for static hosting.
+- Dynamic POST endpoints such as /picjeju_next/api/posts are not included in static hosting.
