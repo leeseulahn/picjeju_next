@@ -30,14 +30,34 @@ const COLOR_STATUS = [
   { name: "Success", token: "--pj-color-success", hex: "#06C270", text: "#ffffff" }
 ];
 
-const COLOR_CATEGORY = [
-  { name: "공연", token: "--pj-color-category-performance", hex: "#7538B5" },
-  { name: "축제", token: "--pj-color-category-festival", hex: "#DF3B67" },
-  { name: "전시", token: "--pj-color-category-exhibition", hex: "#0089D2" },
-  { name: "장터", token: "--pj-color-category-market", hex: "#0A9500" },
-  { name: "체험", token: "--pj-color-category-experience", hex: "#F99100" },
-  { name: "청년", token: "--pj-color-category-youth", hex: "#0644B8" },
-  { name: "뉴스", token: "--pj-color-category-news", hex: "#3C4356" }
+const CATEGORY_GROUPS = [
+  {
+    label: "[공연/축제] 카테고리 컬러",
+    items: [
+      { name: "공연", hex: "#7538B5" },
+      { name: "축제/이벤트", hex: "#DF3B67" },
+      { name: "전시", hex: "#0089D2" },
+      { name: "마켓", hex: "#0A9500" },
+      { name: "체험/교육", hex: "#F99100" },
+      { name: "청년프로그램", hex: "#0644B8" }
+    ]
+  },
+  {
+    label: "[제주살이뉴스] 카테고리 컬러",
+    items: [
+      { name: "제주뉴스", hex: "#3C4356" },
+      { name: "청년지원", hex: "#0644B8" },
+      { name: "제주일자리", hex: "#0A9500" }
+    ]
+  },
+  {
+    label: "[픽제주 장터] 카테고리 컬러",
+    items: [
+      { name: "재능나눔/클래스", hex: "#0644B8" },
+      { name: "나눔", hex: "#0A9500" },
+      { name: "판매", hex: "#F99100" }
+    ]
+  }
 ];
 
 const TYPOGRAPHY = [
@@ -197,8 +217,17 @@ const STYLES = `
   .ds-icon code { font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pj-color-dark-2); text-align: center; word-break: break-all; }
 
   .ds-badge-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .ds-cat-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .ds-cat-chip { padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: #ffffff; }
+
+  .ds-cat-group { background: var(--pj-color-light-2); border: 1px solid var(--pj-color-guide-line); border-radius: 14px; padding: 22px 24px; margin-top: 14px; }
+  .ds-cat-group__label { display: block; font-size: 15px; font-weight: 800; color: var(--pj-color-dark-1); margin-bottom: 14px; letter-spacing: -0.01em; }
+  .ds-cat-row { display: flex; flex-wrap: nowrap; gap: 2px; }
+  .ds-cat-tile { flex: 0 0 130px; min-height: 124px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px 8px; color: #ffffff; text-align: center; }
+  .ds-cat-tile__name { font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .ds-cat-tile__hex { font-size: 13px; font-weight: 500; line-height: 1.3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; opacity: 0.95; }
+  @media (max-width: 720px) {
+    .ds-cat-row { flex-wrap: wrap; gap: 1px; overflow-x: visible; }
+    .ds-cat-tile { flex: 1 1 calc(50% - 1px); min-height: 100px; }
+  }
 
   .ds-pagination { display: inline-flex; gap: 4px; }
   .ds-pagination a { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 10px; background: var(--pj-color-guide-bg); color: var(--pj-color-dark-1); text-decoration: none; font-size: 13px; font-weight: 600; border: 1px solid transparent; }
@@ -294,8 +323,21 @@ function renderIcon(name) {
     </div>`;
 }
 
-function renderCategory({ name, token, hex }) {
-  return `<span class="ds-cat-chip" style="background:${hex};">${name}</span>`;
+function renderCategoryGroup({ label, items }) {
+  const tiles = items
+    .map(
+      ({ name, hex }) => `
+      <div class="ds-cat-tile" style="background:${hex};">
+        <span class="ds-cat-tile__name">${name}</span>
+        <span class="ds-cat-tile__hex">${hex}</span>
+      </div>`
+    )
+    .join("");
+  return `
+    <div class="ds-cat-group">
+      <span class="ds-cat-group__label">${label}</span>
+      <div class="ds-cat-row">${tiles}</div>
+    </div>`;
 }
 
 export function buildDesignSystemMain() {
@@ -307,7 +349,7 @@ export function buildDesignSystemMain() {
   const radius = RADIUS.map(renderRadius).join("");
   const shadows = SHADOWS.map(renderShadow).join("");
   const icons = SAMPLE_ICONS.map(renderIcon).join("");
-  const categories = COLOR_CATEGORY.map(renderCategory).join("");
+  const categoryGroups = CATEGORY_GROUPS.map(renderCategoryGroup).join("");
 
   return `
 ${STYLES}
@@ -336,6 +378,7 @@ ${STYLES}
           <div class="ds-toc__group-label">Foundation</div>
           <ul class="ds-toc__list">
             <li><a href="#colors">Colors</a></li>
+            <li><a href="#category-filter">Category Filter</a></li>
             <li><a href="#typography">Typography</a></li>
             <li><a href="#spacing">Spacing</a></li>
             <li><a href="#radius">Radius</a></li>
@@ -382,11 +425,17 @@ ${STYLES}
           <div class="ds-sub">Status</div>
           <div class="ds-color-grid">${colorStatus}</div>
 
-          <div class="ds-sub">Category</div>
-          <div class="ds-preview">
-            <div class="ds-cat-row">${categories}</div>
-          </div>
         </section>
+
+        <section class="ds-section" id="category-filter">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Category Filter</h2>
+              <p class="ds-section__desc">게시판/필터에서 카테고리를 구분하기 위한 컬러 시스템입니다. 콘텐츠 영역별로 분리된 팔레트를 사용해 주세요.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          ${categoryGroups}</section>
 
         <section class="ds-section" id="typography">
           <div class="ds-section__head">
