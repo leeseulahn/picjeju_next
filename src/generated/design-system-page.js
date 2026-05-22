@@ -254,12 +254,124 @@ const STYLES = `
   .ds-switch input:checked + .ds-slider { background: var(--pj-color-primary); }
   .ds-switch input:checked + .ds-slider::before { transform: translateX(20px); }
 
+  .ds-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--pj-color-guide-line); padding: 0 2px; }
+  .ds-tab { padding: 12px 18px; background: none; border: 0; border-bottom: 2px solid transparent; font-size: 14px; font-weight: 700; color: var(--pj-color-dark-2); cursor: pointer; }
+  .ds-tab.is-active { color: var(--pj-color-primary); border-bottom-color: var(--pj-color-primary); }
+  .ds-pill-tabs { display: inline-flex; padding: 4px; gap: 4px; background: var(--pj-color-guide-bg); border-radius: 999px; }
+  .ds-pill-tab { padding: 8px 16px; background: transparent; border: 0; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--pj-color-dark-2); cursor: pointer; }
+  .ds-pill-tab.is-active { background: #ffffff; color: var(--pj-color-dark-1); box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+
+  .ds-modal-mock { width: 100%; max-width: 480px; margin: 0 auto; border-radius: 18px; background: #ffffff; box-shadow: 0 24px 64px rgba(17,24,39,.18); overflow: hidden; }
+  .ds-modal-mock__head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--pj-color-guide-line); }
+  .ds-modal-mock__title { font-size: 17px; font-weight: 800; }
+  .ds-modal-mock__close { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border: 0; background: var(--pj-color-guide-bg); border-radius: 50%; color: var(--pj-color-dark-1); cursor: pointer; }
+  .ds-modal-mock__body { padding: 22px; color: var(--pj-color-dark-2); font-size: 14px; line-height: 1.6; }
+  .ds-modal-mock__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 0 22px 22px; }
+
+  .ds-drawer-mock { width: 100%; max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: 1fr 280px; min-height: 280px; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 64px rgba(17,24,39,.12); }
+  .ds-drawer-mock__scrim { background: rgba(17,24,39,.45); }
+  .ds-drawer-mock__panel { background: #ffffff; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .ds-drawer-mock__panel h4 { margin: 0; font-size: 16px; font-weight: 800; }
+  .ds-drawer-mock__panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .ds-drawer-mock__panel li a { display: block; padding: 10px 12px; border-radius: 10px; color: var(--pj-color-dark-1); text-decoration: none; font-size: 14px; font-weight: 600; }
+  .ds-drawer-mock__panel li a:hover { background: var(--pj-color-guide-bg); }
+
+  .ds-avatar-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .ds-avatar { display: inline-flex; align-items: center; justify-content: center; background: var(--pj-color-primary-tint); color: var(--pj-color-primary-dark); font-weight: 800; border-radius: 50%; position: relative; }
+  .ds-avatar--xs { width: 24px; height: 24px; font-size: 11px; }
+  .ds-avatar--sm { width: 32px; height: 32px; font-size: 12px; }
+  .ds-avatar--md { width: 40px; height: 40px; font-size: 14px; }
+  .ds-avatar--lg { width: 56px; height: 56px; font-size: 18px; }
+  .ds-avatar--xl { width: 80px; height: 80px; font-size: 24px; }
+  .ds-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .ds-avatar__badge { position: absolute; right: -2px; bottom: -2px; width: 12px; height: 12px; border-radius: 50%; background: var(--pj-color-success); border: 2px solid #ffffff; }
+  .ds-avatar-group { display: inline-flex; align-items: center; }
+  .ds-avatar-group .ds-avatar { border: 2px solid #ffffff; }
+  .ds-avatar-group .ds-avatar + .ds-avatar { margin-left: -10px; }
+  .ds-user-row { display: flex; align-items: center; gap: 12px; }
+  .ds-user-row__name { font-size: 14px; font-weight: 700; color: var(--pj-color-dark-1); }
+  .ds-user-row__meta { font-size: 12px; color: var(--pj-color-dark-2); }
+
+  .ds-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; border: 1px dashed var(--pj-color-guide-line); border-radius: 16px; background: var(--pj-color-light-2); text-align: center; gap: 8px; }
+  .ds-empty__icon { width: 64px; height: 64px; border-radius: 50%; background: var(--pj-color-guide-bg); display: inline-flex; align-items: center; justify-content: center; color: var(--pj-color-dark-2); font-size: 30px; }
+  .ds-empty__title { font-size: 16px; font-weight: 800; color: var(--pj-color-dark-1); margin-top: 6px; }
+  .ds-empty__desc { font-size: 13px; color: var(--pj-color-dark-2); max-width: 320px; line-height: 1.5; }
+
+  .ds-skeleton { background: linear-gradient(90deg, #ececf0 0%, #f6f6f9 50%, #ececf0 100%); background-size: 200% 100%; animation: ds-skel 1.4s infinite ease; border-radius: 8px; }
+  @keyframes ds-skel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .ds-skeleton-card { padding: 14px; border: 1px solid var(--pj-color-guide-line); border-radius: 14px; background: #ffffff; display: grid; gap: 10px; }
+  .ds-skel-thumb { aspect-ratio: 16/10; border-radius: 10px; }
+  .ds-skel-line { height: 12px; }
+  .ds-skel-line.w-60 { width: 60%; }
+  .ds-skel-line.w-40 { width: 40%; }
+
+  .ds-filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ds-chip { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #ffffff; border: 1px solid var(--pj-color-guide-line); color: var(--pj-color-dark-1); font-size: 13px; font-weight: 700; cursor: pointer; transition: background .15s ease, border-color .15s ease, color .15s ease; }
+  .ds-chip:hover { background: var(--pj-color-guide-bg); }
+  .ds-chip.is-active { background: var(--pj-color-primary); color: #ffffff; border-color: var(--pj-color-primary); }
+  .ds-chip__remove { font-size: 12px; opacity: 0.7; }
+
+  .ds-sort-mock { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 12px; background: #ffffff; border: 1px solid var(--pj-color-guide-line); font-size: 13px; font-weight: 700; color: var(--pj-color-dark-1); cursor: pointer; }
+  .ds-sort-mock i { font-size: 16px; color: var(--pj-color-dark-2); }
+  .ds-sort-list { margin-top: 8px; padding: 6px; background: #ffffff; border-radius: 12px; box-shadow: 0 12px 32px rgba(17,24,39,.12); display: inline-flex; flex-direction: column; min-width: 160px; }
+  .ds-sort-list a { padding: 10px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--pj-color-dark-1); text-decoration: none; }
+  .ds-sort-list a.is-active { background: var(--pj-color-primary-tint); color: var(--pj-color-primary-dark); }
+  .ds-sort-list a:hover:not(.is-active) { background: var(--pj-color-guide-bg); }
+
+  .ds-breadcrumb { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-size: 13px; color: var(--pj-color-dark-2); }
+  .ds-breadcrumb a { color: var(--pj-color-dark-2); text-decoration: none; font-weight: 600; }
+  .ds-breadcrumb a:hover { color: var(--pj-color-primary); }
+  .ds-breadcrumb .ds-bc-sep { color: var(--pj-color-dark-3); }
+  .ds-breadcrumb .ds-bc-current { color: var(--pj-color-dark-1); font-weight: 700; }
+
+  .ds-motion-grid { display: grid; gap: 12px; }
+  .ds-motion-row { display: grid; grid-template-columns: 180px 100px 1fr; align-items: center; gap: 14px; padding: 8px 0; }
+  .ds-motion-row code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--pj-color-dark-2); }
+  .ds-motion-row strong { font-size: 13px; font-weight: 700; color: var(--pj-color-dark-1); }
+
+  .ds-z-grid { display: grid; gap: 8px; }
+  .ds-z-row { display: grid; grid-template-columns: 180px 80px 1fr; padding: 10px 12px; background: var(--pj-color-light-2); border-radius: 8px; align-items: center; font-size: 13px; }
+  .ds-z-row code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--pj-color-dark-2); }
+  .ds-z-row strong { font-weight: 700; color: var(--pj-color-dark-1); }
+
+  .ds-bp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .ds-bp { padding: 16px; border: 1px solid var(--pj-color-guide-line); border-radius: 12px; background: #ffffff; }
+  .ds-bp strong { display: block; font-size: 14px; font-weight: 800; color: var(--pj-color-dark-1); margin-bottom: 4px; }
+  .ds-bp code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--pj-color-dark-2); }
+  .ds-bp span { display: block; font-size: 12px; color: var(--pj-color-dark-2); margin-top: 6px; }
+
+  .ds-grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; }
+  .ds-grid-demo > div { padding: 14px 8px; background: var(--pj-color-primary-tint); color: var(--pj-color-primary-dark); border-radius: 6px; font-size: 11px; font-weight: 700; text-align: center; }
+  .ds-grid-demo--row2 > div { background: var(--pj-color-secondary-light); color: #036A3E; }
+
+  .ds-logo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .ds-logo-card { padding: 28px; border-radius: 16px; border: 1px solid var(--pj-color-guide-line); display: flex; align-items: center; justify-content: center; min-height: 140px; }
+  .ds-logo-card img { max-width: 180px; height: auto; }
+  .ds-logo-card--light { background: #ffffff; }
+  .ds-logo-card--dark { background: var(--pj-color-dark-1); }
+  .ds-logo-card--brand { background: var(--pj-color-primary); }
+  .ds-logo-card__label { position: absolute; }
+  .ds-logo-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 14px; }
+  .ds-logo-meta__item { padding: 16px 18px; background: var(--pj-color-light-2); border-radius: 12px; }
+  .ds-logo-meta__item strong { display: block; font-size: 13px; font-weight: 800; color: var(--pj-color-dark-1); margin-bottom: 4px; }
+  .ds-logo-meta__item span { font-size: 12px; color: var(--pj-color-dark-2); line-height: 1.5; }
+  .ds-logo-dont { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 14px; }
+  .ds-logo-dont__card { padding: 22px; border-radius: 14px; border: 1px solid var(--pj-color-guide-line); background: #ffffff; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .ds-logo-dont__pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; }
+  .ds-logo-dont__pill--no { background: #ffeaea; color: #b3201b; }
+  .ds-logo-dont__sample { width: 140px; height: 70px; display: flex; align-items: center; justify-content: center; }
+  .ds-logo-dont__caption { font-size: 12px; color: var(--pj-color-dark-2); line-height: 1.5; }
+
   @media (max-width: 960px) {
     .ds-layout { grid-template-columns: 1fr; }
     .ds-toc { position: static; }
     .ds-section { padding: 24px 18px; }
     .ds-type-row { grid-template-columns: 1fr; }
     .ds-type-row__meta { text-align: left; }
+    .ds-drawer-mock { grid-template-columns: 1fr; min-height: auto; }
+    .ds-drawer-mock__scrim { display: none; }
+    .ds-motion-row { grid-template-columns: 1fr; }
+    .ds-z-row { grid-template-columns: 1fr 80px; }
   }
 </style>
 `;
@@ -383,6 +495,10 @@ ${STYLES}
             <li><a href="#spacing">Spacing</a></li>
             <li><a href="#radius">Radius</a></li>
             <li><a href="#shadow">Shadow</a></li>
+            <li><a href="#grid">Grid</a></li>
+            <li><a href="#motion">Motion</a></li>
+            <li><a href="#z-index">Z-Index</a></li>
+            <li><a href="#breakpoints">Breakpoints</a></li>
           </ul>
         </div>
         <div class="ds-toc__group">
@@ -395,6 +511,22 @@ ${STYLES}
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="#table">Table</a></li>
             <li><a href="#pagination">Pagination</a></li>
+            <li><a href="#tabs">Tabs</a></li>
+            <li><a href="#modal">Modal & Drawer</a></li>
+            <li><a href="#avatar">Avatar</a></li>
+            <li><a href="#empty">Empty & Skeleton</a></li>
+          </ul>
+        </div>
+        <div class="ds-toc__group">
+          <div class="ds-toc__group-label">Patterns</div>
+          <ul class="ds-toc__list">
+            <li><a href="#filter-ui">Filter & Sort</a></li>
+          </ul>
+        </div>
+        <div class="ds-toc__group">
+          <div class="ds-toc__group-label">Brand</div>
+          <ul class="ds-toc__list">
+            <li><a href="#brand">Logo</a></li>
           </ul>
         </div>
         <div class="ds-toc__group">
@@ -716,6 +848,400 @@ ${STYLES}
               <a href="#">5</a>
               <a href="#" aria-label="다음 페이지">›</a>
             </nav>
+          </div>
+        </section>
+
+        <section class="ds-section" id="tabs">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Tabs</h2>
+              <p class="ds-section__desc">서브 페이지 컨텐츠 분기에 사용하는 탭 스타일입니다. Underline / Pill 두 가지 변형을 제공합니다.</p>
+            </div>
+            <span class="ds-section__tag">Components</span>
+          </div>
+
+          <div class="ds-sub">Underline tabs</div>
+          <div class="ds-preview">
+            <div class="ds-tabs" role="tablist">
+              <button type="button" class="ds-tab is-active" role="tab" aria-selected="true">전체</button>
+              <button type="button" class="ds-tab" role="tab">제주살이 뉴스</button>
+              <button type="button" class="ds-tab" role="tab">제주살이 꿀팁</button>
+              <button type="button" class="ds-tab" role="tab">픽제주 친구들</button>
+              <button type="button" class="ds-tab" role="tab">이벤트</button>
+            </div>
+          </div>
+
+          <div class="ds-sub">Pill tabs</div>
+          <div class="ds-preview">
+            <div class="ds-pill-tabs" role="tablist">
+              <button type="button" class="ds-pill-tab is-active">최신순</button>
+              <button type="button" class="ds-pill-tab">인기순</button>
+              <button type="button" class="ds-pill-tab">조회순</button>
+              <button type="button" class="ds-pill-tab">댓글순</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="modal">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Modal & Drawer</h2>
+              <p class="ds-section__desc">사용자 주의를 끌어야 하는 액션은 모달을, 보조 메뉴/필터는 드로어(Offcanvas)를 사용합니다.</p>
+            </div>
+            <span class="ds-section__tag">Components</span>
+          </div>
+
+          <div class="ds-sub">Modal</div>
+          <div class="ds-preview">
+            <div class="ds-modal-mock" role="dialog" aria-modal="true">
+              <div class="ds-modal-mock__head">
+                <div class="ds-modal-mock__title">게시글을 삭제하시겠어요?</div>
+                <button type="button" class="ds-modal-mock__close" aria-label="닫기">×</button>
+              </div>
+              <div class="ds-modal-mock__body">
+                삭제한 게시글은 되돌릴 수 없습니다. 정말 삭제하시려면 확인을 눌러주세요.
+              </div>
+              <div class="ds-modal-mock__foot">
+                <button type="button" class="pj-button pj-button--gray pj-button--md">취소</button>
+                <button type="button" class="pj-button pj-button--primary pj-button--md">삭제</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-sub">Drawer / Offcanvas</div>
+          <div class="ds-preview">
+            <div class="ds-drawer-mock" aria-label="사이드 메뉴 데모">
+              <div class="ds-drawer-mock__scrim" aria-hidden="true"></div>
+              <aside class="ds-drawer-mock__panel">
+                <h4>메뉴</h4>
+                <ul>
+                  <li><a href="#">홈</a></li>
+                  <li><a href="#">제주 핫스팟</a></li>
+                  <li><a href="#">제주살이 뉴스</a></li>
+                  <li><a href="#">픽포인트 거래소</a></li>
+                  <li><a href="#">마이페이지</a></li>
+                </ul>
+                <button type="button" class="pj-button pj-button--primary pj-button--md" style="margin-top:auto;">로그아웃</button>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="avatar">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Avatar & User identity</h2>
+              <p class="ds-section__desc">작성자, 댓글, 마이페이지에서 사용자 식별에 사용하는 아바타입니다.</p>
+            </div>
+            <span class="ds-section__tag">Components</span>
+          </div>
+
+          <div class="ds-sub">Size</div>
+          <div class="ds-preview">
+            <div class="ds-avatar-row">
+              <span class="ds-avatar ds-avatar--xs">제</span>
+              <span class="ds-avatar ds-avatar--sm">제</span>
+              <span class="ds-avatar ds-avatar--md">제</span>
+              <span class="ds-avatar ds-avatar--lg">제</span>
+              <span class="ds-avatar ds-avatar--xl">제</span>
+            </div>
+          </div>
+
+          <div class="ds-sub">With photo & status</div>
+          <div class="ds-preview">
+            <div class="ds-avatar-row">
+              <span class="ds-avatar ds-avatar--lg" aria-label="프로필 이미지"><img src="/assets/images/svg/avatar.svg" alt=""></span>
+              <span class="ds-avatar ds-avatar--lg" aria-label="온라인 상태"><img src="/assets/images/svg/avatar-n.svg" alt=""><span class="ds-avatar__badge" aria-hidden="true"></span></span>
+              <div class="ds-avatar-group" aria-label="3명 참여">
+                <span class="ds-avatar ds-avatar--md">물</span>
+                <span class="ds-avatar ds-avatar--md" style="background:var(--pj-color-secondary-light);color:#036A3E;">먹</span>
+                <span class="ds-avatar ds-avatar--md" style="background:#E0EBFF;color:#1742A6;">해</span>
+                <span class="ds-avatar ds-avatar--md" style="background:var(--pj-color-dark-4);color:var(--pj-color-dark-1);">+12</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-sub">Author row</div>
+          <div class="ds-preview">
+            <div class="ds-user-row">
+              <span class="ds-avatar ds-avatar--md"><img src="/assets/images/svg/avatar.svg" alt=""></span>
+              <div>
+                <div class="ds-user-row__name">물비늘</div>
+                <div class="ds-user-row__meta">제주시 · 5분 전</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="empty">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Empty State & Skeleton</h2>
+              <p class="ds-section__desc">데이터가 없을 때(빈 상태)와 데이터를 불러오는 중일 때(스켈레톤)의 일관된 패턴입니다.</p>
+            </div>
+            <span class="ds-section__tag">Components</span>
+          </div>
+
+          <div class="ds-sub">Empty state</div>
+          <div class="ds-preview">
+            <div class="ds-empty">
+              <div class="ds-empty__icon"><i class="ri-inbox-line" aria-hidden="true"></i></div>
+              <div class="ds-empty__title">아직 등록된 게시글이 없어요</div>
+              <div class="ds-empty__desc">첫 번째로 제주살이 이야기를 들려주세요. 작은 경험도 누군가에겐 큰 정보가 됩니다.</div>
+              <button type="button" class="pj-button pj-button--primary pj-button--md" style="margin-top:6px;">글쓰기</button>
+            </div>
+          </div>
+
+          <div class="ds-sub">Skeleton (loading)</div>
+          <div class="ds-preview">
+            <div class="ds-card-grid">
+              <div class="ds-skeleton-card">
+                <div class="ds-skeleton ds-skel-thumb"></div>
+                <div class="ds-skeleton ds-skel-line"></div>
+                <div class="ds-skeleton ds-skel-line w-60"></div>
+                <div class="ds-skeleton ds-skel-line w-40"></div>
+              </div>
+              <div class="ds-skeleton-card">
+                <div class="ds-skeleton ds-skel-thumb"></div>
+                <div class="ds-skeleton ds-skel-line"></div>
+                <div class="ds-skeleton ds-skel-line w-60"></div>
+                <div class="ds-skeleton ds-skel-line w-40"></div>
+              </div>
+              <div class="ds-skeleton-card">
+                <div class="ds-skeleton ds-skel-thumb"></div>
+                <div class="ds-skeleton ds-skel-line"></div>
+                <div class="ds-skeleton ds-skel-line w-60"></div>
+                <div class="ds-skeleton ds-skel-line w-40"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="filter-ui">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Filter & Sort</h2>
+              <p class="ds-section__desc">목록 페이지에서 자주 사용하는 필터 칩, 정렬 드롭다운, 브레드크럼 패턴입니다.</p>
+            </div>
+            <span class="ds-section__tag">Patterns</span>
+          </div>
+
+          <div class="ds-sub">Filter chips</div>
+          <div class="ds-preview">
+            <div class="ds-filter-chips">
+              <button type="button" class="ds-chip is-active">전체</button>
+              <button type="button" class="ds-chip">공연</button>
+              <button type="button" class="ds-chip">축제/이벤트</button>
+              <button type="button" class="ds-chip">전시</button>
+              <button type="button" class="ds-chip">마켓</button>
+              <button type="button" class="ds-chip">체험/교육</button>
+              <button type="button" class="ds-chip">청년프로그램</button>
+            </div>
+          </div>
+
+          <div class="ds-sub">Applied filter chips (removable)</div>
+          <div class="ds-preview">
+            <div class="ds-filter-chips">
+              <span class="ds-chip is-active">제주시 <span class="ds-chip__remove" aria-hidden="true">×</span></span>
+              <span class="ds-chip is-active">5월 <span class="ds-chip__remove" aria-hidden="true">×</span></span>
+              <span class="ds-chip is-active">무료 <span class="ds-chip__remove" aria-hidden="true">×</span></span>
+              <button type="button" class="pj-button pj-button--text" style="font-size:13px;font-weight:700;">전체 해제</button>
+            </div>
+          </div>
+
+          <div class="ds-sub">Sort dropdown</div>
+          <div class="ds-preview">
+            <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;">
+              <button type="button" class="ds-sort-mock">
+                <span>최신순</span>
+                <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+              </button>
+              <div class="ds-sort-list" role="listbox">
+                <a href="#" class="is-active">최신순</a>
+                <a href="#">인기순</a>
+                <a href="#">조회순</a>
+                <a href="#">댓글순</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-sub">Breadcrumb</div>
+          <div class="ds-preview">
+            <nav class="ds-breadcrumb" aria-label="현재 위치">
+              <a href="#">홈</a>
+              <span class="ds-bc-sep">›</span>
+              <a href="#">커뮤니티</a>
+              <span class="ds-bc-sep">›</span>
+              <a href="#">제주살이 꿀팁</a>
+              <span class="ds-bc-sep">›</span>
+              <span class="ds-bc-current">5월 장마 대비 꿀팁</span>
+            </nav>
+          </div>
+        </section>
+
+        <section class="ds-section" id="grid">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Grid System</h2>
+              <p class="ds-section__desc">12 컬럼 기반 반응형 그리드입니다. <code>pj-row</code> / <code>pj-col-*</code> 클래스로 구성합니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+
+          <div class="ds-sub">12 columns</div>
+          <div class="ds-preview">
+            <div class="ds-grid-demo">
+              ${Array.from({ length: 12 }, (_, i) => `<div>${i + 1}</div>`).join("")}
+            </div>
+          </div>
+
+          <div class="ds-sub">Common splits</div>
+          <div class="ds-preview" style="display:grid;gap:6px;">
+            <div class="ds-grid-demo ds-grid-demo--row2"><div style="grid-column:span 6;">6</div><div style="grid-column:span 6;">6</div></div>
+            <div class="ds-grid-demo ds-grid-demo--row2"><div style="grid-column:span 4;">4</div><div style="grid-column:span 4;">4</div><div style="grid-column:span 4;">4</div></div>
+            <div class="ds-grid-demo ds-grid-demo--row2"><div style="grid-column:span 3;">3</div><div style="grid-column:span 3;">3</div><div style="grid-column:span 3;">3</div><div style="grid-column:span 3;">3</div></div>
+            <div class="ds-grid-demo ds-grid-demo--row2"><div style="grid-column:span 8;">8</div><div style="grid-column:span 4;">4</div></div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="motion">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Motion</h2>
+              <p class="ds-section__desc">트랜지션 시간과 이징 함수 가이드입니다. 마이크로 인터랙션은 빠르게, 페이지 전환은 부드럽게.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+
+          <div class="ds-motion-grid">
+            <div class="ds-motion-row">
+              <strong>Fast · Hover</strong>
+              <code>120ms</code>
+              <div style="display:flex;align-items:center;gap:10px;color:var(--pj-color-dark-2);font-size:12px;">
+                <span style="display:inline-block;width:24px;height:6px;background:var(--pj-color-primary);border-radius:3px;"></span>
+                <code>ease-out</code> · 호버, 포커스, 작은 토글
+              </div>
+            </div>
+            <div class="ds-motion-row">
+              <strong>Default · UI</strong>
+              <code>180ms</code>
+              <div style="display:flex;align-items:center;gap:10px;color:var(--pj-color-dark-2);font-size:12px;">
+                <span style="display:inline-block;width:48px;height:6px;background:var(--pj-color-primary);border-radius:3px;"></span>
+                <code>ease</code> · 토스트, 드롭다운, 탭 전환
+              </div>
+            </div>
+            <div class="ds-motion-row">
+              <strong>Smooth · Surface</strong>
+              <code>280ms</code>
+              <div style="display:flex;align-items:center;gap:10px;color:var(--pj-color-dark-2);font-size:12px;">
+                <span style="display:inline-block;width:72px;height:6px;background:var(--pj-color-primary);border-radius:3px;"></span>
+                <code>cubic-bezier(.4,0,.2,1)</code> · 모달, 드로어
+              </div>
+            </div>
+            <div class="ds-motion-row">
+              <strong>Slow · Page</strong>
+              <code>420ms</code>
+              <div style="display:flex;align-items:center;gap:10px;color:var(--pj-color-dark-2);font-size:12px;">
+                <span style="display:inline-block;width:120px;height:6px;background:var(--pj-color-primary);border-radius:3px;"></span>
+                <code>cubic-bezier(.16,1,.3,1)</code> · 페이지 전환, 히어로 인트로
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="z-index">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Z-Index Scale</h2>
+              <p class="ds-section__desc">레이어 충돌을 피하기 위한 표준 z-index 단계입니다.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          <div class="ds-z-grid">
+            <div class="ds-z-row"><strong>Base</strong><code>1</code><span>본문 콘텐츠 기본</span></div>
+            <div class="ds-z-row"><strong>Dropdown</strong><code>1000</code><span>드롭다운, 셀렉트 메뉴</span></div>
+            <div class="ds-z-row"><strong>Sticky</strong><code>1020</code><span>스티키 헤더, 서브 네비</span></div>
+            <div class="ds-z-row"><strong>Fixed</strong><code>1030</code><span>플로팅 버튼, 고정 UI</span></div>
+            <div class="ds-z-row"><strong>Modal backdrop</strong><code>1040</code><span>모달/드로어 백드롭</span></div>
+            <div class="ds-z-row"><strong>Modal</strong><code>1050</code><span>모달, 드로어 콘텐츠</span></div>
+            <div class="ds-z-row"><strong>Popover</strong><code>1070</code><span>팝오버, 컨텍스트 메뉴</span></div>
+            <div class="ds-z-row"><strong>Tooltip</strong><code>1080</code><span>툴팁</span></div>
+            <div class="ds-z-row"><strong>Notification</strong><code>11000</code><span>알림 패널</span></div>
+            <div class="ds-z-row"><strong>Toast</strong><code>12000</code><span>토스트 (최상위)</span></div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="breakpoints">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Breakpoints</h2>
+              <p class="ds-section__desc">반응형 디자인의 기준점입니다. 모바일 우선으로 작성해 주세요.</p>
+            </div>
+            <span class="ds-section__tag">Foundation</span>
+          </div>
+          <div class="ds-bp-grid">
+            <div class="ds-bp"><strong>Mobile</strong><code>&lt; 768px</code><span>기본 모바일 레이아웃</span></div>
+            <div class="ds-bp"><strong>Tablet</strong><code>≥ 768px</code><span>2단 레이아웃 시작</span></div>
+            <div class="ds-bp"><strong>Desktop</strong><code>≥ 1024px</code><span>사이드바, 다단 그리드</span></div>
+            <div class="ds-bp"><strong>Wide</strong><code>≥ 1280px</code><span>최대 컨테이너 1240px</span></div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="brand">
+          <div class="ds-section__head">
+            <div>
+              <h2 class="ds-section__title">Brand & Logo</h2>
+              <p class="ds-section__desc">픽제주 워드마크 로고 변형과 사용 가이드입니다.</p>
+            </div>
+            <span class="ds-section__tag">Brand</span>
+          </div>
+
+          <div class="ds-sub">Logo variants</div>
+          <div class="ds-logo-row">
+            <div class="ds-logo-card ds-logo-card--light"><img src="/assets/images/logo.png" alt="픽제주 컬러 로고"></div>
+            <div class="ds-logo-card ds-logo-card--dark"><img src="/assets/images/logo-w.png" alt="픽제주 흰색 로고"></div>
+            <div class="ds-logo-card ds-logo-card--brand"><img src="/assets/images/logo-w.png" alt="픽제주 흰색 로고 (브랜드 배경)"></div>
+            <div class="ds-logo-card ds-logo-card--light"><img src="/assets/images/logo-bk.png" alt="픽제주 단색(흑) 로고"></div>
+          </div>
+
+          <div class="ds-sub">Usage</div>
+          <div class="ds-logo-meta">
+            <div class="ds-logo-meta__item">
+              <strong>Clear space</strong>
+              <span>로고의 'p' 자체 높이만큼의 여백을 사방으로 확보해 주세요. 다른 요소와 겹치지 않도록 주의합니다.</span>
+            </div>
+            <div class="ds-logo-meta__item">
+              <strong>Minimum size</strong>
+              <span>웹 48px, 인쇄 12mm 이상으로 사용해 가독성을 보장해 주세요.</span>
+            </div>
+            <div class="ds-logo-meta__item">
+              <strong>Background</strong>
+              <span>밝은 배경에는 컬러/단색 로고, 어두운 배경에는 화이트 로고, 브랜드 배경(Primary)에는 화이트 로고를 사용합니다.</span>
+            </div>
+          </div>
+
+          <div class="ds-sub">Don't</div>
+          <div class="ds-logo-dont">
+            <div class="ds-logo-dont__card">
+              <span class="ds-logo-dont__pill ds-logo-dont__pill--no">NO</span>
+              <div class="ds-logo-dont__sample"><img src="/assets/images/logo.png" alt="" style="transform:scaleX(1.6);max-width:160px;"></div>
+              <div class="ds-logo-dont__caption">비율을 임의로 늘리거나 줄이지 마세요.</div>
+            </div>
+            <div class="ds-logo-dont__card">
+              <span class="ds-logo-dont__pill ds-logo-dont__pill--no">NO</span>
+              <div class="ds-logo-dont__sample" style="background:#FFF7E6;border-radius:8px;"><img src="/assets/images/logo.png" alt="" style="max-width:120px;filter:hue-rotate(120deg);"></div>
+              <div class="ds-logo-dont__caption">브랜드 컬러 외 다른 색상으로 변경하지 마세요.</div>
+            </div>
+            <div class="ds-logo-dont__card">
+              <span class="ds-logo-dont__pill ds-logo-dont__pill--no">NO</span>
+              <div class="ds-logo-dont__sample" style="background:#999;border-radius:8px;"><img src="/assets/images/logo.png" alt="" style="max-width:120px;opacity:0.5;"></div>
+              <div class="ds-logo-dont__caption">대비가 낮은 배경 위에 사용하지 마세요.</div>
+            </div>
+            <div class="ds-logo-dont__card">
+              <span class="ds-logo-dont__pill ds-logo-dont__pill--no">NO</span>
+              <div class="ds-logo-dont__sample"><img src="/assets/images/logo.png" alt="" style="max-width:120px;transform:rotate(-12deg);"></div>
+              <div class="ds-logo-dont__caption">로고를 회전시키지 마세요.</div>
+            </div>
           </div>
         </section>
 
