@@ -4251,3 +4251,23 @@ canvas {
     gap: 40px;
     padding-top: 0;
 }
+
+@media (max-width: 1024px) {
+  .result-gallery ul,
+  .result-store ul,
+  .post-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #life-grid ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #link-grid ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .order-delivery-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

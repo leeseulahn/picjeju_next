@@ -2234,3 +2234,17 @@
         gap: .5rem;
     }
 }
+
+@media (max-width: 1024px) {
+  #gallery-main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: var(--gap24);
+    grid-row-gap: 3rem;
+  }
+
+  #event-main .list ul {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: var(--gap24);
+    grid-row-gap: var(--gap32);
+  }
+}

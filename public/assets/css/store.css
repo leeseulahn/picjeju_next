@@ -2475,3 +2475,10 @@
     flex-basis: 69%;
  }
 
+
+@media (max-width: 1024px) {
+  .store-grid,
+  #store-main ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

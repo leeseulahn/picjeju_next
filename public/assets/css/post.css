@@ -887,3 +887,10 @@ section .pj-container {
     font-weight: 600;
     color: var(--dark1)
 }
+@media (max-width: 1024px) {
+  #post-main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: var(--gap24);
+    grid-row-gap: 3rem;
+  }
+}

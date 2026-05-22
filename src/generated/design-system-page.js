@@ -598,15 +598,74 @@ const STYLES = `
   .ds-pair__pass { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.18); font-weight: 800; }
 
   @media (max-width: 960px) {
-    .ds-layout { grid-template-columns: 1fr; }
-    .ds-toc { position: static; }
-    .ds-section { padding: 24px 18px; }
-    .ds-type-row { grid-template-columns: 1fr; }
+    .ds-layout { grid-template-columns: 1fr; gap: 24px; }
+    .ds-toc { position: static; display: none; }
+    .ds-section { padding: 24px 20px; }
+    .ds-type-row { grid-template-columns: 1fr; gap: 8px; }
     .ds-type-row__meta { text-align: left; }
     .ds-drawer-mock { grid-template-columns: 1fr; min-height: auto; }
     .ds-drawer-mock__scrim { display: none; }
-    .ds-motion-row { grid-template-columns: 1fr; }
-    .ds-z-row { grid-template-columns: 1fr 80px; }
+    .ds-motion-row { grid-template-columns: 140px 80px 1fr; gap: 10px; }
+    .ds-z-row { grid-template-columns: 140px 60px 1fr; }
+    .ds-space-row { grid-template-columns: 110px 1fr 60px; }
+    .ds-token-row { grid-template-columns: 40px 1fr; }
+    .ds-token-row__token { grid-column: 1 / -1; }
+    .ds-token-row__use { grid-column: 1 / -1; }
+    .ds-scale { grid-template-columns: 1fr; }
+    .ds-scale__row { grid-template-columns: repeat(10, 1fr); }
+  }
+
+  @media (max-width: 767px) {
+    .ds-page { padding: 28px 0 56px; }
+    .ds-hero { padding: 24px 0 20px; }
+    .ds-hero__title { font-size: clamp(26px, 7vw, 34px); }
+    .ds-hero__desc { font-size: 15px; }
+    .ds-layout { margin-top: 20px; gap: 16px; }
+    .ds-section { padding: 20px 16px; border-radius: 16px; margin-bottom: 14px; }
+    .ds-section__title { font-size: 20px; }
+    .ds-section__head { margin-bottom: 18px; padding-bottom: 14px; }
+    .ds-motion-row { grid-template-columns: 1fr; gap: 4px; padding: 10px 0; }
+    .ds-z-row { grid-template-columns: 1fr; }
+    .ds-space-row { grid-template-columns: 90px 1fr 50px; gap: 10px; }
+    .ds-board-row { grid-template-columns: 72px 1fr; }
+    .ds-board-row__side { display: none; }
+    .ds-drawer2 { height: 260px; }
+    .ds-drawer2__panel { width: 220px; padding: 16px; }
+    .ds-icon-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+    .ds-color-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .ds-color__swatch { height: 70px; }
+    .ds-card-grid { grid-template-columns: 1fr; }
+    .ds-logo-row { grid-template-columns: 1fr; }
+    .ds-logo-meta { grid-template-columns: 1fr; }
+    .ds-logo-dont { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    .ds-cat-tile { flex: 1 1 calc(33.33% - 2px); min-height: 90px; }
+    .ds-bp-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+    .ds-form-grid { grid-template-columns: 1fr; }
+    .ds-shadow-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .ds-tone-grid { grid-template-columns: 1fr; }
+    .ds-status-grid { grid-template-columns: 1fr; }
+    .ds-scale__row { grid-template-columns: repeat(5, 1fr); }
+    .ds-pair-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  }
+
+  @media (max-width: 480px) {
+    .ds-page { padding: 16px 0 40px; }
+    .ds-hero__title { font-size: 24px; }
+    .ds-section { padding: 16px 12px; border-radius: 12px; }
+    .ds-section__title { font-size: 18px; }
+    .ds-sub { font-size: 14px; }
+    .ds-color-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    .ds-color__swatch { height: 60px; }
+    .ds-cat-tile { flex: 1 1 calc(50% - 1px); }
+    .ds-board-row { grid-template-columns: 60px 1fr; gap: 10px; }
+    .ds-board-row__thumb { border-radius: 8px; }
+    .ds-icon-grid { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); }
+    .ds-space-row { grid-template-columns: 80px 1fr 44px; gap: 8px; }
+    .ds-avatar-row { gap: 14px; }
+    .ds-radius-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .ds-grad-grid { grid-template-columns: 1fr; }
+    .ds-usage-grid { grid-template-columns: 1fr; }
+    .ds-type-row { padding: 14px 0; }
   }
 </style>
 `;
