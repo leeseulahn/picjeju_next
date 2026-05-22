@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { pages } from "../../src/generated/page-content";
+import { buildDesignSystemMain } from "../../src/generated/design-system-page";
 
 function escapeInvalidAngleText(html) {
   return html.replace(/<([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})>/gi, "&lt;$1&gt;");
@@ -285,6 +286,11 @@ function getBoardWriteHtml() {
 ${afterMain}`;
 }
 
+function getDesignSystemHtml() {
+  const { beforeMain, afterMain } = splitMain(pages["board-market"]?.body || "");
+  return `${beforeMain}\n${buildDesignSystemMain()}\n${afterMain}`;
+}
+
 function getPointExchangeHtml() {
   const { beforeMain, afterMain } = splitMain(pages["board-market"]?.body || "");
 
@@ -436,6 +442,17 @@ async function resolveRoute(paramsPromise) {
         }
       };
     }
+    if (key === "design-system") {
+      return {
+        key,
+        page: {
+          title: "픽제주 - 디자인 시스템",
+          description: "픽제주 서비스의 색상, 타이포그래피, 컴포넌트를 모은 디자인 시스템",
+          keywords: "픽제주, 디자인 시스템, 컴포넌트, 가이드",
+          body: getDesignSystemHtml()
+        }
+      };
+    }
     return pages[key] ? { key, page: pages[key] } : null;
   }
 
@@ -460,6 +477,17 @@ async function resolveRoute(paramsPromise) {
           description: "픽포인트를 사고팔 수 있는 픽제주 거래소",
           keywords: "픽제주, 픽포인트, 거래소",
           body: getPointExchangeHtml()
+        }
+      };
+    }
+    if (key === "design-system") {
+      return {
+        key,
+        page: {
+          title: "픽제주 - 디자인 시스템",
+          description: "픽제주 서비스의 색상, 타이포그래피, 컴포넌트를 모은 디자인 시스템",
+          keywords: "픽제주, 디자인 시스템, 컴포넌트, 가이드",
+          body: getDesignSystemHtml()
         }
       };
     }
