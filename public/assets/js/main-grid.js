@@ -1,10 +1,31 @@
 (() => {
+  // Wait until the grid element actually exists. Under Next.js streaming the
+  // body chunk that contains `#main-content` may arrive AFTER the script's
+  // initial execution, so a one-shot DOMContentLoaded callback misses it.
   const ready = (callback) => {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", callback, { once: true });
-      return;
+    let invoked = false;
+    const run = () => {
+      if (invoked) return;
+      if (!document.getElementById("main-content")) return;
+      invoked = true;
+      callback();
+    };
+    if (document.readyState !== "loading") run();
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+    window.addEventListener("load", run, { once: true });
+    if ("MutationObserver" in window && !invoked) {
+      const mo = new MutationObserver(() => {
+        run();
+        if (invoked) mo.disconnect();
+      });
+      const start = () => {
+        if (document.body) mo.observe(document.body, { childList: true, subtree: true });
+      };
+      if (document.body) start();
+      else document.addEventListener("DOMContentLoaded", start, { once: true });
+      // Stop watching after the page has settled.
+      setTimeout(() => mo.disconnect(), 8000);
     }
-    callback();
   };
 
   const readInlinePosts = () => {

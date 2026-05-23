@@ -4,3 +4,6 @@ out/
 cafe24-deploy/
 cafe24-deploy.zip
 *.log
+.claude/
+before-v2.html
+after-v2.html

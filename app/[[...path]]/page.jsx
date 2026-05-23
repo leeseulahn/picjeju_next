@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { pages } from "../../src/generated/page-content";
 import { buildDesignSystemMain } from "../../src/generated/design-system-page";
+import { extractPageContent } from "../../src/lib/page-chrome";
 
 function escapeInvalidAngleText(html) {
   return html.replace(/<([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})>/gi, "&lt;$1&gt;");
@@ -538,13 +539,14 @@ export default async function StaticPage({ params }) {
   }
 
   const html = route.key === "board-write" ? page.body : wireFrontendWriteButtons(page.body, route.key);
+  const { html: stripped } = extractPageContent(escapeInvalidAngleText(html));
 
   return (
     <div
       id="pj-next-page"
       style={{ display: "contents" }}
       suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: escapeInvalidAngleText(html) }}
+      dangerouslySetInnerHTML={{ __html: stripped }}
     />
   );
 }

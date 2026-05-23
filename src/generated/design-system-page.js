@@ -392,7 +392,7 @@ export function buildDesignSystemMain() {
 <main class="ds-page">
   <div class="ds-container">
 
-    <header class="ds-hero">
+    <section class="ds-hero">
       <span class="ds-hero__kicker">PICJEJU DESIGN SYSTEM</span>
       <h1 class="ds-hero__title">픽제주 디자인 시스템</h1>
       <p class="ds-hero__desc">
@@ -406,10 +406,10 @@ export function buildDesignSystemMain() {
         <span>Mobile-first</span>
         <span>WCAG 2.1 AA</span>
       </div>
-    </header>
+    </section>
 
     <div class="ds-layout">
-      <aside class="ds-toc" aria-label="디자인 시스템 목차">
+      <nav class="ds-toc" aria-label="디자인 시스템 목차">
         <div class="ds-toc__group">
           <div class="ds-toc__group-label">Foundation</div>
           <ul class="ds-toc__list">
@@ -477,7 +477,7 @@ export function buildDesignSystemMain() {
             <li><a href="#icons">Icons</a></li>
           </ul>
         </div>
-      </aside>
+      </nav>
 
       <div class="ds-content">
 
@@ -1092,17 +1092,17 @@ export function buildDesignSystemMain() {
 
           <div class="ds-sub">Drawer / Offcanvas</div>
           <div class="ds-preview">
-            <div class="ds-drawer2" aria-label="사이드 메뉴 데모">
-              <div class="ds-drawer2__page" aria-hidden="true">
-                <div class="ds-drawer2__page-bar"></div>
-                <div class="ds-drawer2__page-row"></div>
-                <div class="ds-drawer2__page-row short"></div>
-                <div class="ds-drawer2__page-row"></div>
-                <div class="ds-drawer2__page-row short"></div>
+            <div class="ds-drawer" aria-label="사이드 메뉴 데모">
+              <div class="ds-drawer__page" aria-hidden="true">
+                <div class="ds-drawer__page-bar"></div>
+                <div class="ds-drawer__page-row"></div>
+                <div class="ds-drawer__page-row short"></div>
+                <div class="ds-drawer__page-row"></div>
+                <div class="ds-drawer__page-row short"></div>
               </div>
-              <div class="ds-drawer2__scrim" aria-hidden="true"></div>
-              <aside class="ds-drawer2__panel" role="dialog" aria-modal="true" aria-label="메인 메뉴">
-                <button type="button" class="ds-drawer2__close" aria-label="닫기">×</button>
+              <div class="ds-drawer__scrim" aria-hidden="true"></div>
+              <aside class="ds-drawer__panel" role="dialog" aria-modal="true" aria-label="메인 메뉴">
+                <button type="button" class="ds-drawer__close" aria-label="닫기">×</button>
                 <h4>메뉴</h4>
                 <ul>
                   <li><a href="#">홈</a></li>
@@ -1186,22 +1186,22 @@ export function buildDesignSystemMain() {
           <div class="ds-preview">
             <div class="ds-card-grid">
               <div class="ds-skeleton-card">
-                <div class="ds-skeleton ds-skel-thumb"></div>
-                <div class="ds-skeleton ds-skel-line"></div>
-                <div class="ds-skeleton ds-skel-line w-60"></div>
-                <div class="ds-skeleton ds-skel-line w-40"></div>
+                <div class="ds-skeleton ds-skeleton__thumb"></div>
+                <div class="ds-skeleton ds-skeleton__line"></div>
+                <div class="ds-skeleton ds-skeleton__line w-60"></div>
+                <div class="ds-skeleton ds-skeleton__line w-40"></div>
               </div>
               <div class="ds-skeleton-card">
-                <div class="ds-skeleton ds-skel-thumb"></div>
-                <div class="ds-skeleton ds-skel-line"></div>
-                <div class="ds-skeleton ds-skel-line w-60"></div>
-                <div class="ds-skeleton ds-skel-line w-40"></div>
+                <div class="ds-skeleton ds-skeleton__thumb"></div>
+                <div class="ds-skeleton ds-skeleton__line"></div>
+                <div class="ds-skeleton ds-skeleton__line w-60"></div>
+                <div class="ds-skeleton ds-skeleton__line w-40"></div>
               </div>
               <div class="ds-skeleton-card">
-                <div class="ds-skeleton ds-skel-thumb"></div>
-                <div class="ds-skeleton ds-skel-line"></div>
-                <div class="ds-skeleton ds-skel-line w-60"></div>
-                <div class="ds-skeleton ds-skel-line w-40"></div>
+                <div class="ds-skeleton ds-skeleton__thumb"></div>
+                <div class="ds-skeleton ds-skeleton__line"></div>
+                <div class="ds-skeleton ds-skeleton__line w-60"></div>
+                <div class="ds-skeleton ds-skeleton__line w-40"></div>
               </div>
             </div>
           </div>
@@ -1269,12 +1269,12 @@ export function buildDesignSystemMain() {
           <div class="ds-preview">
             <nav class="ds-breadcrumb" aria-label="현재 위치">
               <a href="#">홈</a>
-              <span class="ds-bc-sep">›</span>
+              <span class="ds-breadcrumb__sep">›</span>
               <a href="#">커뮤니티</a>
-              <span class="ds-bc-sep">›</span>
+              <span class="ds-breadcrumb__sep">›</span>
               <a href="#">제주살이 꿀팁</a>
-              <span class="ds-bc-sep">›</span>
-              <span class="ds-bc-current">5월 장마 대비 꿀팁</span>
+              <span class="ds-breadcrumb__sep">›</span>
+              <span class="ds-breadcrumb__current">5월 장마 대비 꿀팁</span>
             </nav>
           </div>
         </section>
@@ -1357,17 +1357,17 @@ export function buildDesignSystemMain() {
             </div>
             <span class="ds-section__tag">Foundation</span>
           </div>
-          <div class="ds-z-grid">
-            <div class="ds-z-row"><strong>Base</strong><code>1</code><span>본문 콘텐츠 기본</span></div>
-            <div class="ds-z-row"><strong>Dropdown</strong><code>1000</code><span>드롭다운, 셀렉트 메뉴</span></div>
-            <div class="ds-z-row"><strong>Sticky</strong><code>1020</code><span>스티키 헤더, 서브 네비</span></div>
-            <div class="ds-z-row"><strong>Fixed</strong><code>1030</code><span>플로팅 버튼, 고정 UI</span></div>
-            <div class="ds-z-row"><strong>Modal backdrop</strong><code>1040</code><span>모달/드로어 백드롭</span></div>
-            <div class="ds-z-row"><strong>Modal</strong><code>1050</code><span>모달, 드로어 콘텐츠</span></div>
-            <div class="ds-z-row"><strong>Popover</strong><code>1070</code><span>팝오버, 컨텍스트 메뉴</span></div>
-            <div class="ds-z-row"><strong>Tooltip</strong><code>1080</code><span>툴팁</span></div>
-            <div class="ds-z-row"><strong>Notification</strong><code>11000</code><span>알림 패널</span></div>
-            <div class="ds-z-row"><strong>Toast</strong><code>12000</code><span>토스트 (최상위)</span></div>
+          <div class="ds-z-index-grid">
+            <div class="ds-z-index-row"><strong>Base</strong><code>1</code><span>본문 콘텐츠 기본</span></div>
+            <div class="ds-z-index-row"><strong>Dropdown</strong><code>1000</code><span>드롭다운, 셀렉트 메뉴</span></div>
+            <div class="ds-z-index-row"><strong>Sticky</strong><code>1020</code><span>스티키 헤더, 서브 네비</span></div>
+            <div class="ds-z-index-row"><strong>Fixed</strong><code>1030</code><span>플로팅 버튼, 고정 UI</span></div>
+            <div class="ds-z-index-row"><strong>Modal backdrop</strong><code>1040</code><span>모달/드로어 백드롭</span></div>
+            <div class="ds-z-index-row"><strong>Modal</strong><code>1050</code><span>모달, 드로어 콘텐츠</span></div>
+            <div class="ds-z-index-row"><strong>Popover</strong><code>1070</code><span>팝오버, 컨텍스트 메뉴</span></div>
+            <div class="ds-z-index-row"><strong>Tooltip</strong><code>1080</code><span>툴팁</span></div>
+            <div class="ds-z-index-row"><strong>Notification</strong><code>11000</code><span>알림 패널</span></div>
+            <div class="ds-z-index-row"><strong>Toast</strong><code>12000</code><span>토스트 (최상위)</span></div>
           </div>
         </section>
 
@@ -1379,11 +1379,11 @@ export function buildDesignSystemMain() {
             </div>
             <span class="ds-section__tag">Foundation</span>
           </div>
-          <div class="ds-bp-grid">
-            <div class="ds-bp"><strong>Mobile</strong><code>&lt; 768px</code><span>기본 모바일 레이아웃</span></div>
-            <div class="ds-bp"><strong>Tablet</strong><code>≥ 768px</code><span>2단 레이아웃 시작</span></div>
-            <div class="ds-bp"><strong>Desktop</strong><code>≥ 1024px</code><span>사이드바, 다단 그리드</span></div>
-            <div class="ds-bp"><strong>Wide</strong><code>≥ 1280px</code><span>최대 컨테이너 1240px</span></div>
+          <div class="ds-breakpoint-grid">
+            <div class="ds-breakpoint"><strong>Mobile</strong><code>&lt; 768px</code><span>기본 모바일 레이아웃</span></div>
+            <div class="ds-breakpoint"><strong>Tablet</strong><code>≥ 768px</code><span>2단 레이아웃 시작</span></div>
+            <div class="ds-breakpoint"><strong>Desktop</strong><code>≥ 1024px</code><span>사이드바, 다단 그리드</span></div>
+            <div class="ds-breakpoint"><strong>Wide</strong><code>≥ 1280px</code><span>최대 컨테이너 1240px</span></div>
           </div>
         </section>
 

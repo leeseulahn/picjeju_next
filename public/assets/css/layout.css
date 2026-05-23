@@ -229,13 +229,6 @@ body.is-logged-in .action-logout {
 }
 
 /* Header component: Figma main header */
-header {
-    position: sticky;
-    top: 0;
-    height: 80px;
-    z-index: 1030;
-}
-
 header svg {
     display: block;
     width: 32px;
@@ -371,8 +364,8 @@ header.sticky .header-inner {
 
 
 #main-nav {
-    width: 1280px;
-    max-width: 1280px;
+    width: 780px;
+    max-width: 780px;
     height: 450px;
     margin: 0 auto;
     border-radius: 0 0 30px 30px;
@@ -726,8 +719,8 @@ header.sticky .header-inner {
 
 
 #Seachoffcanvas {
-    max-width: 1280px;
-    width: 1280px;
+    max-width: 780px;
+    width: 780px;
     height: 560px;
     margin: 0 auto;
     border-radius: 0 0 30px 30px;
@@ -1402,7 +1395,7 @@ footer {
     #wrap {
         height: auto;
         min-height: 100vh;
-        max-width: 1280px;
+        max-width: 780px;
     }
 
 
